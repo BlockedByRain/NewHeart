@@ -14,31 +14,39 @@ public class GameTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SixDimensionsValue sixZero=new SixDimensionsValue(0, 0, 0, 0, 0, 0);
+
+        AbilitySixDimensions abilitySixDimensions0 = new AbilitySixDimensions(0, 0, 0, 0, 0, 0);
+        AbilitySixDimensions abilitySixDimensions50 =new AbilitySixDimensions(50, 50, 50, 50, 50, 50);
+        RacialSixDimensions racialSixDimensions100=new RacialSixDimensions(100, 100, 100, 100, 100, 300);
+        EffortSixDimensions effortSixDimensions0 =new EffortSixDimensions(0, 0, 0, 0, 0, 0);
 
         //测试用精灵
-        Pet testPet1 = new Pet("大坝");
-        testPet1.Lv = 100;
-        testPet1.personality = Personality.固执;
-        testPet1.abilityValue = sixZero;
-        testPet1.racialValue = new SixDimensionsValue(100f, 100f, 100f, 100f, 100f, 300f);
-        testPet1.effortValue = sixZero;
-        testPet1.extraValue = sixZero;
+        // 创建并初始化精灵
+        Pet testPet1 = new Pet
+        {
+            petName = "日你",
+            Lv = 100,
+            personality = Personality.固执,
+            ability = abilitySixDimensions50,
+            racial = racialSixDimensions100,
+            effort = effortSixDimensions0,
+            extra = abilitySixDimensions0
+        };
         testPet1.RefreshCapability();
+        testPet1.PrintStatus(); // 输出所有状态
 
-        Debug.Log(testPet1.petName + "物攻为：" + testPet1.abilityValue.physicalAttack);
-        //Debug.Log(testPet1.petName+"速度为："+testPet1.abilityValue.speed);
-
-        Pet testPet2 = new Pet("日你");
-        testPet2.Lv = 100;
-        testPet2.personality = Personality.保守;
-        testPet2.abilityValue = sixZero;
-        testPet2.racialValue = new SixDimensionsValue(100f, 100f, 100f, 100f, 100f, 300f);
-        testPet2.effortValue = sixZero;
-        testPet2.extraValue = sixZero;
+        Pet testPet2 = new Pet
+        {
+            petName = "大坝",
+            Lv = 100,
+            personality = Personality.保守,
+            ability = abilitySixDimensions50,
+            racial = racialSixDimensions100,
+            effort = effortSixDimensions0,
+            extra = abilitySixDimensions0
+        };
         testPet2.RefreshCapability();
-        Debug.Log(testPet2.petName + "物攻为：" + testPet1.abilityValue.physicalAttack);
-        //Debug.Log(testPet2.petName + "速度为：" + testPet2.abilityValue.speed);
+        testPet2.PrintStatus();
 
         player1.PetList.Add(testPet1);
         player2.PetList.Add(testPet2);
@@ -51,9 +59,4 @@ public class GameTest : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
