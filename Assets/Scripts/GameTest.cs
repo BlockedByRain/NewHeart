@@ -48,8 +48,8 @@ public class GameTest : MonoBehaviour
         testPet2.RefreshCapability();
         testPet2.PrintStatus();
 
-        player1.PetList.Add(testPet1);
-        player2.PetList.Add(testPet2);
+        player1.petBag.Add(testPet1);
+        player2.petBag.Add(testPet2);
 
         FightManager.Instance.challenger = player1;
         FightManager.Instance.challenged = player2;
