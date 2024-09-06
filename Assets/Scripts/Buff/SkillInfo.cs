@@ -2,14 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 运行时的技能数据类
+/// </summary>
 public class SkillInfo
 {
+    public SkillConfig skillConfig;
+    public GameObject user;
+    public GameObject target;
+   
+
+    //todo
+
+    public void Execute(Pet user, Pet target)
+    {
+        if (skillConfig.skillEffects == null || skillConfig.skillEffects.Count == 0)
+        {
+            Debug.Log("此技能特殊效果");
+        }
+        else
+        {
+            // 逐一执行技能效果
+            foreach (var skillEffect in skillConfig.skillEffects)
+            {
+                try
+                {
+                    skillEffect.Execute(user, target);
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError(skillEffect.effect.effectDescription+ $"技能效果执行失败: {ex.Message}");
+                }
+            }
+        }
+
+
+
+        //todo 伤害计算
+        //前提需要 属性克制、抗性、增减伤系统
+    }
+
+
+}
+
+/// <summary>
+/// 技能配置类
+/// </summary>
+public class SkillConfig
+{
     //技能id
-    public int id;
+    public int skillId;
     //技能名
-    public string name;
+    public string skillName;
     //技能描述
-    public string description;
+    public string skillDescription;
     //技能类型
     public SkillType skillType;
     //技能威力
@@ -25,13 +71,11 @@ public class SkillInfo
     //技能效果
     public List<SkillEffect> skillEffects;
 
-
-
-    public SkillInfo(int skillId, string name, string description, SkillType skillType, int skillPower, int maxPP, bool isPredestinate, int initialCritical, int skillSpeed, List<SkillEffect> skillEffects)
+    public SkillConfig(int skillId, string name, string description, SkillType skillType, int skillPower, int maxPP, bool isPredestinate, int initialCritical, int skillSpeed, List<SkillEffect> skillEffects)
     {
-        this.id = skillId;
-        this.name = name;
-        this.description = description;
+        this.skillId = skillId;
+        this.skillName = name;
+        this.skillDescription = description;
         this.skillType = skillType;
         this.skillPower = skillPower;
         this.maxPP = maxPP;
@@ -41,33 +85,9 @@ public class SkillInfo
         this.skillEffects = skillEffects;
     }
 
-
-    public void Execute(Pet user, Pet target)
-    {
-        if (skillEffects == null || skillEffects.Count == 0)
-        {
-            Debug.Log("此技能无效果");
-            return;
-        }
-        else
-        {
-            // 逐一执行技能效果
-            foreach (var skillEffect in skillEffects)
-            {
-                try
-                {
-                    skillEffect.Execute(user, target);
-                }
-                catch (System.Exception ex)
-                {
-                    Debug.LogError($"技能效果执行失败: {ex.Message}");
-                }
-            }
-        }
-    }
-
-
 }
+
+
 [System.Serializable]
 public class SkillEffect
 {

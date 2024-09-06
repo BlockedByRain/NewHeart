@@ -76,7 +76,7 @@ public class BuffHandler : MonoBehaviour
         foreach (var buffInfo in addBuffs)
         {
             //查找已有的Buff，避免重复添加
-            var find = buffs.Find(x => x.buffConfig.id == buffInfo.buffConfig.id);
+            var find = buffs.Find(x => x.buffConfig.buffId == buffInfo.buffConfig.buffId);
             if (find == null)
             {
                 buffs.Add(buffInfo);

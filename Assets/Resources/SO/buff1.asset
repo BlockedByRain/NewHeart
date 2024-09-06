@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687246f7d8ea0ab46abc764038cccada, type: 3}
   m_Name: buff1
   m_EditorClassIdentifier: 
-  id: 1
-  buffName: "\u4E0B\u6B21\u653B\u51FB\u5A01\u529B\u7FFB\u500D"
-  description: "\u653B\u51FB\u5F3A\u5316\u4E86"
-  buffType: 2
-  buffTags:
-  - "\u5F3A\u653B"
-  effectiveTime: 1
+  buffId: 1
+  buffName: "\u5149\u4E4B\u60E9\u6212"
+  buffDescribe: "\u6D4B\u8BD5buff\uFF0C\u901F\u5EA6+10"
+  buffType: 1
+  buffTags: []
+  effectiveTime: 3
   isStackable: 0
   maxStack: 1
   addTimeChange: 0
   timeOverStackChange: 0
-  buffEffects: []
+  buffEffects:
+  - {fileID: 11400000, guid: 64a82927ec66e7d41b18318a3c0a9ce5, type: 2}

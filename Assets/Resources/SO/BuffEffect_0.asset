@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f2053dba96f459418538477d1b2515f, type: 3}
-  m_Name: 123
+  m_Script: {fileID: 11500000, guid: a48d323c77668a94682a51ee88def627, type: 3}
+  m_Name: BuffEffect_0
   m_EditorClassIdentifier: 
-  damageAmount: 50
+  effectId: 1
+  effectDescription: "\u5F00\u542F\u4E86\u5149\u4E4B\u60E9\u6212\u5F62\u6001\uFF01"

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 /// <summary>
-/// buff运行的数据类
+/// 运行时的buff数据类
 /// </summary>
 public class BuffInfo
 {
@@ -29,8 +29,6 @@ public class BuffInfo
         this.buffConfig = buffConfig;
         this.target = target;
         this.creator = creator;
-
-
 
         //遍历buff配置，将buff效果分类
         foreach (var buffConfigBuffEffect in buffConfig.BuffEffects)
@@ -70,14 +68,14 @@ public class BuffInfo
     }
 
     //战斗开始时调用
-    public void HandleBeginningOfTheBattleEffect()
+    public void HandleBeginningOfTheBattleEffect(Pet owner)
     {
         if (beginningOfTheBattleBuffEffects == null) return;
         foreach (var buffEffect in beginningOfTheBattleBuffEffects)
         {
             foreach (var effect in buffEffect.effects)
             {
-                effect.Apply(this,null);
+                effect.Apply(owner, null);
             }
         }
     }
@@ -132,11 +130,11 @@ public class BuffInfo
 public class BuffConfig
 {
     //buffid
-    public int id;
+    public int buffId;
     //buff名
-    public string name;
+    public string buffName;
     //buff描述
-    public string describe;
+    public string buffDescribe;
     //buff类型
     public BuffType buffType;
     //buffTag
@@ -152,7 +150,24 @@ public class BuffConfig
     //结束时层数刷新类型
     public TimeOverStackChangeEnum TimeOverStackChange;
     //效果列表
-    public BuffEffect[] BuffEffects;
+    public List<BuffEffect> BuffEffects;
+
+
+    public BuffConfig(int buffId, string buffName, string buffDescribe, BuffType buffType, string[] buffTags, int effectiveTime, bool IsStack,int maxStack, AddTimeChangeEnum addTimeChange, TimeOverStackChangeEnum timeOverStackChange, List<BuffEffect> buffEffects)
+    {
+        this.buffId = buffId;
+        this.buffName = buffName;
+        this.buffDescribe = buffDescribe;
+        this.buffType = buffType;
+        this.buffTags = buffTags;
+        this.effectiveTime = effectiveTime;
+        this.IsStack = IsStack;
+        MaxStack = maxStack;
+        AddTimeChange = addTimeChange;
+        TimeOverStackChange = timeOverStackChange;
+        BuffEffects = buffEffects;
+
+    }
 }
 
 /// <summary>
@@ -164,11 +179,17 @@ public class BuffEffect
     //类型
     public BuffType buffType;
     //生效时间
-    public int effectiveTime;
+    //public int effectiveTime;
     //生效节点
     public TriggerTimingEnum triggerTiming;
     //触发效果
     public AbstractEffect[] effects;
+
+
+    public BuffEffect(AbstractEffect[] effects)
+    {
+        this.effects = effects;
+    }
 }
 
 /// <summary>

@@ -358,7 +358,7 @@ MonoBehaviour:
     - Name: challenged
       Entry: 6
       Data: 
-  countdownTime: 10
+  countdownTime: 3
 --- !u!4 &1432030708
 Transform:
   m_ObjectHideFlags: 0

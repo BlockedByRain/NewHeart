@@ -12,7 +12,7 @@ public class Pet
     /// <summary>
     /// 精灵id
     /// </summary>
-    public int petId=1;
+    public int petId = 1;
 
     /// <summary>
     /// 精灵名
@@ -87,7 +87,7 @@ public class Pet
     /// <summary>
     /// 战斗中能力值
     /// </summary>
-    public AbilityLvSixDimensions fightAbility = null;
+    public AbilitySixDimensions fightAbility = null;
 
     /// <summary>
     /// 精灵Buff
@@ -98,7 +98,7 @@ public class Pet
     /// 返回选择使用的技能
     /// </summary>
     public SkillInfo GetSelectedSkill(int skillIndex)
-    {   
+    {
         return currentSkills[skillIndex];
     }
 
@@ -119,9 +119,31 @@ public class Pet
 
         // 计算体力值
         ability.HP = CalculateState(racial.HP, effort.HP, 100 + 31, Lv, personalityEffects.HP, extra.HP);
-    
 
-}
+    }
+
+    /// <summary>
+    /// 刷新战斗能力
+    /// </summary>
+    public void RefreshFightAbility()
+    {
+        if (fightAbility == null)
+        {
+            fightAbility = new AbilitySixDimensions(0, 0, 0, 0, 0, 0);
+        }
+
+        // 计算能力值
+        fightAbility.PhysicalAttack = ability.PhysicalAttack;
+        fightAbility.SpecialAttack = ability.SpecialAttack;
+        fightAbility.PhysicalDefense = ability.PhysicalDefense;
+        fightAbility.SpecialDefense = ability.SpecialDefense;
+        fightAbility.Speed = ability.Speed;
+        // 计算体力值
+        fightAbility.HP = ability.HP;
+
+    }
+
+
 
     /// <summary>
     /// 能力值计算
@@ -193,7 +215,7 @@ public class Pet
         Debug.Log($"特防: {ability.SpecialDefense}");
         Debug.Log($"速度: {ability.Speed}");
         Debug.Log($"体力: {ability.HP}");
-        Debug.Log("特性:"+ $"{feature}");
+        Debug.Log("特性:" + $"{feature}");
 
         //Debug.Log("可用技能:");
         //foreach (var skill in availableSkills)
@@ -204,7 +226,7 @@ public class Pet
         Debug.Log("当前技能:");
         foreach (var skill in currentSkills)
         {
-            Debug.Log($"{skill.name}");
+            Debug.Log($"{skill.skillConfig.skillName}");
         }
 
         //Debug.Log($"魂印ID: {soulSealId}");
@@ -214,11 +236,10 @@ public class Pet
 
 
 
-
-
-
-
-    public static SkillInfo CreateSkillFromConfig(SkillConfigSO skillConfigSO)
+    /// <summary>
+    /// 根据SkillInfoSO文件实例化一个SkillInfo
+    /// </summary>
+    public static SkillInfo CreateSkillInfoFromConfig(SkillConfigSO skillConfigSO)
     {
         if (skillConfigSO == null)
         {
@@ -245,8 +266,8 @@ public class Pet
             skillEffects.Add(skillEffect);
         }
 
-        // 创建 Skill 实例
-        SkillInfo newSkill = new SkillInfo(
+        // 创建 SkillInfo 实例
+        SkillConfig newSkillConfig = new SkillConfig(
             skillId,
             name,
             description,
@@ -258,13 +279,72 @@ public class Pet
             skillSpeed,
             skillEffects
         );
+        SkillInfo newSkillInfo = new SkillInfo();
+        newSkillInfo.skillConfig = newSkillConfig;
 
-        return newSkill;
+        // 返回生成的实例
+        return newSkillInfo;
     }
 
 
 
+    /// <summary>
+    /// 根据BuffInfoSO文件实例化一个BuffInfo
+    /// </summary>
+    public static BuffInfo CreateBuffInfoFromConfig(BuffConfigSO buffConfigSO)
+    {
+        if (buffConfigSO == null)
+        {
+            Debug.LogError("BuffConfigSO is null");
+            return null;
+        }
 
+        // 从 BuffConfigSO 中获取技能属性
+        int buffId = buffConfigSO.buffId;
+        string buffName = buffConfigSO.buffName;
+        string buffDescribe = buffConfigSO.buffDescribe;
+        BuffType buffType = buffConfigSO.buffType;
+        string[] buffTags = buffConfigSO.buffTags;
+        int effectiveTime = buffConfigSO.effectiveTime;
+        bool isStackable = buffConfigSO.isStackable;
+        int maxStack = buffConfigSO.maxStack;
+        AddTimeChangeEnum addTimeChange = buffConfigSO.addTimeChange;
+        TimeOverStackChangeEnum timeOverStackChange = buffConfigSO.timeOverStackChange;
+        List<BuffEffect> buffEffects = new List<BuffEffect>();
+
+        // 从 BuffConfigSO 中获取效果配置，并转换为 BuffEffect 实例
+            BuffEffect buffEffect = new BuffEffect(buffConfigSO.buffEffects);
+            //foreach (var buffEffect in buffEffects1)
+            //{
+            //    buffEffects.Add(buffEffect);
+            //}
+
+
+            //BuffEffect buffEffect = new BuffEffect(effectSO);
+            buffEffects.Add(buffEffect);
+        
+
+
+        // 创建 BuffInfo 实例
+        BuffConfig newBuffConfig = new BuffConfig(
+            buffId,
+            buffName,
+            buffDescribe,
+            buffType,
+            buffTags,
+            effectiveTime,
+            isStackable,
+            maxStack,
+            addTimeChange,
+            timeOverStackChange,
+            buffEffects
+            );
+
+        BuffInfo newBuffInfo= new BuffInfo(newBuffConfig ,null ,null);
+
+        // 返回生成的实例
+        return newBuffInfo;
+    }
 
 
 

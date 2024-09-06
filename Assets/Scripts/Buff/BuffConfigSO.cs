@@ -1,17 +1,32 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewBuffConfig", menuName = "Buff System/BuffConfig")]
+[CreateAssetMenu(fileName = "NewBuffConfig", menuName = "Fight System/BuffConfig")]
 public class BuffConfigSO : ScriptableObject
 {
-    public int id;
+    //buffid
+    public int buffId;
+    //buff名
     public string buffName;
-    public string description;
+    //buff描述
+    public string buffDescribe;
+    //buff类型
     public BuffType buffType;
+    //buffTag
     public string[] buffTags;
-    public int effectiveTime; // 持续时间
-    public bool isStackable;   // 是否可叠加
-    public int maxStack;       // 最大叠加层数
-    public AddTimeChangeEnum addTimeChange;  // 添加时的刷新类型
-    public TimeOverStackChangeEnum timeOverStackChange;  // 结束时的层数刷新类型
-    public BuffEffect[] buffEffects; // Buff 效果列表
+    //生效时间
+    public int effectiveTime;
+    //是否可叠加
+    public bool isStackable;
+    //最大叠加层数
+    public int maxStack;
+    //添加时刷新类型
+    public AddTimeChangeEnum addTimeChange;
+    //结束时层数刷新类型
+    public TimeOverStackChangeEnum timeOverStackChange;
+    //效果列表
+    public AbstractEffect[] buffEffects;
+
+
+
 }

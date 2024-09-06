@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 //测试用
 public class GameTest : MonoBehaviour
@@ -33,6 +31,20 @@ public class GameTest : MonoBehaviour
             Debug.LogError("未找到技能 SO");
         }
 
+        //加载buff
+        // 加载 BuffSO 资源
+        // todo 这两个都要封装下 传入路径直接返回
+        BuffConfigSO loadBuff = Resources.Load<BuffConfigSO>("SO/buff1");
+        if (loadBuff != null)
+        {
+            Debug.Log($"已加载buff: {loadBuff.buffName}");
+        }
+        else
+        {
+            Debug.LogError("未找到buff SO");
+        }
+
+
 
         // 创建并初始化测试用精灵
         Pet testPet1 = new Pet
@@ -45,11 +57,14 @@ public class GameTest : MonoBehaviour
             effort = effortSixDimensions0,
             extra = abilitySixDimensions0,
             currentSkills = new List<SkillInfo>(),
+            buffInfos= new List<BuffInfo>(),
         };
-        testPet1.currentSkills.Add(Pet.CreateSkillFromConfig(loadSkill));
+        testPet1.currentSkills.Add(Pet.CreateSkillInfoFromConfig(loadSkill));
+        testPet1.buffInfos.Add(Pet.CreateBuffInfoFromConfig(loadBuff));
 
         testPet1.RefreshCapability();
-        testPet1.PrintStatus(); // 输出所有状态
+        //输出所有状态
+        //testPet1.PrintStatus(); 
 
         Pet testPet2 = new Pet
         {
@@ -61,7 +76,10 @@ public class GameTest : MonoBehaviour
             effort = effortSixDimensions0,
             extra = abilitySixDimensions0,
             currentSkills = new List<SkillInfo>(),
+            buffInfos = new List<BuffInfo>(),
         };
+        testPet2.currentSkills.Add(Pet.CreateSkillInfoFromConfig(loadSkill));
+
         testPet2.RefreshCapability();
         //testPet2.PrintStatus();
 

@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: skill1
   m_EditorClassIdentifier: 
   skillId: 1
-  skillName: "\u65E5\u4F60\u5927\u5DF4"
-  skillDescription: 
+  skillName: "\u65E5\u4F60\u5927\u575D"
+  skillDescription: "\u91CE\u708A\u6210\u540D\u7EDD\u6280"
   skillType: 0
   skillPower: 150
   maxPP: 3
-  isPredestinate: 0
+  isPredestinate: 1
   initialCritical: 1
   skillSpeed: 0
   skillEffects:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: cdac0e6e807baec4bbf8438fbf49a89b, type: 2}

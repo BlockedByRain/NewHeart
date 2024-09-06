@@ -10,6 +10,7 @@ public class FightManager : MonoSingleton<FightManager>
     public FightPlayer challenged;
     //倒计时
     public float countdownTime = 10f;
+
     private bool battleOngoing = true;
 
     List<Pet> challengerPetBag = null;
@@ -38,15 +39,10 @@ public class FightManager : MonoSingleton<FightManager>
         challenger.activePetIndex = 0;
         challenged.activePetIndex = 0;
 
-
-        Debug.Log(challengerPetBag[challenger.activePetIndex].petName);
-        Debug.Log(challengerPetBag[challenger.activePetIndex].buffInfos);
-
-        Debug.Log(666);
-
         //初始化精灵（如天生能力的获得）
         InitPetBag(challengerPetBag);
         InitPetBag(challengedPetBag);
+
 
         StartCoroutine(UpdateRound());
 
@@ -63,15 +59,19 @@ public class FightManager : MonoSingleton<FightManager>
             // 开始倒计时，让双方玩家选择行动
             yield return StartCoroutine(PlayerActionSelection());
 
-            foreach (var buffInfo in challengerPetBag[challenger.activePetIndex].buffInfos)
-            {
-                buffInfo.HandleBeginningOfTheRoundEffect();
-            }
-            foreach (var buffInfo in challengedPetBag[challenged.activePetIndex].buffInfos)
-            {
-                buffInfo.HandleBeginningOfTheRoundEffect();
-            }
 
+            //todo 和战斗开始时一样需要先判空，之后考虑做封装，这里先注释掉
+            //foreach (var buffInfo in challengerPetBag[challenger.activePetIndex].buffInfos)
+            //{
+            //    buffInfo.HandleBeginningOfTheRoundEffect();
+            //}
+            //foreach (var buffInfo in challengedPetBag[challenged.activePetIndex].buffInfos)
+            //{
+            //    buffInfo.HandleBeginningOfTheRoundEffect();
+            //}
+
+
+            //todo 这里已经拿到双方选择的技能了，考虑如何引入使用时无视强化弱化
 
             // 根据速度决定行动顺序并执行
             yield return StartCoroutine(ExecuteActions());
@@ -96,7 +96,7 @@ public class FightManager : MonoSingleton<FightManager>
         while (timer > 0)
         {
             timer -= Time.deltaTime;
-            Debug.Log($"剩余选择时间: {timer}");
+            //Debug.Log($"剩余选择时间: {timer}");
 
             if (challenger.HasChosenAction() && challenged.HasChosenAction())
                 break;
@@ -105,9 +105,18 @@ public class FightManager : MonoSingleton<FightManager>
         }
 
         if (!challenger.HasChosenAction())
+        {
             challenger.DefaultAction();
+            Debug.Log("challenger 执行了默认操作！");
+        }
+                        
+        
         if (!challenged.HasChosenAction())
+        {
             challenged.DefaultAction();
+            Debug.Log("challenged 执行了默认操作！");
+        }
+            
     }
 
     // 执行玩家选择的操作
@@ -118,36 +127,48 @@ public class FightManager : MonoSingleton<FightManager>
         Pet challengedPet = challenged.GetActivePet();
 
         // 比较双方精灵的速度，速度高的先行动
+        // todo 先判定选择的技能先制，后判定速度，后续考虑引入出手时节点的无视强弱化
         if (challengerPet.ability.Speed > challengedPet.ability.Speed)
         {
             // 挑战方先攻击
             challenger.ExecuteAction(challengerPet, challengedPet);
-            foreach (var buffInfo in challengerPetBag[challenger.activePetIndex].buffInfos)
-            {
-                buffInfo.HandleUsingSkilleEffect();
-            }
+            
+            
+            //foreach (var buffInfo in challengerPetBag[challenger.activePetIndex].buffInfos)
+            //{
+            //    buffInfo.HandleUsingSkilleEffect();
+            //}
 
             if (challengedPet.fightAbility.HP > 0)  // 如果防守方没有被击败
                 challenged.ExecuteAction(challengedPet, challengerPet);
-            foreach (var buffInfo in challengedPetBag[challenged.activePetIndex].buffInfos)
-            {
-                buffInfo.HandleUsingSkilleEffect();
-            }
+            
+            
+            //foreach (var buffInfo in challengedPetBag[challenged.activePetIndex].buffInfos)
+            //{
+            //    buffInfo.HandleUsingSkilleEffect();
+            //}
         }
         else
         {
             // 防守方先攻击
             challenged.ExecuteAction(challengedPet, challengerPet);
-            foreach (var buffInfo in challengedPetBag[challenged.activePetIndex].buffInfos)
-            {
-                buffInfo.HandleUsingSkilleEffect();
-            }
+
+            //todo 和战斗开始时一样需要先判空，之后考虑做封装，这里先注释掉
+            //foreach (var buffInfo in challengedPetBag[challenged.activePetIndex].buffInfos)
+            //{
+            //    buffInfo.HandleUsingSkilleEffect();
+            //}
+
+            
+
             if (challengerPet.fightAbility.HP > 0)  // 如果挑战方没有被击败
                 challenger.ExecuteAction(challengerPet, challengedPet);
-            foreach (var buffInfo in challengerPetBag[challenger.activePetIndex].buffInfos)
-            {
-                buffInfo.HandleUsingSkilleEffect();
-            }
+
+            //foreach (var buffInfo in challengerPetBag[challenger.activePetIndex].buffInfos)
+            //{
+            //    buffInfo.HandleUsingSkilleEffect();
+            //}
+
         }
 
         // 等待技能动画或效果播放完成
@@ -173,18 +194,22 @@ public class FightManager : MonoSingleton<FightManager>
     // 结束回合
     void EndRound()
     {
-        foreach (var buffInfo in challengerPetBag[challenger.activePetIndex].buffInfos)
-        {
-            buffInfo.HandleEndOfTheRoundEffect();
-        }
-        foreach (var buffInfo in challengedPetBag[challenged.activePetIndex].buffInfos)
-        {
-            buffInfo.HandleEndOfTheRoundEffect();
-        }
+        //todo 同其他节点要做判空
+        //foreach (var buffInfo in challengerPetBag[challenger.activePetIndex].buffInfos)
+        //{
+        //    buffInfo.HandleEndOfTheRoundEffect();
+        //}
+        //foreach (var buffInfo in challengedPetBag[challenged.activePetIndex].buffInfos)
+        //{
+        //    buffInfo.HandleEndOfTheRoundEffect();
+        //}
     }
 
 
-
+    /// <summary>
+    /// 初始化精灵背包，主要是令魂印效果生效
+    /// </summary>
+    /// <param name="petBag"></param>
     private void InitPetBag(List<Pet> petBag)
     {
         List<Pet> challengerPetBag = petBag;
@@ -203,9 +228,14 @@ public class FightManager : MonoSingleton<FightManager>
                         foreach (var buffInfo in pet.buffInfos)
                         {
                             // 处理每个 buffInfo
-                            buffInfo.HandleBeginningOfTheBattleEffect();
+                            buffInfo.HandleBeginningOfTheBattleEffect(pet);
                         }
                     }
+
+
+                    //刷新能力
+                    //考虑到魂印直接+100血+50速的类似效果，先初始化buff然后计算能力
+                    pet.RefreshFightAbility();
                 }
 
             }

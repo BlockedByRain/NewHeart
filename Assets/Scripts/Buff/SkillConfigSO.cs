@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewSkillConfig", menuName = "Skill System/SkillConfig")]
+[CreateAssetMenu(fileName = "NewSkillConfig", menuName = "Fight System/SkillConfig")]
 public class SkillConfigSO : ScriptableObject
 {
     //¼¼ÄÜid
