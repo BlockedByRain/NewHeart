@@ -31,7 +31,7 @@ public class FightPlayer
         // todo 超时默认选择第一个技能，之后要做判断选择了无pp的技能罚站
         actionChosen = true;
         playerChoose = 0;
-        Debug.Log("时间用尽，自动执行默认操作！");
+        //Debug.Log("时间用尽，自动执行默认操作！");
     }
 
     public void ExecuteAction(Pet user, Pet target)

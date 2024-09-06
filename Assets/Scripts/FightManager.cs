@@ -222,6 +222,13 @@ public class FightManager : MonoSingleton<FightManager>
                 // 检查 pet 是否为空
                 if (pet != null)
                 {
+
+                    //刷新能力
+                    //考虑到魂印直接+100血+50速的类似效果，先计算能力然后初始化buff
+                    //感觉有点奇怪，但是一时间想不到，留着看看
+
+                    pet.RefreshFightAbility();
+
                     // 检查 pet 的 buffInfos 是否为空
                     if (pet.buffInfos != null)
                     {
@@ -233,9 +240,7 @@ public class FightManager : MonoSingleton<FightManager>
                     }
 
 
-                    //刷新能力
-                    //考虑到魂印直接+100血+50速的类似效果，先初始化buff然后计算能力
-                    pet.RefreshFightAbility();
+                    
                 }
 
             }
