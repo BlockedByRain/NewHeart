@@ -14,9 +14,9 @@ public class FightPlayer
     public List<Pet> petBag = new List<Pet>(6);
 
     //当前出战的精灵索引
-    private int activePetIndex = 0;
+    public int activePetIndex = 0;
     //玩家是否已选择操作
-    private bool actionChosen = false;
+    public bool actionChosen = false;
 
     public bool HasChosenAction()
     {
@@ -30,11 +30,15 @@ public class FightPlayer
         Debug.Log("时间用尽，自动执行默认操作！");
     }
 
-    public void ExecuteAction(Pet target)
+    public void ExecuteAction(Pet user, Pet target)
     {
         Pet activePet = GetActivePet();
-        Skill chosenSkill = ChooseSkill();  // 假设玩家选择了技能
-        activePet.Attack(target, chosenSkill);
+        SkillInfo chosenSkill = ChooseSkill(); 
+        
+        // 假设玩家选择了技能
+        int playerChoose =0;
+
+        activePet.GetSelectedSkill(playerChoose).Execute(user,target);
         actionChosen = false;
     }
 
@@ -57,7 +61,7 @@ public class FightPlayer
         return true;
     }
 
-    public Skill ChooseSkill()
+    public SkillInfo ChooseSkill()
     {
         // 模拟技能选择逻辑，假设选择当前技能列表中的第一个技能
         return GetActivePet().currentSkills[0];

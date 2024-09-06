@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 687246f7d8ea0ab46abc764038cccada, type: 3}
+  m_Name: buff1
+  m_EditorClassIdentifier: 
+  id: 1
+  buffName: "\u4E0B\u6B21\u653B\u51FB\u5A01\u529B\u7FFB\u500D"
+  description: "\u653B\u51FB\u5F3A\u5316\u4E86"
+  buffType: 2
+  buffTags:
+  - "\u5F3A\u653B"
+  effectiveTime: 1
+  isStackable: 0
+  maxStack: 1
+  addTimeChange: 0
+  timeOverStackChange: 0
+  buffEffects: []

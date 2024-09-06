@@ -12,7 +12,7 @@ public class Pet
     /// <summary>
     /// 精灵id
     /// </summary>
-    public int petId;
+    public int petId=1;
 
     /// <summary>
     /// 精灵名
@@ -67,27 +67,40 @@ public class Pet
     /// <summary>
     /// 可用技能组
     /// </summary>
-    public List<Skill> availableSkills;
+    public List<SkillInfo> availableSkills = null;
 
     /// <summary>
     /// 当前技能组
     /// </summary>
-    public List<Skill> currentSkills;
+    public List<SkillInfo> currentSkills = null;
 
     /// <summary>
     /// 魂印id
     /// </summary>
-    public string soulSealId;
+    public string soulSealId = null;
 
     /// <summary>
     /// 能力等级
     /// </summary>
-    public AbilityLvSixDimensions abilityLvSixDimensionsValue;
+    public AbilityLvSixDimensions abilityLvSixDimensionsValue = null;
 
     /// <summary>
     /// 战斗中能力值
     /// </summary>
-    public AbilityLvSixDimensions fightAbility;
+    public AbilityLvSixDimensions fightAbility = null;
+
+    /// <summary>
+    /// 精灵Buff
+    /// </summary>
+    public List<BuffInfo> buffInfos = null;
+
+    /// <summary>
+    /// 返回选择使用的技能
+    /// </summary>
+    public SkillInfo GetSelectedSkill(int skillIndex)
+    {   
+        return currentSkills[skillIndex];
+    }
 
 
 
@@ -138,24 +151,23 @@ public class Pet
         Debug.Log($"等级: {Lv}");
         Debug.Log($"下级所需经验: {nextLvExp}");
 
-        Debug.Log("种族值:");
-        Debug.Log($"物攻: {racial.PhysicalAttack}");
-        Debug.Log($"特攻: {racial.SpecialAttack}");
-        Debug.Log($"物防: {racial.PhysicalDefense}");
-        Debug.Log($"特防: {racial.SpecialDefense}");
-        Debug.Log($"速度: {racial.Speed}");
-        Debug.Log($"体力: {racial.HP}");
+        //Debug.Log("种族值:");
+        //Debug.Log($"物攻: {racial.PhysicalAttack}");
+        //Debug.Log($"特攻: {racial.SpecialAttack}");
+        //Debug.Log($"物防: {racial.PhysicalDefense}");
+        //Debug.Log($"特防: {racial.SpecialDefense}");
+        //Debug.Log($"速度: {racial.Speed}");
+        //Debug.Log($"体力: {racial.HP}");
 
-        Debug.Log("努力值:");
-        Debug.Log($"物攻: {effort.PhysicalAttack}");
-        Debug.Log($"特攻: {effort.SpecialAttack}");
-        Debug.Log($"物防: {effort.PhysicalDefense}");
-        Debug.Log($"特防: {effort.SpecialDefense}");
-        Debug.Log($"速度: {effort.Speed}");
-        Debug.Log($"体力: {effort.HP}");
+        //Debug.Log("努力值:");
+        //Debug.Log($"物攻: {effort.PhysicalAttack}");
+        //Debug.Log($"特攻: {effort.SpecialAttack}");
+        //Debug.Log($"物防: {effort.PhysicalDefense}");
+        //Debug.Log($"特防: {effort.SpecialDefense}");
+        //Debug.Log($"速度: {effort.Speed}");
+        //Debug.Log($"体力: {effort.HP}");
 
-        Debug.Log("性格:");
-        Debug.Log($"{personality}");
+        Debug.Log("性格:" + $"{personality}");
 
         //Debug.Log("性格影响:");
         //var personalityEffects = PersonalityEffects.GetEffect(personality);
@@ -166,13 +178,13 @@ public class Pet
         //Debug.Log($"速度修正: {personalityEffects.Speed}");
         //Debug.Log($"体力修正: {personalityEffects.HP}");
 
-        Debug.Log("额外能力值:");
-        Debug.Log($"物攻: {extra.PhysicalAttack}");
-        Debug.Log($"特攻: {extra.SpecialAttack}");
-        Debug.Log($"物防: {extra.PhysicalDefense}");
-        Debug.Log($"特防: {extra.SpecialDefense}");
-        Debug.Log($"速度: {extra.Speed}");
-        Debug.Log($"体力: {extra.HP}");
+        //Debug.Log("额外能力值:");
+        //Debug.Log($"物攻: {extra.PhysicalAttack}");
+        //Debug.Log($"特攻: {extra.SpecialAttack}");
+        //Debug.Log($"物防: {extra.PhysicalDefense}");
+        //Debug.Log($"特防: {extra.SpecialDefense}");
+        //Debug.Log($"速度: {extra.Speed}");
+        //Debug.Log($"体力: {extra.HP}");
 
         Debug.Log("能力值:");
         Debug.Log($"物攻: {ability.PhysicalAttack}");
@@ -189,15 +201,76 @@ public class Pet
         //    Debug.Log($"{skill}");
         //}
 
-        //Debug.Log("当前技能:");
-        //foreach (var skill in currentSkills)
-        //{
-        //    Debug.Log($"{skill}");
-        //}
+        Debug.Log("当前技能:");
+        foreach (var skill in currentSkills)
+        {
+            Debug.Log($"{skill.name}");
+        }
 
-        Debug.Log($"魂印ID: {soulSealId}");
+        //Debug.Log($"魂印ID: {soulSealId}");
+
         Debug.Log("=== 精灵状态 ===");
     }
+
+
+
+
+
+
+
+    public static SkillInfo CreateSkillFromConfig(SkillConfigSO skillConfigSO)
+    {
+        if (skillConfigSO == null)
+        {
+            Debug.LogError("SkillConfigSO is null");
+            return null;
+        }
+
+        // 从 SkillConfigSO 中获取技能属性
+        int skillId = skillConfigSO.skillId;
+        string name = skillConfigSO.skillName;
+        string description = skillConfigSO.skillDescription;
+        SkillType skillType = skillConfigSO.skillType;
+        int skillPower = skillConfigSO.skillPower;
+        int maxPP = skillConfigSO.maxPP;
+        bool isPredestinate = skillConfigSO.isPredestinate;
+        int initialCritical = skillConfigSO.initialCritical;
+        int skillSpeed = skillConfigSO.skillSpeed;
+        List<SkillEffect> skillEffects = new List<SkillEffect>();
+
+        // 从 SkillConfigSO 中获取效果配置，并转换为 SkillEffect 实例
+        foreach (var effectSO in skillConfigSO.skillEffects)
+        {
+            var skillEffect = new SkillEffect(effectSO);
+            skillEffects.Add(skillEffect);
+        }
+
+        // 创建 Skill 实例
+        SkillInfo newSkill = new SkillInfo(
+            skillId,
+            name,
+            description,
+            skillType,
+            skillPower,
+            maxPP,
+            isPredestinate,
+            initialCritical,
+            skillSpeed,
+            skillEffects
+        );
+
+        return newSkill;
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 }

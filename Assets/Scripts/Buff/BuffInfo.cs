@@ -77,7 +77,7 @@ public class BuffInfo
         {
             foreach (var effect in buffEffect.effects)
             {
-                effect.Apply(this);
+                effect.Apply(this,null);
             }
         }
     }
@@ -90,7 +90,7 @@ public class BuffInfo
         {
             foreach (var effect in buffEffect.effects)
             {
-                effect.Apply(this);
+                effect.Apply(this, null);
             }
         }
     }
@@ -103,7 +103,7 @@ public class BuffInfo
         {
             foreach (var effect in buffEffect.effects)
             {
-                effect.Apply(this);
+                effect.Apply(this, null);
             }
         }
     }
@@ -116,7 +116,7 @@ public class BuffInfo
         {
             foreach (var effect in buffEffect.effects)
             {
-                effect.Apply(this);
+                effect.Apply(this, null);
             }
         }
     }
@@ -139,6 +139,8 @@ public class BuffConfig
     public string describe;
     //buff类型
     public BuffType buffType;
+    //buffTag
+    public string[] buffTags;
     //生效时间
     public int effectiveTime;
     //是否可叠加
@@ -156,6 +158,7 @@ public class BuffConfig
 /// <summary>
 /// buff效果配置类
 /// </summary>
+[System.Serializable]
 public class BuffEffect
 {
     //类型
@@ -168,6 +171,9 @@ public class BuffEffect
     public AbstractEffect[] effects;
 }
 
+/// <summary>
+/// buff类型
+/// </summary>
 public enum BuffType
 {
     //永久类
