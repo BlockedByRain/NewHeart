@@ -7,20 +7,58 @@ using static UnityEngine.GraphicsBuffer;
 /// </summary>
 public class BuffInfo
 {
-    public BuffConfig BuffConfig;
+    public BuffConfig buffConfig;
     public GameObject creator;
     public GameObject target;
-    public int curDuration;
+    public int effectiveTime;
     public int curStack;
     public int maxStack;
 
+    //战斗开始时buff效果集合
+    List<BuffEffect> beginningOfTheBattleBuffEffects;
+    //回合开始时buff效果集合
+    List<BuffEffect> beginningOfTheRoundBuffEffects;
+    //使用技能时buff效果集合
+    List<BuffEffect> usingSkillBuffEffects;
+    //回合结束时buff效果集合
+    List<BuffEffect> endOfTheRound;
+
+
     public BuffInfo(BuffConfig buffConfig, GameObject target, GameObject creator = null)
     {
-        buffConfig = buffConfig;
-        Target = target;
-        Creator = creator;
-        CurDuration = buffConfig.Duration;
-        CurStack = 1;
+        this.buffConfig = buffConfig;
+        this.target = target;
+        this.creator = creator;
+
+
+
+        //遍历buff配置，将buff效果分类
+        foreach (var buffConfigBuffEffect in buffConfig.BuffEffects)
+        {
+            switch (buffConfigBuffEffect.triggerTiming)
+            {
+                case TriggerTimingEnum.BeginningOfTheBattle:
+                    if (beginningOfTheBattleBuffEffects == null) beginningOfTheBattleBuffEffects = new List<BuffEffect>();
+                    beginningOfTheBattleBuffEffects.Add(buffConfigBuffEffect);
+                    break;
+                case TriggerTimingEnum.BeginningOfTheRound:
+                    if (beginningOfTheRoundBuffEffects == null) beginningOfTheRoundBuffEffects = new List<BuffEffect>();
+                    beginningOfTheRoundBuffEffects.Add(buffConfigBuffEffect);
+                    break;
+                case TriggerTimingEnum.UsingSkill:
+                    if (usingSkillBuffEffects == null) usingSkillBuffEffects = new List<BuffEffect>();
+                    usingSkillBuffEffects.Add(buffConfigBuffEffect);
+                    break;
+                case TriggerTimingEnum.EndOfTheRound:
+                    if (endOfTheRound == null) endOfTheRound = new List<BuffEffect>();
+                    endOfTheRound.Add(buffConfigBuffEffect);
+                    break;
+            }
+            
+        }
+
+        this.effectiveTime = buffConfig.effectiveTime;
+        curStack = 1;
     }
 
 
@@ -31,25 +69,52 @@ public class BuffInfo
 
     }
 
-
-    public void HandleCreateEffect()
+    //战斗开始时调用
+    public void HandleBeginningOfTheBattleEffect()
     {
-        if (createBuffEffects == null) return;
-        foreach (var buffEffect in createBuffEffects)
+        if (beginningOfTheBattleBuffEffects == null) return;
+        foreach (var buffEffect in beginningOfTheBattleBuffEffects)
         {
-            foreach (var effect in buffEffect.Effects)
+            foreach (var effect in buffEffect.effects)
             {
                 effect.Apply(this);
             }
         }
     }
 
-    public void HandleRemoveEffect()
+    //回合开始时调用
+    public void HandleBeginningOfTheRoundEffect()
     {
-        if (removeBuffEffects == null) return;
-        foreach (var buffEffect in removeBuffEffects)
+        if (beginningOfTheRoundBuffEffects == null) return;
+        foreach (var buffEffect in beginningOfTheRoundBuffEffects)
         {
-            foreach (var effect in buffEffect.Effects)
+            foreach (var effect in buffEffect.effects)
+            {
+                effect.Apply(this);
+            }
+        }
+    }
+
+    //使用技能时调用
+    public void HandleUsingSkilleEffect()
+    {
+        if (usingSkillBuffEffects == null) return;
+        foreach (var buffEffect in usingSkillBuffEffects)
+        {
+            foreach (var effect in buffEffect.effects)
+            {
+                effect.Apply(this);
+            }
+        }
+    }
+
+    //回合结束时调用
+    public void HandleEndOfTheRoundEffect()
+    {
+        if (endOfTheRound == null) return;
+        foreach (var buffEffect in endOfTheRound)
+        {
+            foreach (var effect in buffEffect.effects)
             {
                 effect.Apply(this);
             }
@@ -66,14 +131,25 @@ public class BuffInfo
 /// </summary>
 public class BuffConfig
 {
-    public int BuffId;
-    public int Priority;
-    public bool IsPermanent;
-    public float Duration;
+    //buffid
+    public int id;
+    //buff名
+    public string name;
+    //buff描述
+    public string describe;
+    //buff类型
+    public BuffType buffType;
+    //生效时间
+    public int effectiveTime;
+    //是否可叠加
     public bool IsStack;
+    //最大叠加层数
     public int MaxStack;
+    //添加时刷新类型
     public AddTimeChangeEnum AddTimeChange;
+    //结束时层数刷新类型
     public TimeOverStackChangeEnum TimeOverStackChange;
+    //效果列表
     public BuffEffect[] BuffEffects;
 }
 
@@ -82,12 +158,29 @@ public class BuffConfig
 /// </summary>
 public class BuffEffect
 {
-    //周期时间
-    public float PeriodTime;
+    //类型
+    public BuffType buffType;
+    //生效时间
+    public int effectiveTime;
+    //生效节点
+    public TriggerTimingEnum triggerTiming;
     //触发效果
-    public AbstractEffect[] Effects;
+    public AbstractEffect[] effects;
 }
 
+public enum BuffType
+{
+    //永久类
+    Permanent,
+    //回合类
+    Round,
+    //次数类
+    Frequency,
+}
+
+/// <summary>
+/// 添加时刷新类型
+/// </summary>
 public enum AddTimeChangeEnum
 {
     [LabelText("刷新时间")]
@@ -96,10 +189,30 @@ public enum AddTimeChangeEnum
     Add,
 }
 
+/// <summary>
+/// 结束时层数刷新类型
+/// </summary>
 public enum TimeOverStackChangeEnum
 {
     [LabelText("清除层数")]
     Clear,
     [LabelText("递减层数")]
     Reduce
+}
+
+
+/// <summary>
+/// 触发时机
+/// </summary>
+public enum TriggerTimingEnum
+{
+    [LabelText("战斗开始时")]
+    BeginningOfTheBattle,
+    [LabelText("回合开始时")]
+    BeginningOfTheRound,
+    [LabelText("使用技能时")]
+    UsingSkill,
+    [LabelText("回合结束时")]
+    EndOfTheRound,
+
 }

@@ -3,7 +3,7 @@
 /// <summary>
 /// 能力等级变化值，用于记录战斗中精灵的能力等级变化。
 /// </summary>
-public class AbilityLvSixDimensionsValue : SixDimensions
+public class AbilityLvSixDimensions : SixDimensions
 {
     private int physicalAttack;
     private int specialAttack;

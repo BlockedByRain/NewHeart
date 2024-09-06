@@ -13,6 +13,16 @@ public abstract class AbstractEffect : IEffect
 }
 
 
+//public interface IEffect
+//{
+//    public void Apply(object user, object target);
+//}
+
+//public abstract class AbstractEffect : IEffect
+//{
+//    public abstract void Apply(object user, object target);
+//}
+
 /// <summary>
 /// 示例，打印指定字符串
 /// </summary>

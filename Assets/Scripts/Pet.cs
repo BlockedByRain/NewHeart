@@ -82,12 +82,12 @@ public class Pet
     /// <summary>
     /// 能力等级
     /// </summary>
-    public AbilityLvSixDimensionsValue abilityLvSixDimensionsValue;
+    public AbilityLvSixDimensions abilityLvSixDimensionsValue;
 
     /// <summary>
     /// 战斗中能力值
     /// </summary>
-    public AbilityLvSixDimensionsValue fightAbility;
+    public AbilityLvSixDimensions fightAbility;
 
 
 

@@ -38,10 +38,7 @@ public class BuffHandler : MonoBehaviour
         if (buffs.Count == 0) return;
         foreach (var buffInfo in buffs)
         {
-            if (!buffInfo.OnUpdate())
-            {
-                RemoveBuff(buffInfo);
-            }
+            RemoveBuff(buffInfo);
         }
     }
     void HandleRemoveBuffs()
@@ -49,23 +46,20 @@ public class BuffHandler : MonoBehaviour
         if (removeBuffs.Count == 0) return;
         foreach (var buffInfo in removeBuffs)
         {
-            if (!buffInfo.BuffConfig.IsStack || buffInfo.CurStack == 1)
+            if (!buffInfo.buffConfig.IsStack || buffInfo.curStack == 1)
             {
-                buffInfo.HandleRemoveEffect();
                 buffs.Remove(buffInfo);
             }
             else
             {
-                switch (buffInfo.BuffConfig.TimeOverStackChange)
+                switch (buffInfo.buffConfig.TimeOverStackChange)
                 {
                     case TimeOverStackChangeEnum.Clear:
-                        buffInfo.HandleRemoveEffect();
                         buffs.Remove(buffInfo);
                         break;
                     case TimeOverStackChangeEnum.Reduce:
-                        buffInfo.CurStack--;
-                        buffInfo.HandleStackChangeEffect();
-                        buffInfo.CurDuration = buffInfo.BuffConfig.Duration;
+                        buffInfo.curStack--;
+                        buffInfo.effectiveTime = buffInfo.buffConfig.effectiveTime;
                         break;
                 }
             }
@@ -81,29 +75,28 @@ public class BuffHandler : MonoBehaviour
         if (addBuffs.Count == 0) return;
         foreach (var buffInfo in addBuffs)
         {
-            //查重
-            var find = buffs.Find(x => x.BuffConfig.BuffId == buffInfo.BuffConfig.BuffId);
+            //查找已有的Buff，避免重复添加
+            var find = buffs.Find(x => x.buffConfig.id == buffInfo.buffConfig.id);
             if (find == null)
             {
-                buffInfo.HandleCreateEffect();
                 buffs.Add(buffInfo);
             }
             else
             {
-                //根据添加的时间类型修改buff时间
-                switch (find.BuffConfig.AddTimeChange)
+                //根据配置处理添加时间的方式
+                switch (find.buffConfig.AddTimeChange)
                 {
                     case AddTimeChangeEnum.Add:
-                        find.CurDuration += buffInfo.CurDuration;
+                        find.effectiveTime += buffInfo.effectiveTime;
                         break;
                     case AddTimeChangeEnum.Refresh:
-                        find.CurDuration = buffInfo.CurDuration;
+                        find.effectiveTime = buffInfo.effectiveTime;
                         break;
                 }
-                //如果层数不可堆叠或者超过最大层数，则不处理
-                if (!find.BuffConfig.IsStack || find.CurStack >= find.BuffConfig.MaxStack) continue;
-                find.CurStack++;
-                find.HandleStackChangeEffect();
+                //检查Buff是否可以叠加
+                if (!find.buffConfig.IsStack || find.curStack >= find.buffConfig.MaxStack)
+                    continue;
+                find.curStack++;
             }
         }
         addBuffs.Clear();
