@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -29,6 +30,11 @@ public class Pet
     /// 下级所需经验
     /// </summary>
     public int nextLvExp;
+
+    /// <summary>
+    /// 精灵属性
+    /// </summary>
+    public Attribute attribute;
 
     /// <summary>
     /// 种族值
@@ -85,9 +91,14 @@ public class Pet
     public AbilityLvSixDimensions abilityLvSixDimensionsValue = null;
 
     /// <summary>
-    /// 战斗中能力值
+    /// 战斗中能力值,其中Hp作为战斗中最大体力上限
     /// </summary>
     public AbilitySixDimensions fightAbility = null;
+
+    /// <summary>
+    /// 战斗中当前体力
+    /// </summary>
+    public int fightAbilityCurHp;
 
     /// <summary>
     /// 精灵Buff
@@ -140,6 +151,7 @@ public class Pet
         fightAbility.Speed = ability.Speed;
         // 计算体力值
         fightAbility.HP = ability.HP;
+        fightAbilityCurHp = (int)fightAbility.HP;
 
     }
 
@@ -252,6 +264,7 @@ public class Pet
         string name = skillConfigSO.skillName;
         string description = skillConfigSO.skillDescription;
         SkillType skillType = skillConfigSO.skillType;
+        Attribute attribute = skillConfigSO.attribute;
         int skillPower = skillConfigSO.skillPower;
         int maxPP = skillConfigSO.maxPP;
         bool isPredestinate = skillConfigSO.isPredestinate;
@@ -272,6 +285,7 @@ public class Pet
             name,
             description,
             skillType,
+            attribute,
             skillPower,
             maxPP,
             isPredestinate,
@@ -347,14 +361,13 @@ public class Pet
     }
 
 
-
-
-
-
-
-
 }
 
+public enum Attribute
+{
+    fire,
+    water,
+}
 
 
 

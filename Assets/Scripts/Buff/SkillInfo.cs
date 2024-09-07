@@ -39,6 +39,9 @@ public class SkillInfo
 
 
         //todo 伤害计算
+        Damage damage = new Damage();
+        damage = damage.GetAttackDamage(user, target, skillConfig);
+
         //前提需要 属性克制、抗性、增减伤系统
     }
 
@@ -58,6 +61,8 @@ public class SkillConfig
     public string skillDescription;
     //技能类型
     public SkillType skillType;
+    //技能属性
+    public Attribute attribute;
     //技能威力
     public int skillPower;
     //最大次数
@@ -71,12 +76,13 @@ public class SkillConfig
     //技能效果
     public List<SkillEffect> skillEffects;
 
-    public SkillConfig(int skillId, string name, string description, SkillType skillType, int skillPower, int maxPP, bool isPredestinate, int initialCritical, int skillSpeed, List<SkillEffect> skillEffects)
+    public SkillConfig(int skillId, string name, string description, SkillType skillType, Attribute attribute, int skillPower, int maxPP, bool isPredestinate, int initialCritical, int skillSpeed, List<SkillEffect> skillEffects)
     {
         this.skillId = skillId;
         this.skillName = name;
         this.skillDescription = description;
         this.skillType = skillType;
+        this.attribute = attribute;
         this.skillPower = skillPower;
         this.maxPP = maxPP;
         this.isPredestinate = isPredestinate;

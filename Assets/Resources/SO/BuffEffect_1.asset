@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e6bc252154ceef4b90c2788b2ff8af7, type: 3}
   m_Name: BuffEffect_1
   m_EditorClassIdentifier: 
-  effectId: 0
-  effectDescription: 
+  effectId: 2
+  effectDescription: "\u52A0\u901F\u4E86"
+  speedUpValue: 10

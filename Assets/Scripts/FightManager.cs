@@ -72,7 +72,6 @@ public class FightManager : MonoSingleton<FightManager>
 
 
             //todo 这里已经拿到双方选择的技能了，考虑如何引入使用时无视强化弱化
-
             // 根据速度决定行动顺序并执行
             yield return StartCoroutine(ExecuteActions());
 
@@ -128,7 +127,8 @@ public class FightManager : MonoSingleton<FightManager>
 
         // 比较双方精灵的速度，速度高的先行动
         // todo 先判定选择的技能先制，后判定速度，后续考虑引入出手时节点的无视强弱化
-        if (challengerPet.ability.Speed > challengedPet.ability.Speed)
+
+        if (challengerPet.fightAbility.Speed > challengedPet.fightAbility.Speed)
         {
             // 挑战方先攻击
             challenger.ExecuteAction(challengerPet, challengedPet);

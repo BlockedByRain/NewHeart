@@ -12,6 +12,8 @@ public class SkillConfigSO : ScriptableObject
     public string skillDescription;
     //技能类型
     public SkillType skillType;
+    //技能属性
+    public Attribute attribute;
     //技能威力
     public int skillPower;
     //最大次数

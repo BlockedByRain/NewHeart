@@ -24,3 +24,4 @@ MonoBehaviour:
   timeOverStackChange: 0
   buffEffects:
   - {fileID: 11400000, guid: 64a82927ec66e7d41b18318a3c0a9ce5, type: 2}
+  - {fileID: 11400000, guid: bc03a650f99699a46beb262f521768b1, type: 2}
