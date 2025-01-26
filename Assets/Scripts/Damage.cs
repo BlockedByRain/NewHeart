@@ -9,7 +9,7 @@ public class Damage
     //伤害类型
     public DamageType damageType;
     //伤害属性
-    public Attribute attribute;
+    public int attribute;
 
 
     /// <summary>

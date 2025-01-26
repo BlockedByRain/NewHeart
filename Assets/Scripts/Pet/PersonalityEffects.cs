@@ -44,13 +44,13 @@ public static class PersonalityEffects
     private static readonly PersonalityEffectsSixDimensions defaultEffect = new PersonalityEffectsSixDimensions(1, 1, 1, 1, 1, 1);
 
 
-    // 定义性格影响
-    private static readonly Dictionary<Personality, PersonalityEffectsSixDimensions> personalityEffects = new Dictionary<Personality, PersonalityEffectsSixDimensions>()
-    {
-        //物攻、特攻、物防、特防、速度、体力（体力无性格影响，即最后一项恒为1）
-        { Personality.固执, new PersonalityEffectsSixDimensions(1.1f, 0.9f, 1f, 1f, 1f, 1f) },
-        { Personality.保守, new PersonalityEffectsSixDimensions(0.9f, 1.1f, 1f, 1f, 1f, 1f) },
-        // 添加更多性格的影响
-    };
+    //// 定义性格影响
+    //private static readonly Dictionary<Personality, PersonalityEffectsSixDimensions> personalityEffects = new Dictionary<Personality, PersonalityEffectsSixDimensions>()
+    //{
+    //    //物攻、特攻、物防、特防、速度、体力（体力无性格影响，即最后一项恒为1）
+    //    { Personality.固执, new PersonalityEffectsSixDimensions(1.1f, 0.9f, 1f, 1f, 1f, 1f) },
+    //    { Personality.保守, new PersonalityEffectsSixDimensions(0.9f, 1.1f, 1f, 1f, 1f, 1f) },
+    //    // 添加更多性格的影响
+    //};
 
 }

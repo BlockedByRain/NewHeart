@@ -1,0 +1,54 @@
+// Attributes.json
+{
+    "attributes": [{
+            "id": 1,
+            "name": "火",
+            "components": []
+        },
+        {
+            "id": 2,
+            "name": "水",
+            "components": []
+        },
+        {
+            "id": 3,
+            "name": "草",
+            "components": []
+        },
+        {
+            "id": 5,
+            "name": "电",
+            "components": []
+        },
+        {
+            "id": 6,
+            "name": "水草",
+            "components": [2, 3]
+        },
+        {
+            "id": 4,
+            "name": "火电",
+            "components": [1, 5]
+        }
+    ],
+    "relations": [{
+            "attackerId": 1,
+            "defenderId": 3,
+            "multiplier": 2.0
+        },
+        {
+            "attackerId": 1,
+            "defenderId": 2,
+            "multiplier": 0.5
+        },
+        {
+            "attackerId": 5,
+            "defenderId": 2,
+            "multiplier": 2.0
+        }
+    ],
+    "settings": {
+        "dualPenalty": 0.75,
+        "defaultMultiplier": 1.0
+    }
+}

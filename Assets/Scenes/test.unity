@@ -407,7 +407,7 @@ MonoBehaviour:
   testEffortPhysicalAttack: 252
   testLevel: 50
   testPersonality: 0
-  personalityConfig: {fileID: 11400000, guid: 7e20ee906180e914da227201dd5fbc17, type: 2}
+  personalityConfig: {fileID: 0}
 --- !u!4 &1615781190
 Transform:
   m_ObjectHideFlags: 0

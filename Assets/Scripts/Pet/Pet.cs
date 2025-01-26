@@ -34,7 +34,19 @@ public class Pet
     /// <summary>
     /// 精灵属性
     /// </summary>
-    public Attribute attribute;
+    public int attribute { get; private set; }
+
+    public void SetAttribute(int attributeId)
+    {
+        // 验证属性有效性
+        var attr = AttributeSystem.GetAttribute(attributeId);
+        attribute = attributeId;
+    }
+
+    public float GetDamageMultiplier(Pet defender)
+    {
+        return AttributeSystem.GetMultiplier(this.attribute, defender.attribute);
+    }
 
     /// <summary>
     /// 种族值
@@ -304,7 +316,7 @@ public class Pet
         string name = skillConfigSO.skillName;
         string description = skillConfigSO.skillDescription;
         SkillType skillType = skillConfigSO.skillType;
-        Attribute attribute = skillConfigSO.attribute;
+        int attribute = skillConfigSO.attribute;
         int skillPower = skillConfigSO.skillPower;
         int maxPP = skillConfigSO.maxPP;
         bool isPredestinate = skillConfigSO.isPredestinate;

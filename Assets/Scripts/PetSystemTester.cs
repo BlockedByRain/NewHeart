@@ -16,6 +16,64 @@ public class PetSystemTester : MonoBehaviour
 
     private void Start()
     {
+        //testSystem();
+        //testSystem2();
+
+    }
+
+
+    //属性系统测试
+    private void testSystem2()
+    {
+        // 初始化系统
+        AttributeSystem.Initialize();
+
+        AttributeSystem.PrintAllAttributeInfo();
+        AttributeSystem.PrintAllRelationInfo();
+
+
+        // 获取属性ID
+        int fireId = AttributeSystem.GetAttribute(1).Id; // 1
+        int waterGrassId = AttributeSystem.GetAttribute(4).Id; //4
+
+        // 计算倍数
+        float multiplier = AttributeSystem.GetMultiplier(fireId, waterGrassId);
+        Debug.Log($"最终倍数: {multiplier}"); // 应输出1.25
+
+
+
+        // 示例：火(1) 攻击 火电(4)
+        //float multiplier = AttributeSystem.GetMultiplier(1, 4);
+        //Debug.Log(multiplier);
+        // 计算过程：
+        // 1. 拆分防御方为火(1)和电(5)
+        // 2. 火→火(未定义) → 1倍
+        // 3. 火→电(未定义) → 1倍
+        // 4. 应用规则：(1 + 1)/2 = 1倍
+
+        // 示例：火(1) 攻击 水草(6)
+        float multiplier2 = AttributeSystem.GetMultiplier(1, 6);
+        Debug.Log(multiplier2);
+        // 计算过程：
+        // 1. 拆分防御方为火(1)和电(5)
+        // 2. 火→火(未定义) → 1倍
+        // 3. 火→电(未定义) → 1倍
+        // 4. 应用规则：(1 + 1)/2 = 1倍
+        // mv计算为1.25
+        // ai流程：
+        //        火（单属性）
+        //↓
+        //水草（双属性）→ 拆分为 水 +草
+        //↓
+        //计算火→水（0.5）和火→草（2.0）
+        //↓
+        //应用规则： (0.5 + 2.0) / 2 = 1.25
+    }
+
+
+    //性格系统测试
+    private void testSystem()
+    {
         // 确保配置文件自动加载
         LoadPersonalityConfig();
 
