@@ -18,7 +18,7 @@ public class SkillInfo
     {
         if (skillConfig.skillEffects == null || skillConfig.skillEffects.Count == 0)
         {
-            Debug.Log("此技能特殊效果");
+            Debug.Log("此技能无特殊效果");
         }
         else
         {
@@ -36,13 +36,12 @@ public class SkillInfo
             }
         }
 
-
-
-        //todo 伤害计算
         Damage damage = new Damage();
-        damage = damage.GetAttackDamage(user, target, skillConfig);
+        damage.GetAttackDamage(user, target, skillConfig);
 
-        //前提需要 属性克制、抗性、增减伤系统
+        //target.SubjectedDamage(damage);
+
+        //todo 抗性系统
     }
 
 

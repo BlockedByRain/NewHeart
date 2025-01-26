@@ -160,13 +160,6 @@ public class Pet
     /// <summary>
     /// 能力值计算
     /// </summary>
-    /// <param name="racialValue"></param>
-    /// <param name="effortValue"></param>
-    /// <param name="additionalValue"></param>
-    /// <param name="level"></param>
-    /// <param name="personalityEffect"></param>
-    /// <param name="extraValue"></param>
-    /// <returns></returns>
     private int CalculateState(float racialValue, float effortValue, float additionalValue, int level, float personalityEffect, float extraValue)
     {
         //常规能力值=【【【(种族值*2+努力值÷4+31)*(精灵等级÷100)+5】*性格修正】*套装百分比（暂无）】+外部加成
