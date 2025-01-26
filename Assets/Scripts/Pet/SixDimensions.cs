@@ -1,8 +1,23 @@
-﻿/// <summary>
+﻿using UnityEngine;
+
+/// <summary>
 /// 六维值
 /// </summary>
-public abstract class SixDimensions
+/// 
+public abstract class SixDimensions<T> where T : SixDimensions<T>
 {
+    protected abstract int GetMinValue();
+    protected abstract int GetMaxValue();
+
+    protected int ClampAndRound(float value)
+    {
+        int min = GetMinValue();
+        int max = GetMaxValue();
+        return Mathf.Clamp(Mathf.RoundToInt(value), min, max);
+    }
+
+    // 抽象属性定义
+
     /// <summary>
     /// 物攻
     /// </summary>
@@ -28,10 +43,8 @@ public abstract class SixDimensions
     /// 体力
     /// </summary>
     public abstract float HP { get; set; }
-
-
-
 }
+
 
 
 

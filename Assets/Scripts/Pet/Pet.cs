@@ -65,6 +65,9 @@ public class Pet
     /// </summary>
     public Personality personality;
 
+
+
+
     /// <summary>
     /// 特性
     /// </summary>
@@ -120,16 +123,60 @@ public class Pet
     /// </summary>
     public void RefreshCapability()
     {
-        PersonalityEffectsSixDimensions personalityEffects = PersonalityEffects.GetEffect(this.personality);
-        // 计算能力值
-        ability.PhysicalAttack = CalculateState(racial.PhysicalAttack, effort.PhysicalAttack, 31, Lv, personalityEffects.PhysicalAttack, extra.PhysicalAttack);
-        ability.SpecialAttack = CalculateState(racial.SpecialAttack, effort.SpecialAttack, 31, Lv, personalityEffects.SpecialAttack, extra.SpecialAttack);
-        ability.PhysicalDefense = CalculateState(racial.PhysicalDefense, effort.PhysicalDefense, 31, Lv, personalityEffects.PhysicalDefense, extra.PhysicalDefense);
-        ability.SpecialDefense = CalculateState(racial.SpecialDefense, effort.SpecialDefense, 31, Lv, personalityEffects.SpecialDefense, extra.SpecialDefense);
-        ability.Speed = CalculateState(racial.Speed, effort.Speed, 31, Lv, personalityEffects.Speed, extra.Speed);
+        // 获取性格修正系数
+        var personalityEffect = PersonalityEffects.GetEffect(this.personality);
+
+        // 计算常规能力值
+        ability.PhysicalAttack = AbilityCalculator.CalculateNormal(
+            racial.PhysicalAttack,
+            effort.PhysicalAttack,
+            Lv,
+            personalityEffect.physicalAttackMultiplier,
+            extra.PhysicalAttack
+        );
+
+        ability.SpecialAttack = AbilityCalculator.CalculateNormal(
+            racial.SpecialAttack,
+            effort.SpecialAttack,
+            Lv,
+            personalityEffect.specialAttackMultiplier,
+            extra.SpecialAttack
+        );
+
+        ability.PhysicalDefense = AbilityCalculator.CalculateNormal(
+            racial.PhysicalDefense,
+            effort.PhysicalDefense,
+            Lv,
+            personalityEffect.physicalDefenseMultiplier,
+            extra.PhysicalDefense
+        );
+
+        ability.SpecialDefense = AbilityCalculator.CalculateNormal(
+            racial.SpecialDefense,
+            effort.SpecialDefense,
+            Lv,
+            personalityEffect.specialDefenseMultiplier,
+            extra.SpecialDefense
+        );
+
+        ability.Speed = AbilityCalculator.CalculateNormal(
+            racial.Speed,
+            effort.Speed,
+            Lv,
+            personalityEffect.speedMultiplier,
+            extra.Speed
+        );
 
         // 计算体力值
-        ability.HP = CalculateState(racial.HP, effort.HP, 100 + 31, Lv, personalityEffects.HP, extra.HP);
+        ability.HP = AbilityCalculator.CalculateHP(
+            racial.HP,
+            effort.HP,
+            Lv,
+            personalityEffect.hpMultiplier,
+            extra.HP
+        );
+
+        Debug.Log($"物理攻击计算中间值：种族={racial.PhysicalAttack}, 努力={effort.PhysicalAttack}, 等级={Lv}, 基础值={racial.PhysicalAttack * 2 + effort.PhysicalAttack / 4 + 31}");
 
     }
 

@@ -3,7 +3,7 @@
 /// <summary>
 /// 六维种族值类，用于表示精灵自身种族的基础属性值。
 /// </summary>
-public class RacialSixDimensions : SixDimensions
+public class RacialSixDimensions : SixDimensions<RacialSixDimensions>
 {
     private int physicalAttack;
     private int specialAttack;
@@ -15,60 +15,58 @@ public class RacialSixDimensions : SixDimensions
     // 最大种族值常量
     private const int MaxRacialValue = 200;
 
+    protected override int GetMinValue() => 1;
+    protected override int GetMaxValue() => MaxRacialValue;
+
     /// <summary>
-    /// 构造函数
+    /// 构造函数，强制数值在1-200之间
     /// </summary>
-    /// <param name="physicalAttack">物攻值</param>
-    /// <param name="specialAttack">特攻值</param>
-    /// <param name="physicalDefense">物防值</param>
-    /// <param name="specialDefense">特防值</param>
-    /// <param name="speed">速度值</param>
-    /// <param name="hp">体力值</param>
-    public RacialSixDimensions(int physicalAttack = 1, int specialAttack = 1, int physicalDefense = 1, int specialDefense = 1, int speed = 1, int hp = 1)
+    public RacialSixDimensions(int pa = 1, int sa = 1, int pd = 1, int sd = 1, int sp = 1, int hp = 1)
     {
-        this.physicalAttack = Mathf.Clamp(physicalAttack, 1, MaxRacialValue);
-        this.specialAttack = Mathf.Clamp(specialAttack, 1, MaxRacialValue);
-        this.physicalDefense = Mathf.Clamp(physicalDefense, 1, MaxRacialValue);
-        this.specialDefense = Mathf.Clamp(specialDefense, 1, MaxRacialValue);
-        this.speed = Mathf.Clamp(speed, 1, MaxRacialValue);
-        this.hp = Mathf.Clamp(hp, 1, MaxRacialValue);
+        PhysicalAttack = pa;
+        SpecialAttack = sa;
+        PhysicalDefense = pd;
+        SpecialDefense = sd;
+        Speed = sp;
+        HP = hp;
     }
+
 
     public override float PhysicalAttack
     {
         get => physicalAttack;
-        set => physicalAttack = Mathf.Clamp(Mathf.RoundToInt(value), 0, MaxRacialValue);
+        set => physicalAttack = ClampAndRound(value);
     }
 
     public override float SpecialAttack
     {
         get => specialAttack;
-        set => specialAttack = Mathf.Clamp(Mathf.RoundToInt(value), 0, MaxRacialValue);
+        set => specialAttack = ClampAndRound(value);
     }
 
     public override float PhysicalDefense
     {
         get => physicalDefense;
-        set => physicalDefense = Mathf.Clamp(Mathf.RoundToInt(value), 0, MaxRacialValue);
+        set => physicalDefense = ClampAndRound(value);
     }
 
     public override float SpecialDefense
     {
         get => specialDefense;
-        set => specialDefense = Mathf.Clamp(Mathf.RoundToInt(value), 0, MaxRacialValue);
+        set => specialDefense = ClampAndRound(value);
     }
 
     public override float Speed
     {
         get => speed;
-        set => speed = Mathf.Clamp(Mathf.RoundToInt(value), 0, MaxRacialValue);
+        set => speed = ClampAndRound(value);
     }
 
     public override float HP
     {
         get => hp;
-        set => hp = Mathf.Clamp(Mathf.RoundToInt(value), 0, MaxRacialValue);
+        set => hp = ClampAndRound(value);
     }
 
-    
+
 }

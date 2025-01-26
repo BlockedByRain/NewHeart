@@ -3,7 +3,7 @@
 /// <summary>
 /// 六维性格影响类，用于表示精灵性格对其属性的影响，属性值为 0.9f、1f 或 1.1f。
 /// </summary>
-public class PersonalityEffectsSixDimensions : SixDimensions
+public class PersonalityEffectsSixDimensions : SixDimensions<PersonalityEffectsSixDimensions>
 {
     // 性格对每个属性的影响（减少、不变、增加）
     private float physicalAttackMultiplier;
@@ -13,16 +13,24 @@ public class PersonalityEffectsSixDimensions : SixDimensions
     private float speedMultiplier;
     private float hpMultiplier;
 
-    // 构造函数
-    public PersonalityEffectsSixDimensions(float physicalAttackMultiplier = 1f, float specialAttackMultiplier = 1f, float physicalDefenseMultiplier = 1f, float specialDefenseMultiplier = 1f, float speedMultiplier = 1f, float hpMultiplier = 1f)
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    public PersonalityEffectsSixDimensions(float pa = 1f, float sa = 1f, float pd = 1f, float sd = 1f, float sp = 1f, float hp = 1f)
     {
-        this.physicalAttackMultiplier = physicalAttackMultiplier;
-        this.specialAttackMultiplier = specialAttackMultiplier;
-        this.physicalDefenseMultiplier = physicalDefenseMultiplier;
-        this.specialDefenseMultiplier = specialDefenseMultiplier;
-        this.speedMultiplier = speedMultiplier;
-        this.hpMultiplier = hpMultiplier;
+        PhysicalAttack = pa;
+        SpecialAttack = sa;
+        PhysicalDefense = pd;
+        SpecialDefense = sd;
+        Speed = sp;
+        HP = hp;
     }
+
+    /// <summary>
+    /// 性格影响无数值范围限制（占位实现）
+    /// </summary>
+    protected override int GetMinValue() => 0;
+    protected override int GetMaxValue() => 0;
 
     public override float PhysicalAttack
     {

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 /// <summary>
@@ -9,6 +8,7 @@ public enum Personality
 {
     固执,
     保守,
+    开朗,
     // 添加更多性格
 }
 
@@ -17,6 +17,28 @@ public enum Personality
 /// </summary>
 public static class PersonalityEffects
 {
+    private static PersonalityEffectConfig _config;
+
+    public static PersonalityEffectConfig.EffectEntry GetEffect(Personality personality)
+    {
+        if (_config == null)
+        {
+            _config = Resources.Load<PersonalityEffectConfig>("Configs/PersonalityEffectConfig");
+            if (_config == null) Debug.LogError("未找到性格修正配置文件！");
+        }
+
+        foreach (var entry in _config.effects)
+        {
+            if (entry.personality == personality)
+                return entry;
+        }
+
+
+
+        return new PersonalityEffectConfig.EffectEntry(); // 返回默认值
+    }
+
+
 
     // 默认效果
     private static readonly PersonalityEffectsSixDimensions defaultEffect = new PersonalityEffectsSixDimensions(1, 1, 1, 1, 1, 1);
@@ -31,13 +53,4 @@ public static class PersonalityEffects
         // 添加更多性格的影响
     };
 
-    public static PersonalityEffectsSixDimensions GetEffect(Personality personality)
-    {
-        if (personalityEffects.TryGetValue(personality, out var effect))
-        {
-            return effect;
-        }
-        // 查询不到对应加成默认无影响
-        return defaultEffect;
-    }
 }

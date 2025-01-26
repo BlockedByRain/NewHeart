@@ -3,7 +3,7 @@
 /// <summary>
 /// 能力等级变化值，用于记录战斗中精灵的能力等级变化。
 /// </summary>
-public class AbilityLvSixDimensions : SixDimensions
+public class AbilityLvSixDimensions : SixDimensions<AbilityLvSixDimensions>
 {
     private int physicalAttack;
     private int specialAttack;
@@ -15,45 +15,57 @@ public class AbilityLvSixDimensions : SixDimensions
     /// <summary>
     /// 能力等级下限值
     /// </summary>
-    private const int MinLvValue = -6;
+    protected override int GetMinValue() => -6;
     /// <summary>
     /// 能力等级上限值
     /// </summary>
-    private const int MaxLvValue = 6;
+    protected override int GetMaxValue() => 6;
+
+
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    /// <param name="physicalAttack">物攻值</param>
+    /// <param name="specialAttack">特攻值</param>
+    /// <param name="physicalDefense">物防值</param>
+    /// <param name="specialDefense">特防值</param>
+    /// <param name="speed">速度值</param>
+    /// <param name="hp">体力值</param>
 
     public override float PhysicalAttack
     {
         get => physicalAttack;
-        set => physicalAttack = Mathf.Clamp(Mathf.RoundToInt(value), MinLvValue, MaxLvValue);
+        set => physicalAttack = ClampAndRound(value);
     }
 
     public override float SpecialAttack
     {
         get => specialAttack;
-        set => specialAttack = Mathf.Clamp(Mathf.RoundToInt(value), MinLvValue, MaxLvValue);
+        set => specialAttack = ClampAndRound(value);
     }
 
     public override float PhysicalDefense
     {
         get => physicalDefense;
-        set => physicalDefense = Mathf.Clamp(Mathf.RoundToInt(value), MinLvValue, MaxLvValue);
+        set => physicalDefense = ClampAndRound(value);
     }
 
     public override float SpecialDefense
     {
         get => specialDefense;
-        set => specialDefense = Mathf.Clamp(Mathf.RoundToInt(value), MinLvValue, MaxLvValue);
+        set => specialDefense = ClampAndRound(value);
     }
 
     public override float Speed
     {
         get => speed;
-        set => speed = Mathf.Clamp(Mathf.RoundToInt(value), MinLvValue, MaxLvValue);
+        set => speed = ClampAndRound(value);
     }
 
     public override float HP
     {
         get => hp;
-        set => hp = Mathf.Clamp(Mathf.RoundToInt(value), MinLvValue, MaxLvValue);
+        set => hp = ClampAndRound(value);
     }
+
 }

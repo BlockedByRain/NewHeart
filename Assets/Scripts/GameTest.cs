@@ -14,9 +14,10 @@ public class GameTest : MonoBehaviour
     void Start()
     {
         //精灵数据
+
         AbilitySixDimensions abilitySixDimensions0 = new AbilitySixDimensions(0, 0, 0, 0, 0, 0);
         AbilitySixDimensions abilitySixDimensions50 =new AbilitySixDimensions(50, 50, 50, 50, 50, 50);
-        RacialSixDimensions racialSixDimensions100=new RacialSixDimensions(100, 100, 100, 100, 100, 300);
+        RacialSixDimensions racialSixDimensions100 =new RacialSixDimensions(100, 100, 100, 100, 100, 300);
         EffortSixDimensions effortSixDimensions0 =new EffortSixDimensions(0, 0, 0, 0, 0, 0);
 
         //加载技能
