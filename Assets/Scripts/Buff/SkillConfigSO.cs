@@ -1,30 +1,30 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewSkillConfig", menuName = "Fight System/SkillConfig")]
 public class SkillConfigSO : ScriptableObject
 {
-    //¼¼ÄÜid
+    //æŠ€èƒ½id
     public int skillId;
-    //¼¼ÄÜÃû
+    //æŠ€èƒ½å
     public string skillName;
-    //¼¼ÄÜÃèÊö
+    //æŠ€èƒ½æè¿°
     public string skillDescription;
-    //¼¼ÄÜÀàĞÍ
+    //æŠ€èƒ½ç±»å‹
     public SkillType skillType;
-    //¼¼ÄÜÊôĞÔ
+    //æŠ€èƒ½å±æ€§
     public Attribute attribute;
-    //¼¼ÄÜÍşÁ¦
+    //æŠ€èƒ½å¨åŠ›
     public int skillPower;
-    //×î´ó´ÎÊı
+    //æœ€å¤§æ¬¡æ•°
     public int maxPP;
-    //ÊÇ·ñ±ØÖĞ
+    //æ˜¯å¦å¿…ä¸­
     public bool isPredestinate;
-    //³õÊ¼±©»÷£¬°´Ê®Áù·ÖÖ®¶àÉÙÀ´±íÊ¾£¬¼´1´ú±í1/16=6.25%¸ÅÂÊ±©»÷
+    //åˆå§‹æš´å‡»ï¼ŒæŒ‰åå…­åˆ†ä¹‹å¤šå°‘æ¥è¡¨ç¤ºï¼Œå³1ä»£è¡¨1/16=6.25%æ¦‚ç‡æš´å‡»
     public int initialCritical;
-    //¼¼ÄÜÏÈÖÆ
+    //æŠ€èƒ½å…ˆåˆ¶
     public int skillSpeed;
-    //¼¼ÄÜĞ§¹û
+    //æŠ€èƒ½æ•ˆæœ
     public AbstractEffect[] skillEffects;
 
 

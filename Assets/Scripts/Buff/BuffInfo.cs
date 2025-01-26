@@ -1,9 +1,9 @@
-using Sirenix.OdinInspector;
+ï»¿using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 /// <summary>
-/// ÔËĞĞÊ±µÄbuffÊı¾İÀà
+/// è¿è¡Œæ—¶çš„buffæ•°æ®ç±»
 /// </summary>
 public class BuffInfo
 {
@@ -14,13 +14,13 @@ public class BuffInfo
     public int curStack;
     public int maxStack;
 
-    //Õ½¶·¿ªÊ¼Ê±buffĞ§¹û¼¯ºÏ
+    //æˆ˜æ–—å¼€å§‹æ—¶buffæ•ˆæœé›†åˆ
     List<BuffEffect> beginningOfTheBattleBuffEffects;
-    //»ØºÏ¿ªÊ¼Ê±buffĞ§¹û¼¯ºÏ
+    //å›åˆå¼€å§‹æ—¶buffæ•ˆæœé›†åˆ
     List<BuffEffect> beginningOfTheRoundBuffEffects;
-    //Ê¹ÓÃ¼¼ÄÜÊ±buffĞ§¹û¼¯ºÏ
+    //ä½¿ç”¨æŠ€èƒ½æ—¶buffæ•ˆæœé›†åˆ
     List<BuffEffect> usingSkillBuffEffects;
-    //»ØºÏ½áÊøÊ±buffĞ§¹û¼¯ºÏ
+    //å›åˆç»“æŸæ—¶buffæ•ˆæœé›†åˆ
     List<BuffEffect> endOfTheRound;
 
 
@@ -30,7 +30,7 @@ public class BuffInfo
         this.target = target;
         this.creator = creator;
 
-        //±éÀúbuffÅäÖÃ£¬½«buffĞ§¹û·ÖÀà
+        //éå†buffé…ç½®ï¼Œå°†buffæ•ˆæœåˆ†ç±»
         foreach (var buffConfigBuffEffect in buffConfig.BuffEffects)
         {
             switch (buffConfigBuffEffect.triggerTiming)
@@ -61,13 +61,13 @@ public class BuffInfo
 
 
 
-    //buffµÄ¸üĞÂÂß¼­
+    //buffçš„æ›´æ–°é€»è¾‘
     public void OnUpdate()
     {
 
     }
 
-    //Õ½¶·¿ªÊ¼Ê±µ÷ÓÃ
+    //æˆ˜æ–—å¼€å§‹æ—¶è°ƒç”¨
     public void HandleBeginningOfTheBattleEffect(Pet owner)
     {
         if (beginningOfTheBattleBuffEffects == null) return;
@@ -80,7 +80,7 @@ public class BuffInfo
         }
     }
 
-    //»ØºÏ¿ªÊ¼Ê±µ÷ÓÃ
+    //å›åˆå¼€å§‹æ—¶è°ƒç”¨
     public void HandleBeginningOfTheRoundEffect()
     {
         if (beginningOfTheRoundBuffEffects == null) return;
@@ -93,7 +93,7 @@ public class BuffInfo
         }
     }
 
-    //Ê¹ÓÃ¼¼ÄÜÊ±µ÷ÓÃ
+    //ä½¿ç”¨æŠ€èƒ½æ—¶è°ƒç”¨
     public void HandleUsingSkilleEffect()
     {
         if (usingSkillBuffEffects == null) return;
@@ -106,7 +106,7 @@ public class BuffInfo
         }
     }
 
-    //»ØºÏ½áÊøÊ±µ÷ÓÃ
+    //å›åˆç»“æŸæ—¶è°ƒç”¨
     public void HandleEndOfTheRoundEffect()
     {
         if (endOfTheRound == null) return;
@@ -125,31 +125,31 @@ public class BuffInfo
 
 
 /// <summary>
-/// buffÅäÖÃÀà
+/// buffé…ç½®ç±»
 /// </summary>
 public class BuffConfig
 {
     //buffid
     public int buffId;
-    //buffÃû
+    //buffå
     public string buffName;
-    //buffÃèÊö
+    //buffæè¿°
     public string buffDescribe;
-    //buffÀàĞÍ
+    //buffç±»å‹
     public BuffType buffType;
     //buffTag
     public string[] buffTags;
-    //ÉúĞ§Ê±¼ä
+    //ç”Ÿæ•ˆæ—¶é—´
     public int effectiveTime;
-    //ÊÇ·ñ¿Éµş¼Ó
+    //æ˜¯å¦å¯å åŠ 
     public bool IsStack;
-    //×î´óµş¼Ó²ãÊı
+    //æœ€å¤§å åŠ å±‚æ•°
     public int MaxStack;
-    //Ìí¼ÓÊ±Ë¢ĞÂÀàĞÍ
+    //æ·»åŠ æ—¶åˆ·æ–°ç±»å‹
     public AddTimeChangeEnum AddTimeChange;
-    //½áÊøÊ±²ãÊıË¢ĞÂÀàĞÍ
+    //ç»“æŸæ—¶å±‚æ•°åˆ·æ–°ç±»å‹
     public TimeOverStackChangeEnum TimeOverStackChange;
-    //Ğ§¹ûÁĞ±í
+    //æ•ˆæœåˆ—è¡¨
     public List<BuffEffect> BuffEffects;
 
 
@@ -171,18 +171,18 @@ public class BuffConfig
 }
 
 /// <summary>
-/// buffĞ§¹ûÅäÖÃÀà
+/// buffæ•ˆæœé…ç½®ç±»
 /// </summary>
 [System.Serializable]
 public class BuffEffect
 {
-    //ÀàĞÍ
+    //ç±»å‹
     public BuffType buffType;
-    //ÉúĞ§Ê±¼ä
+    //ç”Ÿæ•ˆæ—¶é—´
     //public int effectiveTime;
-    //ÉúĞ§½Úµã
+    //ç”Ÿæ•ˆèŠ‚ç‚¹
     public TriggerTimingEnum triggerTiming;
-    //´¥·¢Ğ§¹û
+    //è§¦å‘æ•ˆæœ
     public AbstractEffect[] effects;
 
 
@@ -193,53 +193,53 @@ public class BuffEffect
 }
 
 /// <summary>
-/// buffÀàĞÍ
+/// buffç±»å‹
 /// </summary>
 public enum BuffType
 {
-    //ÓÀ¾ÃÀà
+    //æ°¸ä¹…ç±»
     Permanent,
-    //»ØºÏÀà
+    //å›åˆç±»
     Round,
-    //´ÎÊıÀà
+    //æ¬¡æ•°ç±»
     Frequency,
 }
 
 /// <summary>
-/// Ìí¼ÓÊ±Ë¢ĞÂÀàĞÍ
+/// æ·»åŠ æ—¶åˆ·æ–°ç±»å‹
 /// </summary>
 public enum AddTimeChangeEnum
 {
-    [LabelText("Ë¢ĞÂÊ±¼ä")]
+    [LabelText("åˆ·æ–°æ—¶é—´")]
     Refresh,
-    [LabelText("µş¼ÓÊ±¼ä")]
+    [LabelText("å åŠ æ—¶é—´")]
     Add,
 }
 
 /// <summary>
-/// ½áÊøÊ±²ãÊıË¢ĞÂÀàĞÍ
+/// ç»“æŸæ—¶å±‚æ•°åˆ·æ–°ç±»å‹
 /// </summary>
 public enum TimeOverStackChangeEnum
 {
-    [LabelText("Çå³ı²ãÊı")]
+    [LabelText("æ¸…é™¤å±‚æ•°")]
     Clear,
-    [LabelText("µİ¼õ²ãÊı")]
+    [LabelText("é€’å‡å±‚æ•°")]
     Reduce
 }
 
 
 /// <summary>
-/// ´¥·¢Ê±»ú
+/// è§¦å‘æ—¶æœº
 /// </summary>
 public enum TriggerTimingEnum
 {
-    [LabelText("Õ½¶·¿ªÊ¼Ê±")]
+    [LabelText("æˆ˜æ–—å¼€å§‹æ—¶")]
     BeginningOfTheBattle,
-    [LabelText("»ØºÏ¿ªÊ¼Ê±")]
+    [LabelText("å›åˆå¼€å§‹æ—¶")]
     BeginningOfTheRound,
-    [LabelText("Ê¹ÓÃ¼¼ÄÜÊ±")]
+    [LabelText("ä½¿ç”¨æŠ€èƒ½æ—¶")]
     UsingSkill,
-    [LabelText("»ØºÏ½áÊøÊ±")]
+    [LabelText("å›åˆç»“æŸæ—¶")]
     EndOfTheRound,
 
 }

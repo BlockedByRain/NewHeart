@@ -1,4 +1,4 @@
-using UnityEditor;
+ï»¿using UnityEditor;
 using UnityEngine;
 public static class CustomHierarchyMenu
 {
@@ -7,7 +7,7 @@ public static class CustomHierarchyMenu
     //{
     //    EditorApplication.hierarchyWindowItemOnGUI = delegate (int instanceID, Rect selectionRect)
     //    {
-    //        // Èç¹ûÎ´ÔÚ Hierarchy ÊÓÍ¼ÖÐÑ¡ÔñÎïÌå£¬Ö±½Ó·µ»Ø
+    //        // å¦‚æžœæœªåœ¨ Hierarchy è§†å›¾ä¸­é€‰æ‹©ç‰©ä½“ï¼Œç›´æŽ¥è¿”å›ž
     //        if (!Selection.activeObject || instanceID != Selection.activeObject.GetInstanceID())
     //        {
     //            return;
@@ -19,7 +19,7 @@ public static class CustomHierarchyMenu
     //        selectionRect.width = width;
     //        selectionRect.height = height;
 
-    //        // µã»÷ÊÂ¼þ
+    //        // ç‚¹å‡»äº‹ä»¶
     //        if (GUI.Button(selectionRect, "Delete"))
     //        {
     //            Debug.LogFormat("Delete : {0}", Selection.activeObject.name);

@@ -1,34 +1,34 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 /// <summary>
-/// ĞÔ¸ñÃ¶¾Ù
+/// æ€§æ ¼æšä¸¾
 /// </summary>
 public enum Personality
 {
-    ¹ÌÖ´,
-    ±£ÊØ,
-    // Ìí¼Ó¸ü¶àĞÔ¸ñ
+    å›ºæ‰§,
+    ä¿å®ˆ,
+    // æ·»åŠ æ›´å¤šæ€§æ ¼
 }
 
 /// <summary>
-/// ĞÔ¸ñÓ°Ïì
+/// æ€§æ ¼å½±å“
 /// </summary>
 public static class PersonalityEffects
 {
 
-    // Ä¬ÈÏĞ§¹û
+    // é»˜è®¤æ•ˆæœ
     private static readonly PersonalityEffectsSixDimensions defaultEffect = new PersonalityEffectsSixDimensions(1, 1, 1, 1, 1, 1);
 
 
-    // ¶¨ÒåĞÔ¸ñÓ°Ïì
+    // å®šä¹‰æ€§æ ¼å½±å“
     private static readonly Dictionary<Personality, PersonalityEffectsSixDimensions> personalityEffects = new Dictionary<Personality, PersonalityEffectsSixDimensions>()
     {
-        //Îï¹¥¡¢ÌØ¹¥¡¢Îï·À¡¢ÌØ·À¡¢ËÙ¶È¡¢ÌåÁ¦£¨ÌåÁ¦ÎŞĞÔ¸ñÓ°Ïì£¬¼´×îºóÒ»ÏîºãÎª1£©
-        { Personality.¹ÌÖ´, new PersonalityEffectsSixDimensions(1.1f, 0.9f, 1f, 1f, 1f, 1f) },
-        { Personality.±£ÊØ, new PersonalityEffectsSixDimensions(0.9f, 1.1f, 1f, 1f, 1f, 1f) },
-        // Ìí¼Ó¸ü¶àĞÔ¸ñµÄÓ°Ïì
+        //ç‰©æ”»ã€ç‰¹æ”»ã€ç‰©é˜²ã€ç‰¹é˜²ã€é€Ÿåº¦ã€ä½“åŠ›ï¼ˆä½“åŠ›æ— æ€§æ ¼å½±å“ï¼Œå³æœ€åä¸€é¡¹æ’ä¸º1ï¼‰
+        { Personality.å›ºæ‰§, new PersonalityEffectsSixDimensions(1.1f, 0.9f, 1f, 1f, 1f, 1f) },
+        { Personality.ä¿å®ˆ, new PersonalityEffectsSixDimensions(0.9f, 1.1f, 1f, 1f, 1f, 1f) },
+        // æ·»åŠ æ›´å¤šæ€§æ ¼çš„å½±å“
     };
 
     public static PersonalityEffectsSixDimensions GetEffect(Personality personality)
@@ -37,7 +37,7 @@ public static class PersonalityEffects
         {
             return effect;
         }
-        // ²éÑ¯²»µ½¶ÔÓ¦¼Ó³ÉÄ¬ÈÏÎŞÓ°Ïì
+        // æŸ¥è¯¢ä¸åˆ°å¯¹åº”åŠ æˆé»˜è®¤æ— å½±å“
         return defaultEffect;
     }
 }

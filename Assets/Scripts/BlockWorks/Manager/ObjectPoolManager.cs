@@ -1,16 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
 {
-    // ³ØµÄ´æ´¢£¬Ê¹ÓÃ×Öµä´æ´¢
+    // æ± çš„å­˜å‚¨ï¼Œä½¿ç”¨å­—å…¸å­˜å‚¨
     private Dictionary<string, Queue<GameObject>> pool;
 
-    // Ã¿¸öÀàĞÍµÄÎïÌåÊÇ·ñĞèÒªÔ¤¼ÓÔØ£¬ÒÔ¼°Ô¤¼ÓÔØÊıÁ¿
+    // æ¯ä¸ªç±»å‹çš„ç‰©ä½“æ˜¯å¦éœ€è¦é¢„åŠ è½½ï¼Œä»¥åŠé¢„åŠ è½½æ•°é‡
     private Dictionary<string, int> preloadDict = new Dictionary<string, int>();
 
-    // Ã¿¸ö³ØÖĞ×î´óÊıÁ¿£¬¿ÉÒÔÔÚUnity InspectorÖĞÉèÖÃ
+    // æ¯ä¸ªæ± ä¸­æœ€å¤§æ•°é‡ï¼Œå¯ä»¥åœ¨Unity Inspectorä¸­è®¾ç½®
     [SerializeField]
     private int maxCount = int.MaxValue;
     public int MaxCount
@@ -23,7 +23,7 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
     }
 
 
-    // È«¾Ö¶ÔÏó³Ø×î´óÊıÁ¿£¬¿ÉÒÔÔÚUnity InspectorÖĞÉèÖÃ
+    // å…¨å±€å¯¹è±¡æ± æœ€å¤§æ•°é‡ï¼Œå¯ä»¥åœ¨Unity Inspectorä¸­è®¾ç½®
     [SerializeField]
     private int maxPoolSize = int.MaxValue;
     public int MaxPoolSize
@@ -36,37 +36,37 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
     }
 
 
-    // ³õÊ¼»¯³Ø
+    // åˆå§‹åŒ–æ± 
     protected override void Init()
     {
         pool = new Dictionary<string, Queue<GameObject>>();
     }
 
     /// <summary>
-    /// ´Ó³ØÖĞ»ñÈ¡ÎïÌå
+    /// ä»æ± ä¸­è·å–ç‰©ä½“
     /// </summary>
-    /// <param name="go">ĞèÒªÈ¡µÃµÄÎïÌå</param>
+    /// <param name="go">éœ€è¦å–å¾—çš„ç‰©ä½“</param>
     /// <param name="position"></param>
     /// <param name="rotation"></param>
     /// <returns></returns>
     public GameObject GetObject(GameObject go, Vector3 position, Quaternion rotation)
     {
-        // Èç¹û³ØÖĞÃ»ÓĞ¶ÔÓ¦ÀàĞÍµÄÎïÌå£¬ÔòĞÂ½¨Ò»¸ö¶ÓÁĞ
+        // å¦‚æœæ± ä¸­æ²¡æœ‰å¯¹åº”ç±»å‹çš„ç‰©ä½“ï¼Œåˆ™æ–°å»ºä¸€ä¸ªé˜Ÿåˆ—
         if (!pool.ContainsKey(go.name))
         {
             pool.Add(go.name, new Queue<GameObject>());
         }
-        // Èç¹û³Ø¿ÕÁË¾Í´´½¨ĞÂÎïÌå
+        // å¦‚æœæ± ç©ºäº†å°±åˆ›å»ºæ–°ç‰©ä½“
         if (pool[go.name].Count == 0)
         {
             GameObject newObject = Instantiate(go, position, rotation);
-            //È·ÈÏÃû×ÖÒ»Ñù£¬·ÀÖ¹ÏµÍ³¼ÓÒ»¸ö(clone),»òĞòºÅÀÛ¼ÓÖ®ÀàµÄ
+            //ç¡®è®¤åå­—ä¸€æ ·ï¼Œé˜²æ­¢ç³»ç»ŸåŠ ä¸€ä¸ª(clone),æˆ–åºå·ç´¯åŠ ä¹‹ç±»çš„
             newObject.name = go.name;
             return newObject;
         }
-        // ´Ó³ØÖĞ»ñÈ¡ÎïÌå
+        // ä»æ± ä¸­è·å–ç‰©ä½“
         GameObject nextObject = pool[go.name].Dequeue();
-        // ÒªÏÈÆô¶¯ÔÙÉèÖÃÊôĞÔ£¬·ñÔò¿ÉÄÜ»á±»OnEnableÖØÖÃ
+        // è¦å…ˆå¯åŠ¨å†è®¾ç½®å±æ€§ï¼Œå¦åˆ™å¯èƒ½ä¼šè¢«OnEnableé‡ç½®
         nextObject.SetActive(true);
         nextObject.transform.position = position;
         nextObject.transform.rotation = rotation;
@@ -74,22 +74,22 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
     }
 
     /// <summary>
-    /// °ÑÎïÌå·Å»Ø³ØÀï
+    /// æŠŠç‰©ä½“æ”¾å›æ± é‡Œ
     /// </summary>
-    /// <param name="go">ĞèÒª·Å»Ø¶ÓÁĞµÄÎïÆ·</param>
-    /// <param name="t">ÑÓ³ÙÖ´ĞĞµÄÊ±¼ä</param>
+    /// <param name="go">éœ€è¦æ”¾å›é˜Ÿåˆ—çš„ç‰©å“</param>
+    /// <param name="t">å»¶è¿Ÿæ‰§è¡Œçš„æ—¶é—´</param>
     public void PutObject(GameObject go, float t)
     {
 
-        // Èç¹ûÎ´³õÊ¼»¯¹ı ³õÊ¼»¯³Ø
+        // å¦‚æœæœªåˆå§‹åŒ–è¿‡ åˆå§‹åŒ–æ± 
         if (!pool.ContainsKey(go.name))
         {
             pool.Add(go.name, new Queue<GameObject>());
         }
-        // Èç¹û³ØÖĞÒÑ¾­ÓĞ×î´óÊıÁ¿µÄÎïÌå£¬ÔòÏú»ÙÕâ¸öÎïÌå
+        // å¦‚æœæ± ä¸­å·²ç»æœ‰æœ€å¤§æ•°é‡çš„ç‰©ä½“ï¼Œåˆ™é”€æ¯è¿™ä¸ªç‰©ä½“
         if (pool[go.name].Count >= MaxCount)
             Destroy(go, t);
-        // ·ñÔò½«ÎïÌå¼ÓÈë³ØÖĞ
+        // å¦åˆ™å°†ç‰©ä½“åŠ å…¥æ± ä¸­
         else
             StartCoroutine(ExecutePut(go, t));
     }
@@ -102,11 +102,11 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
     }
 
     /// <summary>
-    /// ÎïÌåÔ¤ÈÈ/Ô¤¼ÓÔØ
+    /// ç‰©ä½“é¢„çƒ­/é¢„åŠ è½½
     /// </summary>
-    /// <param name="go">ĞèÒªÔ¤ÈÈµÄÎïÌå</param>
-    /// <param name="number">ĞèÒªÔ¤ÈÈµÄÊıÁ¿</param>
-    /// TODO ¼ÈÈ»ÓĞÔ¤ÈÈÓÃ¿Õ¼ä»»Ê±¼ä Ó¦¸ÃÒª×öÒ»¸öÇåÀíÓÃÊ±¼ä»»¿Õ¼äµÄ¹¦ÄÜ
+    /// <param name="go">éœ€è¦é¢„çƒ­çš„ç‰©ä½“</param>
+    /// <param name="number">éœ€è¦é¢„çƒ­çš„æ•°é‡</param>
+    /// TODO æ—¢ç„¶æœ‰é¢„çƒ­ç”¨ç©ºé—´æ¢æ—¶é—´ åº”è¯¥è¦åšä¸€ä¸ªæ¸…ç†ç”¨æ—¶é—´æ¢ç©ºé—´çš„åŠŸèƒ½
     public void Preload(GameObject go, int number)
     {
         if (!pool.ContainsKey(go.name))

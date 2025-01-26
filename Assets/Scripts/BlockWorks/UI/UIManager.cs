@@ -1,20 +1,20 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
 public class UIManager:MonoSingleton<UIManager>
 {
-    // ¸ù½ÚµãÃû
+    // æ ¹èŠ‚ç‚¹å
     private readonly string rootName = "UICanvas";
-    // Ô¤ÖÆÌåÂ·¾¶
+    // é¢„åˆ¶ä½“è·¯å¾„
     private readonly string panelPath = "Prefab/Panel/";
 
     private Transform _uiRoot;
-    // Â·¾¶ÅäÖÃ×Öµä
+    // è·¯å¾„é…ç½®å­—å…¸
     private Dictionary<string, string> pathDict;
-    // Ô¤ÖÆ¼ş»º´æ×Öµä
+    // é¢„åˆ¶ä»¶ç¼“å­˜å­—å…¸
     private Dictionary<string, GameObject> prefabDict;
-    // ÒÑ´ò¿ª½çÃæµÄ»º´æ×Öµä
+    // å·²æ‰“å¼€ç•Œé¢çš„ç¼“å­˜å­—å…¸
     public Dictionary<string, BasePanel> panelDict;
 
 
@@ -58,22 +58,22 @@ public class UIManager:MonoSingleton<UIManager>
     public BasePanel OpenPanel(string name)
     {
         BasePanel panel;
-        // ¼ì²éÊÇ·ñÒÑ´ò¿ª
+        // æ£€æŸ¥æ˜¯å¦å·²æ‰“å¼€
         if (panelDict.TryGetValue(name, out panel))
         {
-            Debug.LogError("½çÃæÒÑ´ò¿ª: " + name);
+            Debug.LogError("ç•Œé¢å·²æ‰“å¼€: " + name);
             return null;
         }
 
-        // ¼ì²éÂ·¾¶ÊÇ·ñÅäÖÃ
+        // æ£€æŸ¥è·¯å¾„æ˜¯å¦é…ç½®
         string path;
         if (!pathDict.TryGetValue(name, out path))
         {
-            Debug.LogError("½çÃæÃû³Æ´íÎó£¬»òÎ´ÅäÖÃÂ·¾¶: " + name);
+            Debug.LogError("ç•Œé¢åç§°é”™è¯¯ï¼Œæˆ–æœªé…ç½®è·¯å¾„: " + name);
             return null;
         }
 
-        // Ê¹ÓÃ»º´æÔ¤ÖÆ¼ş
+        // ä½¿ç”¨ç¼“å­˜é¢„åˆ¶ä»¶
         GameObject panelPrefab;
         if (!prefabDict.TryGetValue(name, out panelPrefab))
         {
@@ -82,7 +82,7 @@ public class UIManager:MonoSingleton<UIManager>
             prefabDict.Add(name, panelPrefab);
         }
 
-        // ´ò¿ª½çÃæ
+        // æ‰“å¼€ç•Œé¢
         GameObject panelObject = GameObject.Instantiate(panelPrefab, UIRoot, false);
         panel = panelObject.GetComponent<BasePanel>();
         panelDict.Add(name, panel);
@@ -95,7 +95,7 @@ public class UIManager:MonoSingleton<UIManager>
         BasePanel panel;
         if (!panelDict.TryGetValue(name, out panel))
         {
-            Debug.LogError("½çÃæÎ´´ò¿ª: " + name);
+            Debug.LogError("ç•Œé¢æœªæ‰“å¼€: " + name);
             return false;
         }
 

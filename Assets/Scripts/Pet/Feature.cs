@@ -1,11 +1,11 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum Feature
 {
-    瞬杀,
-    精神,
-    强袭,
-    坚硬,
+    鐬潃,
+    绮剧,
+    寮鸿,
+    鍧氱‖,
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ public class BasePanel : MonoBehaviour
         isRemove = true;
         SetActive(false);
         Destroy(gameObject);
-        // 从打开列表移除
+        // 浠庢墦寮�鍒楄〃绉婚櫎
         if (UIManager.Instance.panelDict.ContainsKey(name))
         {
             UIManager.Instance.panelDict.Remove(name);

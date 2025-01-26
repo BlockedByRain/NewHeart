@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Profiling;
@@ -10,11 +10,11 @@ public class ObjPoolTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Ô¤ÈÈ
+        //é¢„çƒ­
         ObjectPool.Instance.Preload(testObject, 500);
     }
 
-    //ÎŞ¶ÔÏó³Ø²âÊÔ
+    //æ— å¯¹è±¡æ± æµ‹è¯•
     public void TestOfNotOP()
     {
         StartCoroutine(CreateOfNotOP());
@@ -23,9 +23,9 @@ public class ObjPoolTest : MonoBehaviour
 
     private IEnumerator CreateOfNotOP()
     {
-        //Í³¼Æ500Ö¡ËùÓÃÊ±¼ä
+        //ç»Ÿè®¡500å¸§æ‰€ç”¨æ—¶é—´
         float t = 0.0f;
-        //Ã¿Ò»Ö¡Éú³ÉÒ»¸ö¶ÔÏó£¬¶¨Ê±2Ãëºó×Ô¶¯Ïû³ı
+        //æ¯ä¸€å¸§ç”Ÿæˆä¸€ä¸ªå¯¹è±¡ï¼Œå®šæ—¶2ç§’åè‡ªåŠ¨æ¶ˆé™¤
         for (int i = 0; i < 500; i++)
         {
             int x = Random.Range(-30, 30);
@@ -37,10 +37,10 @@ public class ObjPoolTest : MonoBehaviour
             yield return null;
             t += Time.deltaTime;
         }
-        Debug.Log("ÎŞ¶ÔÏó³Ø500Ö¡Ê¹ÓÃÃëÊı:" + t);
+        Debug.Log("æ— å¯¹è±¡æ± 500å¸§ä½¿ç”¨ç§’æ•°:" + t);
     }
 
-    //Ê¹ÓÃ¶ÔÏó³Ø²âÊÔ
+    //ä½¿ç”¨å¯¹è±¡æ± æµ‹è¯•
     public void TestOfOP()
     {
 
@@ -49,9 +49,9 @@ public class ObjPoolTest : MonoBehaviour
 
     private IEnumerator CreateOfOP()
     {
-        //Í³¼Æ500Ö¡ËùÓÃÊ±¼ä
+        //ç»Ÿè®¡500å¸§æ‰€ç”¨æ—¶é—´
         float t = 0.0f;
-        //Ã¿Ò»Ö¡Éú³ÉÒ»¸ö¶ÔÏó£¬¶¨Ê±2Ãëºó×Ô¶¯Ïû³ı
+        //æ¯ä¸€å¸§ç”Ÿæˆä¸€ä¸ªå¯¹è±¡ï¼Œå®šæ—¶2ç§’åè‡ªåŠ¨æ¶ˆé™¤
         for (int i = 0; i < 500; i++)
         {
             int x = Random.Range(-30, 30);
@@ -62,6 +62,6 @@ public class ObjPoolTest : MonoBehaviour
             yield return null;
             t += Time.deltaTime;
         }
-        Debug.Log("Ê¹ÓÃ¶ÔÏó³Ø500Ö¡Ê¹ÓÃÃëÊı:" + t);
+        Debug.Log("ä½¿ç”¨å¯¹è±¡æ± 500å¸§ä½¿ç”¨ç§’æ•°:" + t);
     }
 }

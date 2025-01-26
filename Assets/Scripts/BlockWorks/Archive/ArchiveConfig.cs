@@ -1,54 +1,54 @@
-using System.IO;
+ï»¿using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 using System.Collections.Generic;
 
 public class ArchiveConfig
 {
-    //Ôö¼ÓusersData·ÅÔÚÄÚ´æÖĞ
+    //å¢åŠ usersDataæ”¾åœ¨å†…å­˜ä¸­
     public static Dictionary<string, UserData> usersData = new Dictionary<string, UserData>();
 
-    // Ñ¡È¡Ò»Ğ©ÓÃÓÚÒì»òµÄ×Ö·û
+    // é€‰å–ä¸€äº›ç”¨äºå¼‚æˆ–çš„å­—ç¬¦
     public static char[] keyChars = { 'a', 'b', 'c', 'd', 'e' };
 
 
-    // ±£´æÓÃ»§Êı¾İÎªÎÄ±¾
+    // ä¿å­˜ç”¨æˆ·æ•°æ®ä¸ºæ–‡æœ¬
     public static void SaveUserData(UserData userData)
     {
-        // ÔÚpersistentDataPathÏÂÔÙ´´½¨Ò»¸ö/usersÎÄ¼ş¼Ğ£¬·½±ã¹ÜÀí
+        // åœ¨persistentDataPathä¸‹å†åˆ›å»ºä¸€ä¸ª/usersæ–‡ä»¶å¤¹ï¼Œæ–¹ä¾¿ç®¡ç†
         if (!File.Exists(Application.persistentDataPath + "/users"))
         {
             System.IO.Directory.CreateDirectory(Application.persistentDataPath + "/users");
         }
-        //±£´æ»º´æÊı¾İ
+        //ä¿å­˜ç¼“å­˜æ•°æ®
         usersData[userData.name] = userData;
-        // ×ª»»ÓÃ»§Êı¾İÎªJSON×Ö·û´®
+        // è½¬æ¢ç”¨æˆ·æ•°æ®ä¸ºJSONå­—ç¬¦ä¸²
         string jsonData = JsonConvert.SerializeObject(userData);
-        //¼ÓÃÜ
+        //åŠ å¯†
 #if UNITY_EDITOR
         jsonData = Encrypt(jsonData);
 #endif
-        // ½«JSON×Ö·û´®Ğ´ÈëÎÄ¼şÖĞ(ÎÄ¼şÃûÎªuserData.name)
+        // å°†JSONå­—ç¬¦ä¸²å†™å…¥æ–‡ä»¶ä¸­(æ–‡ä»¶åä¸ºuserData.name)
         File.WriteAllText(Application.persistentDataPath + string.Format("/users/{0}.json", userData.name), jsonData);
     }
 
-    // ¶ÁÈ¡ÓÃ»§Êı¾İµ½ÄÚ´æ
+    // è¯»å–ç”¨æˆ·æ•°æ®åˆ°å†…å­˜
     public static UserData LoadUserData(string userName)
     {
         string path = Application.persistentDataPath + string.Format("/users/{0}.json", userName);
-        // ¼ì²éÓÃ»§ÅäÖÃÎÄ¼şÊÇ·ñ´æÔÚ
+        // æ£€æŸ¥ç”¨æˆ·é…ç½®æ–‡ä»¶æ˜¯å¦å­˜åœ¨
         if (File.Exists(path))
         {
-            // ´ÓÎÄ±¾ÎÄ¼şÖĞ¼ÓÔØJSON×Ö·û´®
+            // ä»æ–‡æœ¬æ–‡ä»¶ä¸­åŠ è½½JSONå­—ç¬¦ä¸²
             string jsonData = File.ReadAllText(path);
-            //½âÃÜ
+            //è§£å¯†
             jsonData = Decrypt(jsonData);
 #if UNITY_EDITOR
             jsonData = Decrypt(jsonData);
 #endif
-            // ½«JSON×Ö·û´®×ª»»ÎªÓÃ»§ÄÚ´æÊı¾İ
+            // å°†JSONå­—ç¬¦ä¸²è½¬æ¢ä¸ºç”¨æˆ·å†…å­˜æ•°æ®
             UserData userData = JsonConvert.DeserializeObject<UserData>(jsonData);
-            //¶ÁÈ¡Ê±£¬Èç¹ûuserDataÒÑ¾­»º´æ£¬¾ÍÖ±½ÓÊ¹ÓÃ
+            //è¯»å–æ—¶ï¼Œå¦‚æœuserDataå·²ç»ç¼“å­˜ï¼Œå°±ç›´æ¥ä½¿ç”¨
             usersData[userName] = userData;
             return userData;
         }
@@ -59,7 +59,7 @@ public class ArchiveConfig
     }
 
 
-    // ¼ÓÃÜ
+    // åŠ å¯†
     public static string Encrypt(string data)
     {
         char[] dataChars = data.ToCharArray();
@@ -67,7 +67,7 @@ public class ArchiveConfig
         {
             char dataChar = dataChars[i];
             char keyChar = keyChars[i % keyChars.Length];
-            // ÖØµã£ºÍ¨¹ıÒì»òµÃµ½ĞÂµÄ×Ö·û
+            // é‡ç‚¹ï¼šé€šè¿‡å¼‚æˆ–å¾—åˆ°æ–°çš„å­—ç¬¦
             char newChar = (char)(dataChar ^ keyChar);
             dataChars[i] = newChar;
         }
@@ -75,10 +75,10 @@ public class ArchiveConfig
     }
 
 
-    // ½âÃÜ
+    // è§£å¯†
     public static string Decrypt(string data)
     {
-        // Á½´ÎÒì»òÖ´ĞĞµÄÊÇÍ¬ÑùµÄ²Ù×÷
+        // ä¸¤æ¬¡å¼‚æˆ–æ‰§è¡Œçš„æ˜¯åŒæ ·çš„æ“ä½œ
         return Encrypt(data);
     }
 

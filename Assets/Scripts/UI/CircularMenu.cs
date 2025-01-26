@@ -1,4 +1,4 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -50,7 +50,7 @@ public class CircularMenu : MonoBehaviour, IPointerClickHandler, IPointerMoveHan
         ResetCanvas();
         OnClick += (part) =>
         {
-            Debug.Log($"当前区域：{part}");
+            Debug.Log($"褰撳墠鍖哄煙锛歿part}");
         };
     }
 
@@ -108,7 +108,7 @@ public class CircularMenu : MonoBehaviour, IPointerClickHandler, IPointerMoveHan
 
     public void OnPointerMove(PointerEventData e)
     {
-        //不在右上第一块时计算角度返回块数
+        //涓嶅湪鍙充笂绗竴鍧楁椂璁＄畻瑙掑害杩斿洖鍧楁暟
         //ResetColor();
         int part;
         if (RectTransformUtility.RectangleContainsScreenPoint(_1.rectTransform, e.position))

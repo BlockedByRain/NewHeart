@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ÁùÎ¬ÖÖ×åÖµÀà£¬ÓÃÓÚ±íÊ¾¾«Áé×ÔÉíÖÖ×åµÄ»ù´¡ÊôĞÔÖµ¡£
+/// å…­ç»´ç§æ—å€¼ç±»ï¼Œç”¨äºè¡¨ç¤ºç²¾çµè‡ªèº«ç§æ—çš„åŸºç¡€å±æ€§å€¼ã€‚
 /// </summary>
 public class RacialSixDimensions : SixDimensions
 {
@@ -12,18 +12,18 @@ public class RacialSixDimensions : SixDimensions
     private int speed;
     private int hp;
 
-    // ×î´óÖÖ×åÖµ³£Á¿
+    // æœ€å¤§ç§æ—å€¼å¸¸é‡
     private const int MaxRacialValue = 200;
 
     /// <summary>
-    /// ¹¹Ôìº¯Êı
+    /// æ„é€ å‡½æ•°
     /// </summary>
-    /// <param name="physicalAttack">Îï¹¥Öµ</param>
-    /// <param name="specialAttack">ÌØ¹¥Öµ</param>
-    /// <param name="physicalDefense">Îï·ÀÖµ</param>
-    /// <param name="specialDefense">ÌØ·ÀÖµ</param>
-    /// <param name="speed">ËÙ¶ÈÖµ</param>
-    /// <param name="hp">ÌåÁ¦Öµ</param>
+    /// <param name="physicalAttack">ç‰©æ”»å€¼</param>
+    /// <param name="specialAttack">ç‰¹æ”»å€¼</param>
+    /// <param name="physicalDefense">ç‰©é˜²å€¼</param>
+    /// <param name="specialDefense">ç‰¹é˜²å€¼</param>
+    /// <param name="speed">é€Ÿåº¦å€¼</param>
+    /// <param name="hp">ä½“åŠ›å€¼</param>
     public RacialSixDimensions(int physicalAttack = 1, int specialAttack = 1, int physicalDefense = 1, int specialDefense = 1, int speed = 1, int hp = 1)
     {
         this.physicalAttack = Mathf.Clamp(physicalAttack, 1, MaxRacialValue);

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewBuffConfig", menuName = "Fight System/BuffConfig")]
@@ -6,25 +6,25 @@ public class BuffConfigSO : ScriptableObject
 {
     //buffid
     public int buffId;
-    //buffÃû
+    //buffå
     public string buffName;
-    //buffÃèÊö
+    //buffæè¿°
     public string buffDescribe;
-    //buffÀàĞÍ
+    //buffç±»å‹
     public BuffType buffType;
     //buffTag
     public string[] buffTags;
-    //ÉúĞ§Ê±¼ä
+    //ç”Ÿæ•ˆæ—¶é—´
     public int effectiveTime;
-    //ÊÇ·ñ¿Éµş¼Ó
+    //æ˜¯å¦å¯å åŠ 
     public bool isStackable;
-    //×î´óµş¼Ó²ãÊı
+    //æœ€å¤§å åŠ å±‚æ•°
     public int maxStack;
-    //Ìí¼ÓÊ±Ë¢ĞÂÀàĞÍ
+    //æ·»åŠ æ—¶åˆ·æ–°ç±»å‹
     public AddTimeChangeEnum addTimeChange;
-    //½áÊøÊ±²ãÊıË¢ĞÂÀàĞÍ
+    //ç»“æŸæ—¶å±‚æ•°åˆ·æ–°ç±»å‹
     public TimeOverStackChangeEnum timeOverStackChange;
-    //Ğ§¹ûÁĞ±í
+    //æ•ˆæœåˆ—è¡¨
     public AbstractEffect[] buffEffects;
 
 

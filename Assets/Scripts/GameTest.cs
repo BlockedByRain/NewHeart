@@ -1,57 +1,57 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//²âÊÔÓÃ
+//æµ‹è¯•ç”¨
 public class GameTest : MonoBehaviour
 {
 
-    //²âÊÔÓÃË«·½
+    //æµ‹è¯•ç”¨åŒæ–¹
     FightPlayer player1 = new FightPlayer();
     FightPlayer player2 = new FightPlayer();
 
     // Start is called before the first frame update
     void Start()
     {
-        //¾«ÁéÊı¾İ
+        //ç²¾çµæ•°æ®
         AbilitySixDimensions abilitySixDimensions0 = new AbilitySixDimensions(0, 0, 0, 0, 0, 0);
         AbilitySixDimensions abilitySixDimensions50 =new AbilitySixDimensions(50, 50, 50, 50, 50, 50);
         RacialSixDimensions racialSixDimensions100=new RacialSixDimensions(100, 100, 100, 100, 100, 300);
         EffortSixDimensions effortSixDimensions0 =new EffortSixDimensions(0, 0, 0, 0, 0, 0);
 
-        //¼ÓÔØ¼¼ÄÜ
-        // ¼ÓÔØ SkillSO ×ÊÔ´
+        //åŠ è½½æŠ€èƒ½
+        // åŠ è½½ SkillSO èµ„æº
         SkillConfigSO loadSkill = Resources.Load<SkillConfigSO>("SO/skill1");
         if (loadSkill != null)
         {
-            Debug.Log($"ÒÑ¼ÓÔØ¼¼ÄÜ: {loadSkill.skillName}");
+            Debug.Log($"å·²åŠ è½½æŠ€èƒ½: {loadSkill.skillName}");
         }
         else
         {
-            Debug.LogError("Î´ÕÒµ½¼¼ÄÜ SO");
+            Debug.LogError("æœªæ‰¾åˆ°æŠ€èƒ½ SO");
         }
 
-        //¼ÓÔØbuff
-        // ¼ÓÔØ BuffSO ×ÊÔ´
-        // todo ÕâÁ½¸ö¶¼Òª·â×°ÏÂ ´«ÈëÂ·¾¶Ö±½Ó·µ»Ø
+        //åŠ è½½buff
+        // åŠ è½½ BuffSO èµ„æº
+        // todo è¿™ä¸¤ä¸ªéƒ½è¦å°è£…ä¸‹ ä¼ å…¥è·¯å¾„ç›´æ¥è¿”å›
         BuffConfigSO loadBuff = Resources.Load<BuffConfigSO>("SO/buff1");
         if (loadBuff != null)
         {
-            Debug.Log($"ÒÑ¼ÓÔØbuff: {loadBuff.buffName}");
+            Debug.Log($"å·²åŠ è½½buff: {loadBuff.buffName}");
         }
         else
         {
-            Debug.LogError("Î´ÕÒµ½buff SO");
+            Debug.LogError("æœªæ‰¾åˆ°buff SO");
         }
 
 
 
-        // ´´½¨²¢³õÊ¼»¯²âÊÔÓÃ¾«Áé
+        // åˆ›å»ºå¹¶åˆå§‹åŒ–æµ‹è¯•ç”¨ç²¾çµ
         Pet testPet1 = new Pet
         {
-            petName = "ÈÕÄã",
+            petName = "æ—¥ä½ ",
             Lv = 100,
-            personality = Personality.¹ÌÖ´,
+            personality = Personality.å›ºæ‰§,
             ability = abilitySixDimensions50,
             racial = racialSixDimensions100,
             effort = effortSixDimensions0,
@@ -63,14 +63,14 @@ public class GameTest : MonoBehaviour
         testPet1.buffInfos.Add(Pet.CreateBuffInfoFromConfig(loadBuff));
 
         testPet1.RefreshCapability();
-        //Êä³öËùÓĞ×´Ì¬
+        //è¾“å‡ºæ‰€æœ‰çŠ¶æ€
         //testPet1.PrintStatus(); 
 
         Pet testPet2 = new Pet
         {
-            petName = "´ó°Ó",
+            petName = "å¤§å",
             Lv = 100,
-            personality = Personality.±£ÊØ,
+            personality = Personality.ä¿å®ˆ,
             ability = abilitySixDimensions50,
             racial = racialSixDimensions100,
             effort = effortSixDimensions0,
@@ -83,11 +83,11 @@ public class GameTest : MonoBehaviour
         testPet2.RefreshCapability();
         //testPet2.PrintStatus();
 
-        //¾«Áé¼ÓÈë±³°ü
+        //ç²¾çµåŠ å…¥èƒŒåŒ…
         player1.petBag.Add(testPet1);
         player2.petBag.Add(testPet2);
 
-        //½øÈë¶ÔÕ½
+        //è¿›å…¥å¯¹æˆ˜
         FightManager.Instance.challenger = player1;
         FightManager.Instance.challenged = player2;
         FightManager.Instance.EnterFight(player1, player2);

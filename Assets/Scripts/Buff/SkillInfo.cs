@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ÔËĞĞÊ±µÄ¼¼ÄÜÊı¾İÀà
+/// è¿è¡Œæ—¶çš„æŠ€èƒ½æ•°æ®ç±»
 /// </summary>
 public class SkillInfo
 {
@@ -18,11 +18,11 @@ public class SkillInfo
     {
         if (skillConfig.skillEffects == null || skillConfig.skillEffects.Count == 0)
         {
-            Debug.Log("´Ë¼¼ÄÜÎŞÌØÊâĞ§¹û");
+            Debug.Log("æ­¤æŠ€èƒ½æ— ç‰¹æ®Šæ•ˆæœ");
         }
         else
         {
-            // ÖğÒ»Ö´ĞĞ¼¼ÄÜĞ§¹û
+            // é€ä¸€æ‰§è¡ŒæŠ€èƒ½æ•ˆæœ
             foreach (var skillEffect in skillConfig.skillEffects)
             {
                 try
@@ -31,7 +31,7 @@ public class SkillInfo
                 }
                 catch (System.Exception ex)
                 {
-                    Debug.LogError(skillEffect.effect.effectDescription+ $"¼¼ÄÜĞ§¹ûÖ´ĞĞÊ§°Ü: {ex.Message}");
+                    Debug.LogError(skillEffect.effect.effectDescription+ $"æŠ€èƒ½æ•ˆæœæ‰§è¡Œå¤±è´¥: {ex.Message}");
                 }
             }
         }
@@ -41,38 +41,38 @@ public class SkillInfo
 
         //target.SubjectedDamage(damage);
 
-        //todo ¿¹ĞÔÏµÍ³
+        //todo æŠ—æ€§ç³»ç»Ÿ
     }
 
 
 }
 
 /// <summary>
-/// ¼¼ÄÜÅäÖÃÀà
+/// æŠ€èƒ½é…ç½®ç±»
 /// </summary>
 public class SkillConfig
 {
-    //¼¼ÄÜid
+    //æŠ€èƒ½id
     public int skillId;
-    //¼¼ÄÜÃû
+    //æŠ€èƒ½å
     public string skillName;
-    //¼¼ÄÜÃèÊö
+    //æŠ€èƒ½æè¿°
     public string skillDescription;
-    //¼¼ÄÜÀàĞÍ
+    //æŠ€èƒ½ç±»å‹
     public SkillType skillType;
-    //¼¼ÄÜÊôĞÔ
+    //æŠ€èƒ½å±æ€§
     public Attribute attribute;
-    //¼¼ÄÜÍşÁ¦
+    //æŠ€èƒ½å¨åŠ›
     public int skillPower;
-    //×î´ó´ÎÊı
+    //æœ€å¤§æ¬¡æ•°
     public int maxPP;
-    //ÊÇ·ñ±ØÖĞ
+    //æ˜¯å¦å¿…ä¸­
     public bool isPredestinate;
-    //³õÊ¼±©»÷£¬°´Ê®Áù·ÖÖ®¶àÉÙÀ´±íÊ¾£¬¼´1´ú±í1/16=6.25%¸ÅÂÊ±©»÷
+    //åˆå§‹æš´å‡»ï¼ŒæŒ‰åå…­åˆ†ä¹‹å¤šå°‘æ¥è¡¨ç¤ºï¼Œå³1ä»£è¡¨1/16=6.25%æ¦‚ç‡æš´å‡»
     public int initialCritical;
-    //¼¼ÄÜÏÈÖÆ
+    //æŠ€èƒ½å…ˆåˆ¶
     public int skillSpeed;
-    //¼¼ÄÜĞ§¹û
+    //æŠ€èƒ½æ•ˆæœ
     public List<SkillEffect> skillEffects;
 
     public SkillConfig(int skillId, string name, string description, SkillType skillType, Attribute attribute, int skillPower, int maxPP, bool isPredestinate, int initialCritical, int skillSpeed, List<SkillEffect> skillEffects)
@@ -103,7 +103,7 @@ public class SkillEffect
         this.effect = effect;
     }
 
-    // Ö´ĞĞĞ§¹û£¬Õë¶ÔÃ¿¸öĞ§¹ûÒÀ´ÎÖ´ĞĞ
+    // æ‰§è¡Œæ•ˆæœï¼Œé’ˆå¯¹æ¯ä¸ªæ•ˆæœä¾æ¬¡æ‰§è¡Œ
     public void Execute(object user, object target)
     {
 
@@ -114,10 +114,10 @@ public class SkillEffect
 
 public enum SkillType
 {
-    //ÎïÀí¹¥»÷
+    //ç‰©ç†æ”»å‡»
     Physical,
-    //ÌØÊâ¹¥»÷
+    //ç‰¹æ®Šæ”»å‡»
     Special,
-    //ÊôĞÔ¼¼ÄÜ
+    //å±æ€§æŠ€èƒ½
     Attribute,
 }

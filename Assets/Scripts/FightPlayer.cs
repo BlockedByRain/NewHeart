@@ -1,24 +1,24 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FightPlayer
 {
-    //Ì××°
+    //å¥—è£…
 
-    //³ÆºÅ
+    //ç§°å·
 
-    //Ä¿¾µ
+    //ç›®é•œ
 
-    //±³°ü
+    //èƒŒåŒ…
     public List<Pet> petBag = new List<Pet>(6);
 
-    //Ñ¡ÔñµÄ²Ù×÷
+    //é€‰æ‹©çš„æ“ä½œ
     int playerChoose;
 
-    //µ±Ç°³öÕ½µÄ¾«ÁéË÷Òı
+    //å½“å‰å‡ºæˆ˜çš„ç²¾çµç´¢å¼•
     public int activePetIndex = 0;
-    //Íæ¼ÒÊÇ·ñÒÑÑ¡Ôñ²Ù×÷
+    //ç©å®¶æ˜¯å¦å·²é€‰æ‹©æ“ä½œ
     public bool actionChosen = false;
 
     public bool HasChosenAction()
@@ -28,17 +28,17 @@ public class FightPlayer
 
     public void DefaultAction()
     {
-        // todo ³¬Ê±Ä¬ÈÏÑ¡ÔñµÚÒ»¸ö¼¼ÄÜ£¬Ö®ºóÒª×öÅĞ¶ÏÑ¡ÔñÁËÎŞppµÄ¼¼ÄÜ·£Õ¾
+        // todo è¶…æ—¶é»˜è®¤é€‰æ‹©ç¬¬ä¸€ä¸ªæŠ€èƒ½ï¼Œä¹‹åè¦åšåˆ¤æ–­é€‰æ‹©äº†æ— ppçš„æŠ€èƒ½ç½šç«™
         actionChosen = true;
         playerChoose = 0;
-        //Debug.Log("Ê±¼äÓÃ¾¡£¬×Ô¶¯Ö´ĞĞÄ¬ÈÏ²Ù×÷£¡");
+        //Debug.Log("æ—¶é—´ç”¨å°½ï¼Œè‡ªåŠ¨æ‰§è¡Œé»˜è®¤æ“ä½œï¼");
     }
 
     public void ExecuteAction(Pet user, Pet target)
     {
         Pet activePet = GetActivePet();
         
-        // ¼ÙÉèÍæ¼ÒÑ¡ÔñÁË¼¼ÄÜ£¬Ö´ĞĞ¶ÔÓ¦¼¼ÄÜ
+        // å‡è®¾ç©å®¶é€‰æ‹©äº†æŠ€èƒ½ï¼Œæ‰§è¡Œå¯¹åº”æŠ€èƒ½
         activePet.GetSelectedSkill(playerChoose).Execute(user,target);
         actionChosen = false;
     }
@@ -49,7 +49,7 @@ public class FightPlayer
     }
 
     /// <summary>
-    /// ÊÇ·ñËùÓĞ¾«Áé¶¼ÕóÍö
+    /// æ˜¯å¦æ‰€æœ‰ç²¾çµéƒ½é˜µäº¡
     /// </summary>
     /// <returns></returns>
     public bool AreAllPetsDefeated()
@@ -64,7 +64,7 @@ public class FightPlayer
 
     public SkillInfo ChooseSkill()
     {
-        // Ä£Äâ¼¼ÄÜÑ¡ÔñÂß¼­£¬¼ÙÉèÑ¡Ôñµ±Ç°¼¼ÄÜÁĞ±íÖĞµÄµÚÒ»¸ö¼¼ÄÜ
+        // æ¨¡æ‹ŸæŠ€èƒ½é€‰æ‹©é€»è¾‘ï¼Œå‡è®¾é€‰æ‹©å½“å‰æŠ€èƒ½åˆ—è¡¨ä¸­çš„ç¬¬ä¸€ä¸ªæŠ€èƒ½
         return GetActivePet().currentSkills[0];
     }
 }

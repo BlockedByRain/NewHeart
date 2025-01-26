@@ -1,4 +1,4 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ public class BuffEffect_1 : AbstractEffect
 
         onwerPet.fightAbility.Speed += speedUpValue;
 
-        Debug.Log(onwerPet.petName + "速度提升了十点！");
+        Debug.Log(onwerPet.petName + "閫熷害鎻愬崌浜嗗崄鐐癸紒");
 
         Debug.Log(onwerPet.fightAbility.Speed);
 

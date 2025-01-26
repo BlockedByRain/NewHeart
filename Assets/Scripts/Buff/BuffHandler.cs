@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// buff´¦ÀíÀà
+/// buffå¤„ç†ç±»
 /// </summary>
 public class BuffHandler : MonoBehaviour
 {
-    // ÕıÔÚÓĞĞ§µÄbuff
+    // æ­£åœ¨æœ‰æ•ˆçš„buff
     List<BuffInfo> buffs = new List<BuffInfo>();
-    // ¼´½«ÒÆ³ıµÄbuff
+    // å³å°†ç§»é™¤çš„buff
     List<BuffInfo> removeBuffs = new List<BuffInfo>();
-    // ¼´½«Ìí¼ÓµÄbuff
+    // å³å°†æ·»åŠ çš„buff
     List<BuffInfo> addBuffs = new List<BuffInfo>();
 
 
@@ -68,14 +68,14 @@ public class BuffHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// ´¦Àí´ıÌí¼ÓµÄbuff
+    /// å¤„ç†å¾…æ·»åŠ çš„buff
     /// </summary>
     void HandleAddBuffs()
     {
         if (addBuffs.Count == 0) return;
         foreach (var buffInfo in addBuffs)
         {
-            //²éÕÒÒÑÓĞµÄBuff£¬±ÜÃâÖØ¸´Ìí¼Ó
+            //æŸ¥æ‰¾å·²æœ‰çš„Buffï¼Œé¿å…é‡å¤æ·»åŠ 
             var find = buffs.Find(x => x.buffConfig.buffId == buffInfo.buffConfig.buffId);
             if (find == null)
             {
@@ -83,7 +83,7 @@ public class BuffHandler : MonoBehaviour
             }
             else
             {
-                //¸ù¾İÅäÖÃ´¦ÀíÌí¼ÓÊ±¼äµÄ·½Ê½
+                //æ ¹æ®é…ç½®å¤„ç†æ·»åŠ æ—¶é—´çš„æ–¹å¼
                 switch (find.buffConfig.AddTimeChange)
                 {
                     case AddTimeChangeEnum.Add:
@@ -93,7 +93,7 @@ public class BuffHandler : MonoBehaviour
                         find.effectiveTime = buffInfo.effectiveTime;
                         break;
                 }
-                //¼ì²éBuffÊÇ·ñ¿ÉÒÔµş¼Ó
+                //æ£€æŸ¥Buffæ˜¯å¦å¯ä»¥å åŠ 
                 if (!find.buffConfig.IsStack || find.curStack >= find.buffConfig.MaxStack)
                     continue;
                 find.curStack++;

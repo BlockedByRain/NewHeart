@@ -1,14 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FightManager : MonoSingleton<FightManager>
 {
-    //»ñÈ¡ÌôÕ½·½Player
+    //è·å–æŒ‘æˆ˜æ–¹Player
     public FightPlayer challenger;
-    //»ñÈ¡±»ÌôÕ½·½Player
+    //è·å–è¢«æŒ‘æˆ˜æ–¹Player
     public FightPlayer challenged;
-    //µ¹¼ÆÊ±
+    //å€’è®¡æ—¶
     public float countdownTime = 10f;
 
     private bool battleOngoing = true;
@@ -23,7 +23,7 @@ public class FightManager : MonoSingleton<FightManager>
     }
 
     /// <summary>
-    /// ½øÈëÕ½¶·
+    /// è¿›å…¥æˆ˜æ–—
     /// </summary>
     public void EnterFight(FightPlayer player1, FightPlayer player2)
     {
@@ -35,11 +35,11 @@ public class FightManager : MonoSingleton<FightManager>
         challengedPetBag = player2.petBag;
 
 
-        //ÉèÖÃ³öÕ½
+        //è®¾ç½®å‡ºæˆ˜
         challenger.activePetIndex = 0;
         challenged.activePetIndex = 0;
 
-        //³õÊ¼»¯¾«Áé£¨ÈçÌìÉúÄÜÁ¦µÄ»ñµÃ£©
+        //åˆå§‹åŒ–ç²¾çµï¼ˆå¦‚å¤©ç”Ÿèƒ½åŠ›çš„è·å¾—ï¼‰
         InitPetBag(challengerPetBag);
         InitPetBag(challengedPetBag);
 
@@ -49,18 +49,18 @@ public class FightManager : MonoSingleton<FightManager>
     }
 
     /// <summary>
-    /// »ØºÏÑ­»·
+    /// å›åˆå¾ªç¯
     /// </summary>
     /// <returns></returns>
     private IEnumerator UpdateRound()
     {
         while (battleOngoing)
         {
-            // ¿ªÊ¼µ¹¼ÆÊ±£¬ÈÃË«·½Íæ¼ÒÑ¡ÔñĞĞ¶¯
+            // å¼€å§‹å€’è®¡æ—¶ï¼Œè®©åŒæ–¹ç©å®¶é€‰æ‹©è¡ŒåŠ¨
             yield return StartCoroutine(PlayerActionSelection());
 
 
-            //todo ºÍÕ½¶·¿ªÊ¼Ê±Ò»ÑùĞèÒªÏÈÅĞ¿Õ£¬Ö®ºó¿¼ÂÇ×ö·â×°£¬ÕâÀïÏÈ×¢ÊÍµô
+            //todo å’Œæˆ˜æ–—å¼€å§‹æ—¶ä¸€æ ·éœ€è¦å…ˆåˆ¤ç©ºï¼Œä¹‹åè€ƒè™‘åšå°è£…ï¼Œè¿™é‡Œå…ˆæ³¨é‡Šæ‰
             //foreach (var buffInfo in challengerPetBag[challenger.activePetIndex].buffInfos)
             //{
             //    buffInfo.HandleBeginningOfTheRoundEffect();
@@ -71,11 +71,11 @@ public class FightManager : MonoSingleton<FightManager>
             //}
 
 
-            //todo ÕâÀïÒÑ¾­ÄÃµ½Ë«·½Ñ¡ÔñµÄ¼¼ÄÜÁË£¬¿¼ÂÇÈçºÎÒıÈëÊ¹ÓÃÊ±ÎŞÊÓÇ¿»¯Èõ»¯
-            // ¸ù¾İËÙ¶È¾ö¶¨ĞĞ¶¯Ë³Ğò²¢Ö´ĞĞ
+            //todo è¿™é‡Œå·²ç»æ‹¿åˆ°åŒæ–¹é€‰æ‹©çš„æŠ€èƒ½äº†ï¼Œè€ƒè™‘å¦‚ä½•å¼•å…¥ä½¿ç”¨æ—¶æ— è§†å¼ºåŒ–å¼±åŒ–
+            // æ ¹æ®é€Ÿåº¦å†³å®šè¡ŒåŠ¨é¡ºåºå¹¶æ‰§è¡Œ
             yield return StartCoroutine(ExecuteActions());
 
-            // ¼ì²éÊÇ·ñÓĞÍæ¼ÒµÄ¾«ÁéÈ«²¿ÕóÍö
+            // æ£€æŸ¥æ˜¯å¦æœ‰ç©å®¶çš„ç²¾çµå…¨éƒ¨é˜µäº¡
             if (challenger.AreAllPetsDefeated() || challenged.AreAllPetsDefeated())
             {
                 EndBattle();
@@ -95,7 +95,7 @@ public class FightManager : MonoSingleton<FightManager>
         while (timer > 0)
         {
             timer -= Time.deltaTime;
-            //Debug.Log($"Ê£ÓàÑ¡ÔñÊ±¼ä: {timer}");
+            //Debug.Log($"å‰©ä½™é€‰æ‹©æ—¶é—´: {timer}");
 
             if (challenger.HasChosenAction() && challenged.HasChosenAction())
                 break;
@@ -106,31 +106,31 @@ public class FightManager : MonoSingleton<FightManager>
         if (!challenger.HasChosenAction())
         {
             challenger.DefaultAction();
-            Debug.Log("challenger Ö´ĞĞÁËÄ¬ÈÏ²Ù×÷£¡");
+            Debug.Log("challenger æ‰§è¡Œäº†é»˜è®¤æ“ä½œï¼");
         }
                         
         
         if (!challenged.HasChosenAction())
         {
             challenged.DefaultAction();
-            Debug.Log("challenged Ö´ĞĞÁËÄ¬ÈÏ²Ù×÷£¡");
+            Debug.Log("challenged æ‰§è¡Œäº†é»˜è®¤æ“ä½œï¼");
         }
             
     }
 
-    // Ö´ĞĞÍæ¼ÒÑ¡ÔñµÄ²Ù×÷
+    // æ‰§è¡Œç©å®¶é€‰æ‹©çš„æ“ä½œ
     IEnumerator ExecuteActions()
     {
-        // »ñÈ¡Ë«·½µ±Ç°³öÕ½µÄ¾«Áé
+        // è·å–åŒæ–¹å½“å‰å‡ºæˆ˜çš„ç²¾çµ
         Pet challengerPet = challenger.GetActivePet();
         Pet challengedPet = challenged.GetActivePet();
 
-        // ±È½ÏË«·½¾«ÁéµÄËÙ¶È£¬ËÙ¶È¸ßµÄÏÈĞĞ¶¯
-        // todo ÏÈÅĞ¶¨Ñ¡ÔñµÄ¼¼ÄÜÏÈÖÆ£¬ºóÅĞ¶¨ËÙ¶È£¬ºóĞø¿¼ÂÇÒıÈë³öÊÖÊ±½ÚµãµÄÎŞÊÓÇ¿Èõ»¯
+        // æ¯”è¾ƒåŒæ–¹ç²¾çµçš„é€Ÿåº¦ï¼Œé€Ÿåº¦é«˜çš„å…ˆè¡ŒåŠ¨
+        // todo å…ˆåˆ¤å®šé€‰æ‹©çš„æŠ€èƒ½å…ˆåˆ¶ï¼Œååˆ¤å®šé€Ÿåº¦ï¼Œåç»­è€ƒè™‘å¼•å…¥å‡ºæ‰‹æ—¶èŠ‚ç‚¹çš„æ— è§†å¼ºå¼±åŒ–
 
         if (challengerPet.fightAbility.Speed > challengedPet.fightAbility.Speed)
         {
-            // ÌôÕ½·½ÏÈ¹¥»÷
+            // æŒ‘æˆ˜æ–¹å…ˆæ”»å‡»
             challenger.ExecuteAction(challengerPet, challengedPet);
             
             
@@ -139,7 +139,7 @@ public class FightManager : MonoSingleton<FightManager>
             //    buffInfo.HandleUsingSkilleEffect();
             //}
 
-            if (challengedPet.fightAbility.HP > 0)  // Èç¹û·ÀÊØ·½Ã»ÓĞ±»»÷°Ü
+            if (challengedPet.fightAbility.HP > 0)  // å¦‚æœé˜²å®ˆæ–¹æ²¡æœ‰è¢«å‡»è´¥
                 challenged.ExecuteAction(challengedPet, challengerPet);
             
             
@@ -150,10 +150,10 @@ public class FightManager : MonoSingleton<FightManager>
         }
         else
         {
-            // ·ÀÊØ·½ÏÈ¹¥»÷
+            // é˜²å®ˆæ–¹å…ˆæ”»å‡»
             challenged.ExecuteAction(challengedPet, challengerPet);
 
-            //todo ºÍÕ½¶·¿ªÊ¼Ê±Ò»ÑùĞèÒªÏÈÅĞ¿Õ£¬Ö®ºó¿¼ÂÇ×ö·â×°£¬ÕâÀïÏÈ×¢ÊÍµô
+            //todo å’Œæˆ˜æ–—å¼€å§‹æ—¶ä¸€æ ·éœ€è¦å…ˆåˆ¤ç©ºï¼Œä¹‹åè€ƒè™‘åšå°è£…ï¼Œè¿™é‡Œå…ˆæ³¨é‡Šæ‰
             //foreach (var buffInfo in challengedPetBag[challenged.activePetIndex].buffInfos)
             //{
             //    buffInfo.HandleUsingSkilleEffect();
@@ -161,7 +161,7 @@ public class FightManager : MonoSingleton<FightManager>
 
             
 
-            if (challengerPet.fightAbility.HP > 0)  // Èç¹ûÌôÕ½·½Ã»ÓĞ±»»÷°Ü
+            if (challengerPet.fightAbility.HP > 0)  // å¦‚æœæŒ‘æˆ˜æ–¹æ²¡æœ‰è¢«å‡»è´¥
                 challenger.ExecuteAction(challengerPet, challengedPet);
 
             //foreach (var buffInfo in challengerPetBag[challenger.activePetIndex].buffInfos)
@@ -171,30 +171,30 @@ public class FightManager : MonoSingleton<FightManager>
 
         }
 
-        // µÈ´ı¼¼ÄÜ¶¯»­»òĞ§¹û²¥·ÅÍê³É
+        // ç­‰å¾…æŠ€èƒ½åŠ¨ç”»æˆ–æ•ˆæœæ’­æ”¾å®Œæˆ
         yield return new WaitForSeconds(3f);
     }
 
-    // ½áÊøÕ½¶·
+    // ç»“æŸæˆ˜æ–—
     void EndBattle()
     {
         battleOngoing = false;
 
         if (challenger.AreAllPetsDefeated())
         {
-            Debug.Log("ÌôÕ½·½Ê§°Ü£¬·ÀÊØ·½»ñÊ¤£¡");
+            Debug.Log("æŒ‘æˆ˜æ–¹å¤±è´¥ï¼Œé˜²å®ˆæ–¹è·èƒœï¼");
         }
         else if (challenged.AreAllPetsDefeated())
         {
-            Debug.Log("·ÀÊØ·½Ê§°Ü£¬ÌôÕ½·½»ñÊ¤£¡");
+            Debug.Log("é˜²å®ˆæ–¹å¤±è´¥ï¼ŒæŒ‘æˆ˜æ–¹è·èƒœï¼");
         }
     }
 
 
-    // ½áÊø»ØºÏ
+    // ç»“æŸå›åˆ
     void EndRound()
     {
-        //todo Í¬ÆäËû½ÚµãÒª×öÅĞ¿Õ
+        //todo åŒå…¶ä»–èŠ‚ç‚¹è¦åšåˆ¤ç©º
         //foreach (var buffInfo in challengerPetBag[challenger.activePetIndex].buffInfos)
         //{
         //    buffInfo.HandleEndOfTheRoundEffect();
@@ -207,34 +207,34 @@ public class FightManager : MonoSingleton<FightManager>
 
 
     /// <summary>
-    /// ³õÊ¼»¯¾«Áé±³°ü£¬Ö÷ÒªÊÇÁî»êÓ¡Ğ§¹ûÉúĞ§
+    /// åˆå§‹åŒ–ç²¾çµèƒŒåŒ…ï¼Œä¸»è¦æ˜¯ä»¤é­‚å°æ•ˆæœç”Ÿæ•ˆ
     /// </summary>
     /// <param name="petBag"></param>
     private void InitPetBag(List<Pet> petBag)
     {
         List<Pet> challengerPetBag = petBag;
-        // ¼ì²é challengerPetBag ÊÇ·ñÓĞĞ§
+        // æ£€æŸ¥ challengerPetBag æ˜¯å¦æœ‰æ•ˆ
         if (challengerPetBag != null)
         {
-            // ±éÀúÕû¸ö challengerPetBag ÁĞ±í
+            // éå†æ•´ä¸ª challengerPetBag åˆ—è¡¨
             foreach (var pet in challengerPetBag)
             {
-                // ¼ì²é pet ÊÇ·ñÎª¿Õ
+                // æ£€æŸ¥ pet æ˜¯å¦ä¸ºç©º
                 if (pet != null)
                 {
 
-                    //Ë¢ĞÂÄÜÁ¦
-                    //¿¼ÂÇµ½»êÓ¡Ö±½Ó+100Ñª+50ËÙµÄÀàËÆĞ§¹û£¬ÏÈ¼ÆËãÄÜÁ¦È»ºó³õÊ¼»¯buff
-                    //¸Ğ¾õÓĞµãÆæ¹Ö£¬µ«ÊÇÒ»Ê±¼äÏë²»µ½£¬Áô×Å¿´¿´
+                    //åˆ·æ–°èƒ½åŠ›
+                    //è€ƒè™‘åˆ°é­‚å°ç›´æ¥+100è¡€+50é€Ÿçš„ç±»ä¼¼æ•ˆæœï¼Œå…ˆè®¡ç®—èƒ½åŠ›ç„¶ååˆå§‹åŒ–buff
+                    //æ„Ÿè§‰æœ‰ç‚¹å¥‡æ€ªï¼Œä½†æ˜¯ä¸€æ—¶é—´æƒ³ä¸åˆ°ï¼Œç•™ç€çœ‹çœ‹
 
                     pet.RefreshFightAbility();
 
-                    // ¼ì²é pet µÄ buffInfos ÊÇ·ñÎª¿Õ
+                    // æ£€æŸ¥ pet çš„ buffInfos æ˜¯å¦ä¸ºç©º
                     if (pet.buffInfos != null)
                     {
                         foreach (var buffInfo in pet.buffInfos)
                         {
-                            // ´¦ÀíÃ¿¸ö buffInfo
+                            // å¤„ç†æ¯ä¸ª buffInfo
                             buffInfo.HandleBeginningOfTheBattleEffect(pet);
                         }
                     }

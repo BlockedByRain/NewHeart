@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ÁùÎ¬ÄÜÁ¦ÖµÀà£¬ÓÃÓÚ±íÊ¾¾«ÁéµÄÄÜÁ¦Öµ¡£
+/// å…­ç»´èƒ½åŠ›å€¼ç±»ï¼Œç”¨äºè¡¨ç¤ºç²¾çµçš„èƒ½åŠ›å€¼ã€‚
 /// </summary>
 public class AbilitySixDimensions : SixDimensions
 {
@@ -15,14 +15,14 @@ public class AbilitySixDimensions : SixDimensions
     private int hp;
 
     /// <summary>
-    /// ¹¹Ôìº¯Êı
+    /// æ„é€ å‡½æ•°
     /// </summary>
-    /// <param name="physicalAttack">Îï¹¥Öµ</param>
-    /// <param name="specialAttack">ÌØ¹¥Öµ</param>
-    /// <param name="physicalDefense">Îï·ÀÖµ</param>
-    /// <param name="specialDefense">ÌØ·ÀÖµ</param>
-    /// <param name="speed">ËÙ¶ÈÖµ</param>
-    /// <param name="hp">ÌåÁ¦Öµ</param>
+    /// <param name="physicalAttack">ç‰©æ”»å€¼</param>
+    /// <param name="specialAttack">ç‰¹æ”»å€¼</param>
+    /// <param name="physicalDefense">ç‰©é˜²å€¼</param>
+    /// <param name="specialDefense">ç‰¹é˜²å€¼</param>
+    /// <param name="speed">é€Ÿåº¦å€¼</param>
+    /// <param name="hp">ä½“åŠ›å€¼</param>
     public AbilitySixDimensions(int physicalAttack = 1, int specialAttack = 1, int physicalDefense = 1, int specialDefense = 1, int speed = 1, int hp = 1)
     {
         this.physicalAttack = Mathf.Max(1, physicalAttack);

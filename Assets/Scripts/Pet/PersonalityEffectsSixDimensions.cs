@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ÁùÎ¬ĞÔ¸ñÓ°ÏìÀà£¬ÓÃÓÚ±íÊ¾¾«ÁéĞÔ¸ñ¶ÔÆäÊôĞÔµÄÓ°Ïì£¬ÊôĞÔÖµÎª 0.9f¡¢1f »ò 1.1f¡£
+/// å…­ç»´æ€§æ ¼å½±å“ç±»ï¼Œç”¨äºè¡¨ç¤ºç²¾çµæ€§æ ¼å¯¹å…¶å±æ€§çš„å½±å“ï¼Œå±æ€§å€¼ä¸º 0.9fã€1f æˆ– 1.1fã€‚
 /// </summary>
 public class PersonalityEffectsSixDimensions : SixDimensions
 {
-    // ĞÔ¸ñ¶ÔÃ¿¸öÊôĞÔµÄÓ°Ïì£¨¼õÉÙ¡¢²»±ä¡¢Ôö¼Ó£©
+    // æ€§æ ¼å¯¹æ¯ä¸ªå±æ€§çš„å½±å“ï¼ˆå‡å°‘ã€ä¸å˜ã€å¢åŠ ï¼‰
     private float physicalAttackMultiplier;
     private float specialAttackMultiplier;
     private float physicalDefenseMultiplier;
@@ -13,7 +13,7 @@ public class PersonalityEffectsSixDimensions : SixDimensions
     private float speedMultiplier;
     private float hpMultiplier;
 
-    // ¹¹Ôìº¯Êı
+    // æ„é€ å‡½æ•°
     public PersonalityEffectsSixDimensions(float physicalAttackMultiplier = 1f, float specialAttackMultiplier = 1f, float physicalDefenseMultiplier = 1f, float specialDefenseMultiplier = 1f, float speedMultiplier = 1f, float hpMultiplier = 1f)
     {
         this.physicalAttackMultiplier = physicalAttackMultiplier;

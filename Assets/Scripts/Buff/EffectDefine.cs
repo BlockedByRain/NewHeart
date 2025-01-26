@@ -1,7 +1,7 @@
-using UnityEngine;
+锘縰sing UnityEngine;
 
 /// <summary>
-/// 效果定义部分，技能或buff触发效果后的逻辑
+/// 鏁堟灉瀹氫箟閮ㄥ垎锛屾妧鑳芥垨buff瑙﹀彂鏁堟灉鍚庣殑閫昏緫
 /// </summary>
 public interface IEffect
 {
@@ -18,7 +18,7 @@ public abstract class AbstractEffect : ScriptableObject,IEffect
 }
 
 /// <summary>
-/// 示例，打印指定字符串
+/// 绀轰緥锛屾墦鍗版寚瀹氬瓧绗︿覆
 /// </summary>
 public class PrintEffect : AbstractEffect
 {

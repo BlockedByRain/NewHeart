@@ -1,31 +1,31 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Damage
 {
-    //ÉËº¦ÊıÖµ
+    //ä¼¤å®³æ•°å€¼
     public int damageValue;
-    //ÉËº¦ÀàĞÍ
+    //ä¼¤å®³ç±»å‹
     public DamageType damageType;
-    //ÉËº¦ÊôĞÔ
+    //ä¼¤å®³å±æ€§
     public Attribute attribute;
 
 
     /// <summary>
-    /// ¼ÆËã¹¥»÷ÉËº¦
+    /// è®¡ç®—æ”»å‡»ä¼¤å®³
     /// </summary>
     public Damage GetAttackDamage(Pet creator, Pet target, SkillConfig skillConfig)
     {
-        //ÉËº¦Öµ=¡¾¡¾µÈ¼¶ÏµÊı*¼¼ÄÜÍşÁ¦*£¨½ø¹¥·½¶ÔÕ½Êµ¼Ê½ø¹¥Öµ¡Â·ÀÊØ·½¶ÔÕ½Êµ¼Ê·ÀÊØÖµ£©+2¡¿*¸¡¶¯·¶Î§*ÊôĞÔ¼Ó³É*¿ËÖÆ±¶Êı*¼º·½ÔöÉË°Ù·Ö±È*£¨1-¶Ô·½¼õÉË°Ù·Ö±È£©¡¿
-        //µÈ¼¶ÏµÊı =£¨0.4 * ¾«ÁéµÈ¼¶ + 2£©¡Â50
-        //¸¡¶¯·¶Î§¡Ê[217¡Â255£¬1]
+        //ä¼¤å®³å€¼=ã€ã€ç­‰çº§ç³»æ•°*æŠ€èƒ½å¨åŠ›*ï¼ˆè¿›æ”»æ–¹å¯¹æˆ˜å®é™…è¿›æ”»å€¼Ã·é˜²å®ˆæ–¹å¯¹æˆ˜å®é™…é˜²å®ˆå€¼ï¼‰+2ã€‘*æµ®åŠ¨èŒƒå›´*å±æ€§åŠ æˆ*å…‹åˆ¶å€æ•°*å·±æ–¹å¢ä¼¤ç™¾åˆ†æ¯”*ï¼ˆ1-å¯¹æ–¹å‡ä¼¤ç™¾åˆ†æ¯”ï¼‰ã€‘
+        //ç­‰çº§ç³»æ•° =ï¼ˆ0.4 * ç²¾çµç­‰çº§ + 2ï¼‰Ã·50
+        //æµ®åŠ¨èŒƒå›´âˆˆ[217Ã·255ï¼Œ1]
 
-        //µÈ¼¶ÏµÊı
+        //ç­‰çº§ç³»æ•°
         float LvMultiplier = (float)(creator.Lv * 0.4 + 2) / 50;
-        //¼¼ÄÜÍşÁ¦
+        //æŠ€èƒ½å¨åŠ›
         float skillPower = skillConfig.skillPower;
-        //Êµ¼ÊÄÜÁ¦
+        //å®é™…èƒ½åŠ›
         float curAttack;
         float curDefense;
         if (skillConfig.skillType == SkillType.Physical)
@@ -38,7 +38,7 @@ public class Damage
             curAttack = creator.fightAbility.SpecialAttack;
             curDefense = target.fightAbility.SpecialDefense;
         }
-        //ÊôĞÔ¼Ó³É todo Ë«ÊôĞÔÒ²³Ôµ¥¶À±¾Ïµ
+        //å±æ€§åŠ æˆ todo åŒå±æ€§ä¹Ÿåƒå•ç‹¬æœ¬ç³»
         this.attribute = skillConfig.attribute;
 
         float attributeMultiplier;
@@ -51,18 +51,18 @@ public class Damage
             attributeMultiplier = 1f;
         }
 
-        //¸¡¶¯ÏµÊı [217¡Â255£¬1]
+        //æµ®åŠ¨ç³»æ•° [217Ã·255ï¼Œ1]
 
         int a = Random.Range(217, 256);
 
         float FloatingMultiplier = (float)a / 255;
 
 
-        //todo¿ËÖÆ±¶Êı
+        //todoå…‹åˆ¶å€æ•°
         float restraintMultiplier = 1f;
 
 
-        //todoÔö¼õÉË
+        //todoå¢å‡ä¼¤
 
 
         //Debug.Log(LvMultiplier);
@@ -74,7 +74,7 @@ public class Damage
         //Debug.Log(restraintMultiplier);
 
 
-        //ÉËº¦Öµ=¡¾¡¾µÈ¼¶ÏµÊı*¼¼ÄÜÍşÁ¦*£¨½ø¹¥·½¶ÔÕ½Êµ¼Ê½ø¹¥Öµ¡Â·ÀÊØ·½¶ÔÕ½Êµ¼Ê·ÀÊØÖµ£©+2¡¿*¸¡¶¯·¶Î§*ÊôĞÔ¼Ó³É*¿ËÖÆ±¶Êı*¼º·½ÔöÉË°Ù·Ö±È*£¨1-¶Ô·½¼õÉË°Ù·Ö±È£©¡¿
+        //ä¼¤å®³å€¼=ã€ã€ç­‰çº§ç³»æ•°*æŠ€èƒ½å¨åŠ›*ï¼ˆè¿›æ”»æ–¹å¯¹æˆ˜å®é™…è¿›æ”»å€¼Ã·é˜²å®ˆæ–¹å¯¹æˆ˜å®é™…é˜²å®ˆå€¼ï¼‰+2ã€‘*æµ®åŠ¨èŒƒå›´*å±æ€§åŠ æˆ*å…‹åˆ¶å€æ•°*å·±æ–¹å¢ä¼¤ç™¾åˆ†æ¯”*ï¼ˆ1-å¯¹æ–¹å‡ä¼¤ç™¾åˆ†æ¯”ï¼‰ã€‘
         damageValue = (int)((LvMultiplier * skillPower * (curAttack / curDefense) + 2) * FloatingMultiplier * attributeMultiplier * restraintMultiplier);
 
 
@@ -90,7 +90,7 @@ public class Damage
     
     public void LogDamageInfo()
     {
-        Debug.Log("´Ë´ÎÉËº¦Îª"+ attribute+"ÊôĞÔµÄ"+damageType+"ÀàĞÍÉËº¦£¬"+"ÉËº¦ÖµÎª£º"+ damageValue);
+        Debug.Log("æ­¤æ¬¡ä¼¤å®³ä¸º"+ attribute+"å±æ€§çš„"+damageType+"ç±»å‹ä¼¤å®³ï¼Œ"+"ä¼¤å®³å€¼ä¸ºï¼š"+ damageValue);
 
     }
 
@@ -99,10 +99,10 @@ public class Damage
 
 public enum DamageType
 {
-    //¹¥»÷ÉËº¦£¬Ò»°ãÊÇ¹¥»÷Ôì³ÉµÄÉËº¦
+    //æ”»å‡»ä¼¤å®³ï¼Œä¸€èˆ¬æ˜¯æ”»å‡»é€ æˆçš„ä¼¤å®³
     Attack,
-    //°Ù·Ö±ÈÉËº¦£¬Ò»°ãÊÇ´øÓĞ°Ù·Ö±ÈÃèÊöµÄĞ§¹û²úÉúµÄÉËº¦
+    //ç™¾åˆ†æ¯”ä¼¤å®³ï¼Œä¸€èˆ¬æ˜¯å¸¦æœ‰ç™¾åˆ†æ¯”æè¿°çš„æ•ˆæœäº§ç”Ÿçš„ä¼¤å®³
     Percentage,
-    //¹Ì¶¨ÉËº¦£¬Ò»°ãÊÇ´øÓĞ¹Ì¶¨ÉËº¦Êı×ÖµÄĞ§¹û²úÉúµÄÉËº¦
+    //å›ºå®šä¼¤å®³ï¼Œä¸€èˆ¬æ˜¯å¸¦æœ‰å›ºå®šä¼¤å®³æ•°å­—çš„æ•ˆæœäº§ç”Ÿçš„ä¼¤å®³
     Fixed
 }

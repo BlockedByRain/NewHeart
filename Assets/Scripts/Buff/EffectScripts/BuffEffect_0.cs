@@ -1,4 +1,4 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ public class BuffEffect_0 : AbstractEffect
         Pet otherPet = other as Pet;
 
         Debug.Log(onwerPet.petName + effectDescription);
-        //Debug.Log(userPet.petName+"开启了光之惩戒形态！");
+        //Debug.Log(userPet.petName+"寮�鍚簡鍏変箣鎯╂垝褰㈡�侊紒");
 
 
 

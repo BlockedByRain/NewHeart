@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ÁùÎ¬Å¬Á¦ÖµÀà£¬ÓÃÓÚ±íÊ¾¾«ÁéµÄÅ¬Á¦Öµ¡£
+/// å…­ç»´åŠªåŠ›å€¼ç±»ï¼Œç”¨äºè¡¨ç¤ºç²¾çµçš„åŠªåŠ›å€¼ã€‚
 /// </summary>
 public class EffortSixDimensions : SixDimensions
 {
@@ -12,23 +12,23 @@ public class EffortSixDimensions : SixDimensions
     private int speed;
     private int hp;
 
-    // µ¥ÏîÅ¬Á¦Öµ×î´óÖµ³£Á¿
+    // å•é¡¹åŠªåŠ›å€¼æœ€å¤§å€¼å¸¸é‡
     private const int MaxEffortValue = 255;
-    // ×ÜºÍÅ¬Á¦Öµ×î´óÖµ³£Á¿
+    // æ€»å’ŒåŠªåŠ›å€¼æœ€å¤§å€¼å¸¸é‡
     private const int MaxTotalEffort = 510;
 
     /// <summary>
-    /// ¹¹Ôìº¯Êı
+    /// æ„é€ å‡½æ•°
     /// </summary>
-    /// <param name="physicalAttack">Îï¹¥Öµ</param>
-    /// <param name="specialAttack">ÌØ¹¥Öµ</param>
-    /// <param name="physicalDefense">Îï·ÀÖµ</param>
-    /// <param name="specialDefense">ÌØ·ÀÖµ</param>
-    /// <param name="speed">ËÙ¶ÈÖµ</param>
-    /// <param name="hp">ÌåÁ¦Öµ</param>
+    /// <param name="physicalAttack">ç‰©æ”»å€¼</param>
+    /// <param name="specialAttack">ç‰¹æ”»å€¼</param>
+    /// <param name="physicalDefense">ç‰©é˜²å€¼</param>
+    /// <param name="specialDefense">ç‰¹é˜²å€¼</param>
+    /// <param name="speed">é€Ÿåº¦å€¼</param>
+    /// <param name="hp">ä½“åŠ›å€¼</param>
     public EffortSixDimensions(int physicalAttack = 0, int specialAttack = 0, int physicalDefense = 0, int specialDefense = 0, int speed = 0, int hp = 0)
     {
-        //Ê¹ÓÃAddEffort ·½·¨³õÊ¼»¯£¬È·±£ºÏ·¨ĞÔ
+        //ä½¿ç”¨AddEffort æ–¹æ³•åˆå§‹åŒ–ï¼Œç¡®ä¿åˆæ³•æ€§
         AddEffort(physicalAttack, specialAttack, physicalDefense, specialDefense, speed, hp);
     }
 
@@ -69,29 +69,29 @@ public class EffortSixDimensions : SixDimensions
     }
 
     /// <summary>
-    /// Ôö¼ÓÅ¬Á¦Öµµ½Ö¸¶¨ÊôĞÔ£¬È·±£×ÜºÍ²»³¬¹ı 510¡£
+    /// å¢åŠ åŠªåŠ›å€¼åˆ°æŒ‡å®šå±æ€§ï¼Œç¡®ä¿æ€»å’Œä¸è¶…è¿‡ 510ã€‚
     /// </summary>
-    /// <param name="physicalAttack">Îï¹¥Ôö¼ÓÖµ</param>
-    /// <param name="specialAttack">ÌØ¹¥Ôö¼ÓÖµ</param>
-    /// <param name="physicalDefense">Îï·ÀÔö¼ÓÖµ</param>
-    /// <param name="specialDefense">ÌØ·ÀÔö¼ÓÖµ</param>
-    /// <param name="speed">ËÙ¶ÈÔö¼ÓÖµ</param>
-    /// <param name="hp">ÌåÁ¦Ôö¼ÓÖµ</param>
-    /// <returns>ÊÇ·ñ³É¹¦Ìí¼Ó</returns>
+    /// <param name="physicalAttack">ç‰©æ”»å¢åŠ å€¼</param>
+    /// <param name="specialAttack">ç‰¹æ”»å¢åŠ å€¼</param>
+    /// <param name="physicalDefense">ç‰©é˜²å¢åŠ å€¼</param>
+    /// <param name="specialDefense">ç‰¹é˜²å¢åŠ å€¼</param>
+    /// <param name="speed">é€Ÿåº¦å¢åŠ å€¼</param>
+    /// <param name="hp">ä½“åŠ›å¢åŠ å€¼</param>
+    /// <returns>æ˜¯å¦æˆåŠŸæ·»åŠ </returns>
     public bool AddEffort(int physicalAttack = 0, int specialAttack = 0, int physicalDefense = 0, int specialDefense = 0, int speed = 0, int hp = 0)
     {
-        // ¼ÆËãµ±Ç°Å¬Á¦Öµ×ÜºÍ
+        // è®¡ç®—å½“å‰åŠªåŠ›å€¼æ€»å’Œ
         int currentTotalEffort = this.physicalAttack + this.specialAttack + this.physicalDefense + this.specialDefense + this.speed + this.hp;
 
-        // ¼ÆËãĞÂÅ¬Á¦Öµ×ÜºÍ
+        // è®¡ç®—æ–°åŠªåŠ›å€¼æ€»å’Œ
         int newTotalEffort = currentTotalEffort + physicalAttack + specialAttack + physicalDefense + specialDefense + speed + hp;
         if (newTotalEffort > MaxTotalEffort)
         {
-            // Èç¹ûĞÂ×ÜºÍ³¬¹ı×î´óÏŞÖÆ£¬ÔòÌí¼ÓÊ§°Ü
+            // å¦‚æœæ–°æ€»å’Œè¶…è¿‡æœ€å¤§é™åˆ¶ï¼Œåˆ™æ·»åŠ å¤±è´¥
             return false;
         }
 
-        // ¼ÆËãÃ¿¸öÎ¬¶ÈµÄĞÂÖµ
+        // è®¡ç®—æ¯ä¸ªç»´åº¦çš„æ–°å€¼
         int newPhysicalAttack = this.physicalAttack + physicalAttack;
         int newSpecialAttack = this.specialAttack + specialAttack;
         int newPhysicalDefense = this.physicalDefense + physicalDefense;
@@ -99,13 +99,13 @@ public class EffortSixDimensions : SixDimensions
         int newSpeed = this.speed + speed;
         int newHP = this.hp + hp;
 
-        // È·±£ÔÚÔö¼Óºó²»»á³¬¹ıµ¥Ïî×î´óÖµ
+        // ç¡®ä¿åœ¨å¢åŠ åä¸ä¼šè¶…è¿‡å•é¡¹æœ€å¤§å€¼
         if (newPhysicalAttack > MaxEffortValue || newSpecialAttack > MaxEffortValue || newPhysicalDefense > MaxEffortValue || newSpecialDefense > MaxEffortValue || newSpeed > MaxEffortValue || newHP > MaxEffortValue)
         {
-            // Èç¹ûÄ³¸öÎ¬¶È³¬³öµ¥ÏîÏŞÖÆ£¬ÔòÌí¼ÓÊ§°Ü
+            // å¦‚æœæŸä¸ªç»´åº¦è¶…å‡ºå•é¡¹é™åˆ¶ï¼Œåˆ™æ·»åŠ å¤±è´¥
             return false;
         }
-        // ¸üĞÂÅ¬Á¦Öµ
+        // æ›´æ–°åŠªåŠ›å€¼
         this.physicalAttack = newPhysicalAttack;
         this.specialAttack = newSpecialAttack;
         this.physicalDefense = newPhysicalDefense;

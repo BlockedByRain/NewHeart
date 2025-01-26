@@ -1,16 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
 
-//·ºĞÍµ¥Àı
+//æ³›å‹å•ä¾‹
 public abstract class Singleton<T> where T : class, new()
 {
     private static T _instance;
 
     /// <summary>
-    /// µ¥ÀıÊµÀı
+    /// å•ä¾‹å®ä¾‹
     /// </summary>
     public static T Instance
     {
@@ -29,14 +29,14 @@ public abstract class Singleton<T> where T : class, new()
     }
 
     /// <summary>
-    /// ³õÊ¼»¯
+    /// åˆå§‹åŒ–
     /// </summary>
     public virtual void Init()
     {
     }
 
     /// <summary>
-    /// ÊÍ·Å Release() ·½·¨ÔòÊÇÒ»¸ö¾²Ì¬·½·¨£¬ÓÃÓÚ½«µ¥ÀıÊµÀıÇå¿Õ¡£
+    /// é‡Šæ”¾ Release() æ–¹æ³•åˆ™æ˜¯ä¸€ä¸ªé™æ€æ–¹æ³•ï¼Œç”¨äºå°†å•ä¾‹å®ä¾‹æ¸…ç©ºã€‚
     /// </summary>
     public static void Release()
     {
@@ -44,7 +44,7 @@ public abstract class Singleton<T> where T : class, new()
     }
 
     /// <summary>
-    /// Ïú»Ù Dispose() ·½·¨ÊÇÒ»¸ö³éÏó·½·¨£¬ËüµÄ¾ßÌåÊµÏÖÓÉ¼Ì³Ğ Singleton µÄ×ÓÀàÀ´ÊµÏÖ¡£
+    /// é”€æ¯ Dispose() æ–¹æ³•æ˜¯ä¸€ä¸ªæŠ½è±¡æ–¹æ³•ï¼Œå®ƒçš„å…·ä½“å®ç°ç”±ç»§æ‰¿ Singleton çš„å­ç±»æ¥å®ç°ã€‚
     /// </summary>
     public abstract void Dispose();
 

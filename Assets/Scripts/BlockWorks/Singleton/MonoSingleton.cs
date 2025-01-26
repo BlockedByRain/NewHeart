@@ -1,4 +1,4 @@
-using Sirenix.OdinInspector;
+ï»¿using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,32 +24,32 @@ public class MonoSingleton<T> : SerializedMonoBehaviour where T : MonoSingleton<
 
 
     /// <summary>
-    /// µ¥ÀıÊµÀı
+    /// å•ä¾‹å®ä¾‹
     /// </summary>
     public static T Instance
     {
         get
         {
-            //²»ÆôÓÃÊ±Ö±½Ó·µ»Ø¿Õ
+            //ä¸å¯ç”¨æ—¶ç›´æ¥è¿”å›ç©º
             if (!IsAlive)
             {
                 return null;
             }
 
-            // Èç¹ûÒÑ¾­´æÔÚµ¥ÀıÊµÀı£¬ÔòÖ±½Ó·µ»Ø
+            // å¦‚æœå·²ç»å­˜åœ¨å•ä¾‹å®ä¾‹ï¼Œåˆ™ç›´æ¥è¿”å›
             if (_instance != null)
                 return _instance;
 
-            // Èç¹û²»´æÔÚµ¥ÀıÊµÀı£¬ÔòÑ°ÕÒ³¡¾°ÖĞÊÇ·ñÒÑ¾­ÓĞÍ¬ÀàĞÍµÄµ¥ÀıÊµÀı
+            // å¦‚æœä¸å­˜åœ¨å•ä¾‹å®ä¾‹ï¼Œåˆ™å¯»æ‰¾åœºæ™¯ä¸­æ˜¯å¦å·²ç»æœ‰åŒç±»å‹çš„å•ä¾‹å®ä¾‹
             _instance = FindObjectOfType<T>();
             if (_instance != null)
                 return _instance;
 
-            // Èç¹û²»´æÔÚÍ¬ÀàĞÍµÄµ¥ÀıÊµÀı£¬Ôò´´½¨Ò»¸öĞÂµÄ GameObject£¬¹ÒÔØ¸Ãµ¥Àı×é¼ş£¬²¢ÉèÖÃ¸Ã×é¼şÎª²»±»Ïú»Ù
+            // å¦‚æœä¸å­˜åœ¨åŒç±»å‹çš„å•ä¾‹å®ä¾‹ï¼Œåˆ™åˆ›å»ºä¸€ä¸ªæ–°çš„ GameObjectï¼ŒæŒ‚è½½è¯¥å•ä¾‹ç»„ä»¶ï¼Œå¹¶è®¾ç½®è¯¥ç»„ä»¶ä¸ºä¸è¢«é”€æ¯
             GameObject go = new GameObject(typeof(T).Name);
             _instance = go.AddComponent<T>();
 
-            //¹ÒÔØÔÚBlockWorksÏÂ£¬²¢½«ÆäÉèÖÃÎª²»¿ÉÏú»Ù
+            //æŒ‚è½½åœ¨BlockWorksä¸‹ï¼Œå¹¶å°†å…¶è®¾ç½®ä¸ºä¸å¯é”€æ¯
             GameObject parent = GameObject.Find("BlockWorks");
             if (parent == null)
             {
@@ -57,7 +57,7 @@ public class MonoSingleton<T> : SerializedMonoBehaviour where T : MonoSingleton<
                 DontDestroyOnLoad(parent);
             }
 
-            //¶¨Î»·½±ã¹ÜÀí
+            //å®šä½æ–¹ä¾¿ç®¡ç†
             go.transform.SetParent(parent.transform);
             return _instance;
         }
@@ -65,34 +65,34 @@ public class MonoSingleton<T> : SerializedMonoBehaviour where T : MonoSingleton<
 
     private void Awake()
     {
-        // Èç¹û´æÔÚÍ¬ÀàĞÍµÄµ¥ÀıÊµÀı£¬ÔòÏú»Ùµ±Ç°µÄÊµÀı£¬±£Ö¤Ö»ÓĞÒ»¸öÊµÀı´æÔÚ
+        // å¦‚æœå­˜åœ¨åŒç±»å‹çš„å•ä¾‹å®ä¾‹ï¼Œåˆ™é”€æ¯å½“å‰çš„å®ä¾‹ï¼Œä¿è¯åªæœ‰ä¸€ä¸ªå®ä¾‹å­˜åœ¨
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        // ±£Ö¤¸Ãµ¥ÀıÊµÀı²»»á±»Ïú»Ù
+        // ä¿è¯è¯¥å•ä¾‹å®ä¾‹ä¸ä¼šè¢«é”€æ¯
         DontDestroyOnLoad(gameObject);
         _instance = this as T;
         Init();
     }
 
     /// <summary>
-    /// ³õÊ¼»¯
+    /// åˆå§‹åŒ–
     /// </summary>
     protected virtual void Init()
     {
     }
 
     /// <summary>
-    /// Ïú»Ù
+    /// é”€æ¯
     /// </summary>
     protected virtual void OnDestroy()
     {
         alive = false;
 
-        //»áÔì³É±¨´íµÄĞ´·¨£¬ÆúÓÃ
+        //ä¼šé€ æˆæŠ¥é”™çš„å†™æ³•ï¼Œå¼ƒç”¨
         //if (_instance == this)
         //    _instance = null;
     }

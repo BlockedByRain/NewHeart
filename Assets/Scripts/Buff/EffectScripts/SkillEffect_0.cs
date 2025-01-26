@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewSkillEffect_0", menuName = "Skill Effects/SkillEffect_0")]
 public class SkillEffect_0 : AbstractEffect
 {
-    //´òÓ¡µÄĞÅÏ¢
+    //æ‰“å°çš„ä¿¡æ¯
     public string logMessage;
 
     public override void Apply(object user, object target)
@@ -13,7 +13,7 @@ public class SkillEffect_0 : AbstractEffect
 
         if (targetPet != null)
         {
-            Debug.Log(userPet.petName+"Ê¹ÓÃÁË¼¼ÄÜ£º"+logMessage);
+            Debug.Log(userPet.petName+"ä½¿ç”¨äº†æŠ€èƒ½ï¼š"+logMessage);
         }
     }
 }

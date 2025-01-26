@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +24,7 @@ public class TipsPanel : BasePanel
         base.OpenPanel(name);
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.alpha = 0.0f;
-        //½¥ÏÔ
+        //æ¸æ˜¾
         DOTween.To(()=>canvasGroup.alpha,x=>canvasGroup.alpha=x,1f,1);
     }
 
@@ -33,7 +33,7 @@ public class TipsPanel : BasePanel
     public override void ClosePanel()
     {
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
-        //½¥Òþ
+        //æ¸éš
         DOTween.To(() => canvasGroup.alpha, x => canvasGroup.alpha = x, 0, 1).OnComplete(
             () =>
             {

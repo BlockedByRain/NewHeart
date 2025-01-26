@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,107 +6,107 @@ using UnityEngine;
 
 
 /// <summary>
-/// ¾«Áé
+/// ç²¾çµ
 /// </summary>
 public class Pet
 {
     /// <summary>
-    /// ¾«Áéid
+    /// ç²¾çµid
     /// </summary>
     public int petId = 1;
 
     /// <summary>
-    /// ¾«ÁéÃû
+    /// ç²¾çµå
     /// </summary>
     public string petName;
 
 
     /// <summary>
-    /// ¾«ÁéµÈ¼¶
+    /// ç²¾çµç­‰çº§
     /// </summary>
     public int Lv;
 
     /// <summary>
-    /// ÏÂ¼¶ËùĞè¾­Ñé
+    /// ä¸‹çº§æ‰€éœ€ç»éªŒ
     /// </summary>
     public int nextLvExp;
 
     /// <summary>
-    /// ¾«ÁéÊôĞÔ
+    /// ç²¾çµå±æ€§
     /// </summary>
     public Attribute attribute;
 
     /// <summary>
-    /// ÖÖ×åÖµ
+    /// ç§æ—å€¼
     /// </summary>
     public RacialSixDimensions racial;
 
 
     /// <summary>
-    /// ÄÜÁ¦Öµ
+    /// èƒ½åŠ›å€¼
     /// </summary>
     public AbilitySixDimensions ability;
 
 
     /// <summary>
-    /// Å¬Á¦Öµ
+    /// åŠªåŠ›å€¼
     /// </summary>
     public EffortSixDimensions effort;
 
 
     /// <summary>
-    /// ¶îÍâÄÜÁ¦Öµ
+    /// é¢å¤–èƒ½åŠ›å€¼
     /// </summary>
     public AbilitySixDimensions extra;
 
 
     /// <summary>
-    /// ĞÔ¸ñ
+    /// æ€§æ ¼
     /// </summary>
     public Personality personality;
 
     /// <summary>
-    /// ÌØĞÔ
+    /// ç‰¹æ€§
     /// </summary>
     public Feature feature;
 
     /// <summary>
-    /// ¿ÉÓÃ¼¼ÄÜ×é
+    /// å¯ç”¨æŠ€èƒ½ç»„
     /// </summary>
     public List<SkillInfo> availableSkills = null;
 
     /// <summary>
-    /// µ±Ç°¼¼ÄÜ×é
+    /// å½“å‰æŠ€èƒ½ç»„
     /// </summary>
     public List<SkillInfo> currentSkills = null;
 
     /// <summary>
-    /// »êÓ¡id
+    /// é­‚å°id
     /// </summary>
     public string soulSealId = null;
 
     /// <summary>
-    /// ÄÜÁ¦µÈ¼¶
+    /// èƒ½åŠ›ç­‰çº§
     /// </summary>
     public AbilityLvSixDimensions abilityLvSixDimensionsValue = null;
 
     /// <summary>
-    /// Õ½¶·ÖĞÄÜÁ¦Öµ,ÆäÖĞHp×÷ÎªÕ½¶·ÖĞ×î´óÌåÁ¦ÉÏÏŞ
+    /// æˆ˜æ–—ä¸­èƒ½åŠ›å€¼,å…¶ä¸­Hpä½œä¸ºæˆ˜æ–—ä¸­æœ€å¤§ä½“åŠ›ä¸Šé™
     /// </summary>
     public AbilitySixDimensions fightAbility = null;
 
     /// <summary>
-    /// Õ½¶·ÖĞµ±Ç°ÌåÁ¦
+    /// æˆ˜æ–—ä¸­å½“å‰ä½“åŠ›
     /// </summary>
     public int fightAbilityCurHp;
 
     /// <summary>
-    /// ¾«ÁéBuff
+    /// ç²¾çµBuff
     /// </summary>
     public List<BuffInfo> buffInfos = null;
 
     /// <summary>
-    /// ·µ»ØÑ¡ÔñÊ¹ÓÃµÄ¼¼ÄÜ
+    /// è¿”å›é€‰æ‹©ä½¿ç”¨çš„æŠ€èƒ½
     /// </summary>
     public SkillInfo GetSelectedSkill(int skillIndex)
     {
@@ -116,25 +116,25 @@ public class Pet
 
 
     /// <summary>
-    /// Ë¢ĞÂÄÜÁ¦
+    /// åˆ·æ–°èƒ½åŠ›
     /// </summary>
     public void RefreshCapability()
     {
         PersonalityEffectsSixDimensions personalityEffects = PersonalityEffects.GetEffect(this.personality);
-        // ¼ÆËãÄÜÁ¦Öµ
+        // è®¡ç®—èƒ½åŠ›å€¼
         ability.PhysicalAttack = CalculateState(racial.PhysicalAttack, effort.PhysicalAttack, 31, Lv, personalityEffects.PhysicalAttack, extra.PhysicalAttack);
         ability.SpecialAttack = CalculateState(racial.SpecialAttack, effort.SpecialAttack, 31, Lv, personalityEffects.SpecialAttack, extra.SpecialAttack);
         ability.PhysicalDefense = CalculateState(racial.PhysicalDefense, effort.PhysicalDefense, 31, Lv, personalityEffects.PhysicalDefense, extra.PhysicalDefense);
         ability.SpecialDefense = CalculateState(racial.SpecialDefense, effort.SpecialDefense, 31, Lv, personalityEffects.SpecialDefense, extra.SpecialDefense);
         ability.Speed = CalculateState(racial.Speed, effort.Speed, 31, Lv, personalityEffects.Speed, extra.Speed);
 
-        // ¼ÆËãÌåÁ¦Öµ
+        // è®¡ç®—ä½“åŠ›å€¼
         ability.HP = CalculateState(racial.HP, effort.HP, 100 + 31, Lv, personalityEffects.HP, extra.HP);
 
     }
 
     /// <summary>
-    /// Ë¢ĞÂÕ½¶·ÄÜÁ¦
+    /// åˆ·æ–°æˆ˜æ–—èƒ½åŠ›
     /// </summary>
     public void RefreshFightAbility()
     {
@@ -143,13 +143,13 @@ public class Pet
             fightAbility = new AbilitySixDimensions(0, 0, 0, 0, 0, 0);
         }
 
-        // ¼ÆËãÄÜÁ¦Öµ
+        // è®¡ç®—èƒ½åŠ›å€¼
         fightAbility.PhysicalAttack = ability.PhysicalAttack;
         fightAbility.SpecialAttack = ability.SpecialAttack;
         fightAbility.PhysicalDefense = ability.PhysicalDefense;
         fightAbility.SpecialDefense = ability.SpecialDefense;
         fightAbility.Speed = ability.Speed;
-        // ¼ÆËãÌåÁ¦Öµ
+        // è®¡ç®—ä½“åŠ›å€¼
         fightAbility.HP = ability.HP;
         fightAbilityCurHp = (int)fightAbility.HP;
 
@@ -158,91 +158,91 @@ public class Pet
 
 
     /// <summary>
-    /// ÄÜÁ¦Öµ¼ÆËã
+    /// èƒ½åŠ›å€¼è®¡ç®—
     /// </summary>
     private int CalculateState(float racialValue, float effortValue, float additionalValue, int level, float personalityEffect, float extraValue)
     {
-        //³£¹æÄÜÁ¦Öµ=¡¾¡¾¡¾(ÖÖ×åÖµ*2+Å¬Á¦Öµ¡Â4+31)*(¾«ÁéµÈ¼¶¡Â100)+5¡¿*ĞÔ¸ñĞŞÕı¡¿*Ì××°°Ù·Ö±È£¨ÔİÎŞ£©¡¿+Íâ²¿¼Ó³É
-        //ÌåÁ¦ÄÜÁ¦Öµ=¡¾¡¾(ÖÖ×åÖµ*2+Å¬Á¦Öµ¡Â4+100+31)*(¾«ÁéµÈ¼¶¡Â100)+10¡¿*Ì××°°Ù·Ö±È¼Ó³É£¨ÔİÎŞ£©¡¿+Íâ²¿¼Ó³É
+        //å¸¸è§„èƒ½åŠ›å€¼=ã€ã€ã€(ç§æ—å€¼*2+åŠªåŠ›å€¼Ã·4+31)*(ç²¾çµç­‰çº§Ã·100)+5ã€‘*æ€§æ ¼ä¿®æ­£ã€‘*å¥—è£…ç™¾åˆ†æ¯”ï¼ˆæš‚æ— ï¼‰ã€‘+å¤–éƒ¨åŠ æˆ
+        //ä½“åŠ›èƒ½åŠ›å€¼=ã€ã€(ç§æ—å€¼*2+åŠªåŠ›å€¼Ã·4+100+31)*(ç²¾çµç­‰çº§Ã·100)+10ã€‘*å¥—è£…ç™¾åˆ†æ¯”åŠ æˆï¼ˆæš‚æ— ï¼‰ã€‘+å¤–éƒ¨åŠ æˆ
         return (int)(((((racialValue * 2) + (effortValue / 4) + additionalValue) * (level / 100) + 5) * personalityEffect) + extraValue);
     }
 
     /// <summary>
-    /// ´òÓ¡µ±Ç°¾«ÁéµÄËùÓĞ×´Ì¬
+    /// æ‰“å°å½“å‰ç²¾çµçš„æ‰€æœ‰çŠ¶æ€
     /// </summary>
     public void PrintStatus()
     {
-        Debug.Log("=== ¾«Áé×´Ì¬ ===");
+        Debug.Log("=== ç²¾çµçŠ¶æ€ ===");
         Debug.Log($"ID: {petId}");
-        Debug.Log($"Ãû×Ö: {petName}");
-        Debug.Log($"µÈ¼¶: {Lv}");
-        Debug.Log($"ÏÂ¼¶ËùĞè¾­Ñé: {nextLvExp}");
+        Debug.Log($"åå­—: {petName}");
+        Debug.Log($"ç­‰çº§: {Lv}");
+        Debug.Log($"ä¸‹çº§æ‰€éœ€ç»éªŒ: {nextLvExp}");
 
-        //Debug.Log("ÖÖ×åÖµ:");
-        //Debug.Log($"Îï¹¥: {racial.PhysicalAttack}");
-        //Debug.Log($"ÌØ¹¥: {racial.SpecialAttack}");
-        //Debug.Log($"Îï·À: {racial.PhysicalDefense}");
-        //Debug.Log($"ÌØ·À: {racial.SpecialDefense}");
-        //Debug.Log($"ËÙ¶È: {racial.Speed}");
-        //Debug.Log($"ÌåÁ¦: {racial.HP}");
+        //Debug.Log("ç§æ—å€¼:");
+        //Debug.Log($"ç‰©æ”»: {racial.PhysicalAttack}");
+        //Debug.Log($"ç‰¹æ”»: {racial.SpecialAttack}");
+        //Debug.Log($"ç‰©é˜²: {racial.PhysicalDefense}");
+        //Debug.Log($"ç‰¹é˜²: {racial.SpecialDefense}");
+        //Debug.Log($"é€Ÿåº¦: {racial.Speed}");
+        //Debug.Log($"ä½“åŠ›: {racial.HP}");
 
-        //Debug.Log("Å¬Á¦Öµ:");
-        //Debug.Log($"Îï¹¥: {effort.PhysicalAttack}");
-        //Debug.Log($"ÌØ¹¥: {effort.SpecialAttack}");
-        //Debug.Log($"Îï·À: {effort.PhysicalDefense}");
-        //Debug.Log($"ÌØ·À: {effort.SpecialDefense}");
-        //Debug.Log($"ËÙ¶È: {effort.Speed}");
-        //Debug.Log($"ÌåÁ¦: {effort.HP}");
+        //Debug.Log("åŠªåŠ›å€¼:");
+        //Debug.Log($"ç‰©æ”»: {effort.PhysicalAttack}");
+        //Debug.Log($"ç‰¹æ”»: {effort.SpecialAttack}");
+        //Debug.Log($"ç‰©é˜²: {effort.PhysicalDefense}");
+        //Debug.Log($"ç‰¹é˜²: {effort.SpecialDefense}");
+        //Debug.Log($"é€Ÿåº¦: {effort.Speed}");
+        //Debug.Log($"ä½“åŠ›: {effort.HP}");
 
-        Debug.Log("ĞÔ¸ñ:" + $"{personality}");
+        Debug.Log("æ€§æ ¼:" + $"{personality}");
 
-        //Debug.Log("ĞÔ¸ñÓ°Ïì:");
+        //Debug.Log("æ€§æ ¼å½±å“:");
         //var personalityEffects = PersonalityEffects.GetEffect(personality);
-        //Debug.Log($"Îï¹¥ĞŞÕı: {personalityEffects.PhysicalAttack}");
-        //Debug.Log($"ÌØ¹¥ĞŞÕı: {personalityEffects.SpecialAttack}");
-        //Debug.Log($"Îï·ÀĞŞÕı: {personalityEffects.PhysicalDefense}");
-        //Debug.Log($"ÌØ·ÀĞŞÕı: {personalityEffects.SpecialDefense}");
-        //Debug.Log($"ËÙ¶ÈĞŞÕı: {personalityEffects.Speed}");
-        //Debug.Log($"ÌåÁ¦ĞŞÕı: {personalityEffects.HP}");
+        //Debug.Log($"ç‰©æ”»ä¿®æ­£: {personalityEffects.PhysicalAttack}");
+        //Debug.Log($"ç‰¹æ”»ä¿®æ­£: {personalityEffects.SpecialAttack}");
+        //Debug.Log($"ç‰©é˜²ä¿®æ­£: {personalityEffects.PhysicalDefense}");
+        //Debug.Log($"ç‰¹é˜²ä¿®æ­£: {personalityEffects.SpecialDefense}");
+        //Debug.Log($"é€Ÿåº¦ä¿®æ­£: {personalityEffects.Speed}");
+        //Debug.Log($"ä½“åŠ›ä¿®æ­£: {personalityEffects.HP}");
 
-        //Debug.Log("¶îÍâÄÜÁ¦Öµ:");
-        //Debug.Log($"Îï¹¥: {extra.PhysicalAttack}");
-        //Debug.Log($"ÌØ¹¥: {extra.SpecialAttack}");
-        //Debug.Log($"Îï·À: {extra.PhysicalDefense}");
-        //Debug.Log($"ÌØ·À: {extra.SpecialDefense}");
-        //Debug.Log($"ËÙ¶È: {extra.Speed}");
-        //Debug.Log($"ÌåÁ¦: {extra.HP}");
+        //Debug.Log("é¢å¤–èƒ½åŠ›å€¼:");
+        //Debug.Log($"ç‰©æ”»: {extra.PhysicalAttack}");
+        //Debug.Log($"ç‰¹æ”»: {extra.SpecialAttack}");
+        //Debug.Log($"ç‰©é˜²: {extra.PhysicalDefense}");
+        //Debug.Log($"ç‰¹é˜²: {extra.SpecialDefense}");
+        //Debug.Log($"é€Ÿåº¦: {extra.Speed}");
+        //Debug.Log($"ä½“åŠ›: {extra.HP}");
 
-        Debug.Log("ÄÜÁ¦Öµ:");
-        Debug.Log($"Îï¹¥: {ability.PhysicalAttack}");
-        Debug.Log($"ÌØ¹¥: {ability.SpecialAttack}");
-        Debug.Log($"Îï·À: {ability.PhysicalDefense}");
-        Debug.Log($"ÌØ·À: {ability.SpecialDefense}");
-        Debug.Log($"ËÙ¶È: {ability.Speed}");
-        Debug.Log($"ÌåÁ¦: {ability.HP}");
-        Debug.Log("ÌØĞÔ:" + $"{feature}");
+        Debug.Log("èƒ½åŠ›å€¼:");
+        Debug.Log($"ç‰©æ”»: {ability.PhysicalAttack}");
+        Debug.Log($"ç‰¹æ”»: {ability.SpecialAttack}");
+        Debug.Log($"ç‰©é˜²: {ability.PhysicalDefense}");
+        Debug.Log($"ç‰¹é˜²: {ability.SpecialDefense}");
+        Debug.Log($"é€Ÿåº¦: {ability.Speed}");
+        Debug.Log($"ä½“åŠ›: {ability.HP}");
+        Debug.Log("ç‰¹æ€§:" + $"{feature}");
 
-        //Debug.Log("¿ÉÓÃ¼¼ÄÜ:");
+        //Debug.Log("å¯ç”¨æŠ€èƒ½:");
         //foreach (var skill in availableSkills)
         //{
         //    Debug.Log($"{skill}");
         //}
 
-        Debug.Log("µ±Ç°¼¼ÄÜ:");
+        Debug.Log("å½“å‰æŠ€èƒ½:");
         foreach (var skill in currentSkills)
         {
             Debug.Log($"{skill.skillConfig.skillName}");
         }
 
-        //Debug.Log($"»êÓ¡ID: {soulSealId}");
+        //Debug.Log($"é­‚å°ID: {soulSealId}");
 
-        Debug.Log("=== ¾«Áé×´Ì¬ ===");
+        Debug.Log("=== ç²¾çµçŠ¶æ€ ===");
     }
 
 
 
     /// <summary>
-    /// ¸ù¾İSkillInfoSOÎÄ¼şÊµÀı»¯Ò»¸öSkillInfo
+    /// æ ¹æ®SkillInfoSOæ–‡ä»¶å®ä¾‹åŒ–ä¸€ä¸ªSkillInfo
     /// </summary>
     public static SkillInfo CreateSkillInfoFromConfig(SkillConfigSO skillConfigSO)
     {
@@ -252,7 +252,7 @@ public class Pet
             return null;
         }
 
-        // ´Ó SkillConfigSO ÖĞ»ñÈ¡¼¼ÄÜÊôĞÔ
+        // ä» SkillConfigSO ä¸­è·å–æŠ€èƒ½å±æ€§
         int skillId = skillConfigSO.skillId;
         string name = skillConfigSO.skillName;
         string description = skillConfigSO.skillDescription;
@@ -265,14 +265,14 @@ public class Pet
         int skillSpeed = skillConfigSO.skillSpeed;
         List<SkillEffect> skillEffects = new List<SkillEffect>();
 
-        // ´Ó SkillConfigSO ÖĞ»ñÈ¡Ğ§¹ûÅäÖÃ£¬²¢×ª»»Îª SkillEffect ÊµÀı
+        // ä» SkillConfigSO ä¸­è·å–æ•ˆæœé…ç½®ï¼Œå¹¶è½¬æ¢ä¸º SkillEffect å®ä¾‹
         foreach (var effectSO in skillConfigSO.skillEffects)
         {
             var skillEffect = new SkillEffect(effectSO);
             skillEffects.Add(skillEffect);
         }
 
-        // ´´½¨ SkillInfo ÊµÀı
+        // åˆ›å»º SkillInfo å®ä¾‹
         SkillConfig newSkillConfig = new SkillConfig(
             skillId,
             name,
@@ -289,14 +289,14 @@ public class Pet
         SkillInfo newSkillInfo = new SkillInfo();
         newSkillInfo.skillConfig = newSkillConfig;
 
-        // ·µ»ØÉú³ÉµÄÊµÀı
+        // è¿”å›ç”Ÿæˆçš„å®ä¾‹
         return newSkillInfo;
     }
 
 
 
     /// <summary>
-    /// ¸ù¾İBuffInfoSOÎÄ¼şÊµÀı»¯Ò»¸öBuffInfo
+    /// æ ¹æ®BuffInfoSOæ–‡ä»¶å®ä¾‹åŒ–ä¸€ä¸ªBuffInfo
     /// </summary>
     public static BuffInfo CreateBuffInfoFromConfig(BuffConfigSO buffConfigSO)
     {
@@ -306,7 +306,7 @@ public class Pet
             return null;
         }
 
-        // ´Ó BuffConfigSO ÖĞ»ñÈ¡¼¼ÄÜÊôĞÔ
+        // ä» BuffConfigSO ä¸­è·å–æŠ€èƒ½å±æ€§
         int buffId = buffConfigSO.buffId;
         string buffName = buffConfigSO.buffName;
         string buffDescribe = buffConfigSO.buffDescribe;
@@ -319,7 +319,7 @@ public class Pet
         TimeOverStackChangeEnum timeOverStackChange = buffConfigSO.timeOverStackChange;
         List<BuffEffect> buffEffects = new List<BuffEffect>();
 
-        // ´Ó BuffConfigSO ÖĞ»ñÈ¡Ğ§¹ûÅäÖÃ£¬²¢×ª»»Îª BuffEffect ÊµÀı
+        // ä» BuffConfigSO ä¸­è·å–æ•ˆæœé…ç½®ï¼Œå¹¶è½¬æ¢ä¸º BuffEffect å®ä¾‹
             BuffEffect buffEffect = new BuffEffect(buffConfigSO.buffEffects);
             //foreach (var buffEffect in buffEffects1)
             //{
@@ -332,7 +332,7 @@ public class Pet
         
 
 
-        // ´´½¨ BuffInfo ÊµÀı
+        // åˆ›å»º BuffInfo å®ä¾‹
         BuffConfig newBuffConfig = new BuffConfig(
             buffId,
             buffName,
@@ -349,7 +349,7 @@ public class Pet
 
         BuffInfo newBuffInfo= new BuffInfo(newBuffConfig ,null ,null);
 
-        // ·µ»ØÉú³ÉµÄÊµÀı
+        // è¿”å›ç”Ÿæˆçš„å®ä¾‹
         return newBuffInfo;
     }
 

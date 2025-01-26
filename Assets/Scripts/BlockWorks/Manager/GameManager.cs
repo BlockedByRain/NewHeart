@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 
 public class GameManager : MonoSingleton<GameManager>
 {
     /// <summary>
-    ///  ÓÎÏ·×´Ì¬Ã¶¾Ù
+    ///  æ¸¸æˆçŠ¶æ€æšä¸¾
     /// </summary>
     public enum GameState
     {
@@ -21,7 +21,7 @@ public class GameManager : MonoSingleton<GameManager>
 
 
 
-    // µ±Ç°ÓÎÏ·×´Ì¬
+    // å½“å‰æ¸¸æˆçŠ¶æ€
     [SerializeField]
     private GameState _state = GameState.None;
 
@@ -30,16 +30,16 @@ public class GameManager : MonoSingleton<GameManager>
         switch (_state)
         {
             case GameState.Start:
-                // TODO: ÓÎÏ·¿ªÊ¼Âß¼­
+                // TODO: æ¸¸æˆå¼€å§‹é€»è¾‘
                 break;
             case GameState.Playing:
-                // TODO: ÓÎÏ·½øĞĞÂß¼­
+                // TODO: æ¸¸æˆè¿›è¡Œé€»è¾‘
                 break;
             case GameState.Pause:
-                // TODO: ÓÎÏ·ÔİÍ£Âß¼­
+                // TODO: æ¸¸æˆæš‚åœé€»è¾‘
                 break;
             case GameState.GameOver:
-                // TODO: ÓÎÏ·½áÊøÂß¼­
+                // TODO: æ¸¸æˆç»“æŸé€»è¾‘
                 break;
         }
     }
