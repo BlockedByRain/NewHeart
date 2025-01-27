@@ -52,7 +52,7 @@ public class GameTest : MonoBehaviour
         {
             petName = "日你",
             Lv = 100,
-            personality = Personality.固执,
+            personality = 1,
             ability = abilitySixDimensions50,
             racial = racialSixDimensions100,
             effort = effortSixDimensions0,
@@ -71,7 +71,7 @@ public class GameTest : MonoBehaviour
         {
             petName = "大坝",
             Lv = 100,
-            personality = Personality.保守,
+            personality = 2,
             ability = abilitySixDimensions50,
             racial = racialSixDimensions100,
             effort = effortSixDimensions0,

@@ -1,22 +1,278 @@
 {
-    "0": {
-        "name": 固执,
-        "pa": 1.1,
-        "sa": 0.9,
-        "pd": 1.0,
-        "sd": 1.9,
-        "sp": 1.0,
-        "hp": 1.0,
-
-    },
-    "1": {
-        "name": 保守,
-        "pa": 0.9,
-        "sa": 1.1,
-        "pd": 1.0,
-        "sd": 1.9,
-        "sp": 1.0,
-        "hp": 1.0,
-    },
-
+    "personalities": [{
+            "id": 0,
+            "name": "孤独",
+            "physicalAttackMultiplier": 1.1,
+            "physicalDefenseMultiplier": 0.9,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "增加攻击，减少防御"
+        },
+        {
+            "id": 1,
+            "name": "固执",
+            "physicalAttackMultiplier": 1.1,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 0.9,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "增加攻击，减少特攻"
+        },
+        {
+            "id": 2,
+            "name": "调皮",
+            "physicalAttackMultiplier": 1.1,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 0.9,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "增加攻击，减少特防"
+        },
+        {
+            "id": 3,
+            "name": "勇敢",
+            "physicalAttackMultiplier": 1.1,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 0.9,
+            "hpMultiplier": 1.0,
+            "desc": "增加攻击，减少速度"
+        },
+        {
+            "id": 4,
+            "name": "大胆",
+            "physicalAttackMultiplier": 0.9,
+            "physicalDefenseMultiplier": 1.1,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "增加防御，减少攻击"
+        },
+        {
+            "id": 5,
+            "name": "顽皮",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.1,
+            "specialAttackMultiplier": 0.9,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "增加防御，减少特攻"
+        },
+        {
+            "id": 6,
+            "name": "无虑",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.1,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 0.9,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "增加防御，减少特防"
+        },
+        {
+            "id": 7,
+            "name": "悠闲",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.1,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 0.9,
+            "hpMultiplier": 1.0,
+            "desc": "增加防御，减少速度"
+        },
+        {
+            "id": 8,
+            "name": "保守",
+            "physicalAttackMultiplier": 0.9,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.1,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "增加特攻，减少攻击"
+        },
+        {
+            "id": 9,
+            "name": "稳重",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 0.9,
+            "specialAttackMultiplier": 1.1,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "增加特攻，减少防御"
+        },
+        {
+            "id": 10,
+            "name": "马虎",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.1,
+            "specialDefenseMultiplier": 0.9,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "增加特攻，减少特防"
+        },
+        {
+            "id": 11,
+            "name": "冷静",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.1,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 0.9,
+            "hpMultiplier": 1.0,
+            "desc": "增加特攻，减少速度"
+        },
+        {
+            "id": 12,
+            "name": "沉着",
+            "physicalAttackMultiplier": 0.9,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.1,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "增加特防，减少攻击"
+        },
+        {
+            "id": 13,
+            "name": "温顺",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 0.9,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.1,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "增加特防，减少防御"
+        },
+        {
+            "id": 14,
+            "name": "慎重",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 0.9,
+            "specialDefenseMultiplier": 1.1,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "增加特防，减少特攻"
+        },
+        {
+            "id": 15,
+            "name": "狂妄",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.1,
+            "speedMultiplier": 0.9,
+            "hpMultiplier": 1.0,
+            "desc": "增加特防，减少速度"
+        },
+        {
+            "id": 16,
+            "name": "胆小",
+            "physicalAttackMultiplier": 0.9,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.1,
+            "hpMultiplier": 1.0,
+            "desc": "增加速度，减少攻击"
+        },
+        {
+            "id": 17,
+            "name": "急躁",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 0.9,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.1,
+            "hpMultiplier": 1.0,
+            "desc": "增加速度，减少防御"
+        },
+        {
+            "id": 18,
+            "name": "开朗",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 0.9,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.1,
+            "hpMultiplier": 1.0,
+            "desc": "增加速度，减少特攻"
+        },
+        {
+            "id": 19,
+            "name": "天真",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 0.9,
+            "speedMultiplier": 1.1,
+            "hpMultiplier": 1.0,
+            "desc": "增加速度，减少特防"
+        },
+        {
+            "id": 20,
+            "name": "害羞",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "均衡发展"
+        },
+        {
+            "id": 21,
+            "name": "实干",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "均衡发展"
+        },
+        {
+            "id": 22,
+            "name": "坦率",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "均衡发展"
+        },
+        {
+            "id": 23,
+            "name": "浮躁",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "均衡发展"
+        },
+        {
+            "id": 24,
+            "name": "认真",
+            "physicalAttackMultiplier": 1.0,
+            "physicalDefenseMultiplier": 1.0,
+            "specialAttackMultiplier": 1.0,
+            "specialDefenseMultiplier": 1.0,
+            "speedMultiplier": 1.0,
+            "hpMultiplier": 1.0,
+            "desc": "均衡发展"
+        }
+    ]
 }

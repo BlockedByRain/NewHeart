@@ -5,11 +5,6 @@
 /// </summary>
 public class PersonalityEffectsSixDimensions : SixDimensions<PersonalityEffectsSixDimensions>
 {
-    private int personlityId;
-
-    private string personalityName;
-
-
     // 性格对每个属性的影响（减少、不变、增加）
     private float physicalAttackMultiplier;
     private float specialAttackMultiplier;

@@ -47,6 +47,19 @@ public static class AttributeSystem
     }
 
     /// <summary>
+    /// 获取属性名
+    /// </summary>
+    public static string GetAttributeName(int attributeId)
+    {
+        if (!_isInitialized) throw new Exception("属性系统未初始化");
+
+        AttributeDefinition attribute = GetAttribute(attributeId);
+
+        return attribute.Name;
+    }
+
+
+    /// <summary>
     /// 获取属性克制倍数
     /// </summary>
     public static float GetMultiplier(int attackerId, int defenderId)

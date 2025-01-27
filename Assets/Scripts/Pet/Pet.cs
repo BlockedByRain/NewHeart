@@ -34,19 +34,7 @@ public class Pet
     /// <summary>
     /// 精灵属性
     /// </summary>
-    public int attribute { get; private set; }
-
-    public void SetAttribute(int attributeId)
-    {
-        // 验证属性有效性
-        var attr = AttributeSystem.GetAttribute(attributeId);
-        attribute = attributeId;
-    }
-
-    public float GetDamageMultiplier(Pet defender)
-    {
-        return AttributeSystem.GetMultiplier(this.attribute, defender.attribute);
-    }
+    public int attribute;
 
     /// <summary>
     /// 种族值
@@ -75,9 +63,7 @@ public class Pet
     /// <summary>
     /// 性格
     /// </summary>
-    public Personality personality;
-
-
+    public int personality;
 
 
     /// <summary>
@@ -136,60 +122,24 @@ public class Pet
     public void RefreshCapability()
     {
         // 获取性格修正系数
-        var personalityEffect = PersonalityEffects.GetEffect(this.personality);
+        var personalityEffect = PersonalitySystem.GetPersonalityEffect(this.personality);
 
-        // 计算常规能力值
-        ability.PhysicalAttack = AbilityCalculator.CalculateNormal(
-            racial.PhysicalAttack,
-            effort.PhysicalAttack,
+        // 计算所有能力值
+        ability = AbilityCalculator.CalculateAllAbilities(
+            racial,
+            effort,
             Lv,
-            personalityEffect.physicalAttackMultiplier,
-            extra.PhysicalAttack
-        );
-
-        ability.SpecialAttack = AbilityCalculator.CalculateNormal(
-            racial.SpecialAttack,
-            effort.SpecialAttack,
-            Lv,
-            personalityEffect.specialAttackMultiplier,
-            extra.SpecialAttack
-        );
-
-        ability.PhysicalDefense = AbilityCalculator.CalculateNormal(
-            racial.PhysicalDefense,
-            effort.PhysicalDefense,
-            Lv,
-            personalityEffect.physicalDefenseMultiplier,
-            extra.PhysicalDefense
-        );
-
-        ability.SpecialDefense = AbilityCalculator.CalculateNormal(
-            racial.SpecialDefense,
-            effort.SpecialDefense,
-            Lv,
-            personalityEffect.specialDefenseMultiplier,
-            extra.SpecialDefense
-        );
-
-        ability.Speed = AbilityCalculator.CalculateNormal(
-            racial.Speed,
-            effort.Speed,
-            Lv,
-            personalityEffect.speedMultiplier,
-            extra.Speed
-        );
-
-        // 计算体力值
-        ability.HP = AbilityCalculator.CalculateHP(
-            racial.HP,
-            effort.HP,
-            Lv,
-            personalityEffect.hpMultiplier,
-            extra.HP
+            personalityEffect,
+            extra
         );
 
         Debug.Log($"物理攻击计算中间值：种族={racial.PhysicalAttack}, 努力={effort.PhysicalAttack}, 等级={Lv}, 基础值={racial.PhysicalAttack * 2 + effort.PhysicalAttack / 4 + 31}");
-
+        Debug.Log($"物攻: {ability.PhysicalAttack}");
+        Debug.Log($"特攻: {ability.SpecialAttack}");
+        Debug.Log($"物防: {ability.PhysicalDefense}");
+        Debug.Log($"特防: {ability.SpecialDefense}");
+        Debug.Log($"速度: {ability.Speed}");
+        Debug.Log($"体力: {ability.HP}");
     }
 
     /// <summary>
@@ -214,17 +164,27 @@ public class Pet
 
     }
 
-
+    /// <summary>
+    /// 升级
+    /// </summary>
+    public void LevelUp()
+    {
+        Lv++;
+        RefreshCapability(); // 刷新能力值
+        Debug.Log($"{petName} 升级到 {Lv} 级！");
+    }
 
     /// <summary>
-    /// 能力值计算
+    /// 改变性格
     /// </summary>
-    private int CalculateState(float racialValue, float effortValue, float additionalValue, int level, float personalityEffect, float extraValue)
+    /// <param name="newPersonality"></param>
+    public void ChangePersonality(int newPersonality)
     {
-        //常规能力值=【【【(种族值*2+努力值÷4+31)*(精灵等级÷100)+5】*性格修正】*套装百分比（暂无）】+外部加成
-        //体力能力值=【【(种族值*2+努力值÷4+100+31)*(精灵等级÷100)+10】*套装百分比加成（暂无）】+外部加成
-        return (int)(((((racialValue * 2) + (effortValue / 4) + additionalValue) * (level / 100) + 5) * personalityEffect) + extraValue);
+        personality = newPersonality;
+        RefreshCapability(); // 刷新能力值
+        Debug.Log($"{petName} 的性格变为 {personality}！");
     }
+
 
     /// <summary>
     /// 打印当前精灵的所有状态
@@ -234,8 +194,10 @@ public class Pet
         Debug.Log("=== 精灵状态 ===");
         Debug.Log($"ID: {petId}");
         Debug.Log($"名字: {petName}");
+        Debug.Log($"属性: {AttributeSystem.GetAttributeName(attribute)}");
+        Debug.Log($"性格: {PersonalitySystem.GetPersonalityName(personality)}");
         Debug.Log($"等级: {Lv}");
-        Debug.Log($"下级所需经验: {nextLvExp}");
+        //Debug.Log($"下级所需经验: {nextLvExp}");
 
         //Debug.Log("种族值:");
         //Debug.Log($"物攻: {racial.PhysicalAttack}");
@@ -252,8 +214,6 @@ public class Pet
         //Debug.Log($"特防: {effort.SpecialDefense}");
         //Debug.Log($"速度: {effort.Speed}");
         //Debug.Log($"体力: {effort.HP}");
-
-        Debug.Log("性格:" + $"{personality}");
 
         //Debug.Log("性格影响:");
         //var personalityEffects = PersonalityEffects.GetEffect(personality);
@@ -287,11 +247,15 @@ public class Pet
         //    Debug.Log($"{skill}");
         //}
 
-        Debug.Log("当前技能:");
-        foreach (var skill in currentSkills)
+        if (currentSkills!=null)
         {
-            Debug.Log($"{skill.skillConfig.skillName}");
+            Debug.Log("当前技能:");
+            foreach (var skill in currentSkills)
+            {
+                Debug.Log($"{skill.skillConfig.skillName}");
+            }
         }
+
 
         //Debug.Log($"魂印ID: {soulSealId}");
 
@@ -415,11 +379,7 @@ public class Pet
 
 }
 
-public enum Attribute
-{
-    fire,
-    water,
-}
+
 
 
 

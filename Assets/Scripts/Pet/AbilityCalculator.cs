@@ -40,4 +40,62 @@ public static class AbilityCalculator
         float levelFactor = level / 100f;
         return Mathf.FloorToInt(((baseValue * levelFactor + 10) * personalityMultiplier) + extraValue);
     }
+
+    /// <summary>
+    /// 计算所有能力值
+    /// </summary>
+    public static AbilitySixDimensions CalculateAllAbilities(
+        RacialSixDimensions racial,
+        EffortSixDimensions effort,
+        int level,
+        PersonalityEffectsSixDimensions personalityEffect,
+        AbilitySixDimensions extra
+    )
+    {
+        return new AbilitySixDimensions
+        {
+            PhysicalAttack = CalculateNormal(
+                racial.PhysicalAttack,
+                effort.PhysicalAttack,
+                level,
+                personalityEffect.PhysicalAttack,
+                extra.PhysicalAttack
+            ),
+            SpecialAttack = CalculateNormal(
+                racial.SpecialAttack,
+                effort.SpecialAttack,
+                level,
+                personalityEffect.SpecialAttack,
+                extra.SpecialAttack
+            ),
+            PhysicalDefense = CalculateNormal(
+                racial.PhysicalDefense,
+                effort.PhysicalDefense,
+                level,
+                personalityEffect.PhysicalDefense,
+                extra.PhysicalDefense
+            ),
+            SpecialDefense = CalculateNormal(
+                racial.SpecialDefense,
+                effort.SpecialDefense,
+                level,
+                personalityEffect.SpecialDefense,
+                extra.SpecialDefense
+            ),
+            Speed = CalculateNormal(
+                racial.Speed,
+                effort.Speed,
+                level,
+                personalityEffect.Speed,
+                extra.Speed
+            ),
+            HP = CalculateHP(
+                racial.HP,
+                effort.HP,
+                level,
+                personalityEffect.HP,
+                extra.HP
+            )
+        };
+    }
 }

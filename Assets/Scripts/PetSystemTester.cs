@@ -5,18 +5,14 @@ using UnityEngine;
 /// </summary>
 public class PetSystemTester : MonoBehaviour
 {
-    [Header("测试参数配置")]
-    [SerializeField] private int testRacialPhysicalAttack = 100;  // 测试种族值（物攻）
-    [SerializeField] private int testEffortPhysicalAttack = 252;  // 测试努力值（物攻）
-    [SerializeField] private int testLevel = 50;                  // 测试等级
-    [SerializeField] private Personality testPersonality = Personality.固执; // 测试性格
-
-    [Header("ScriptableObject 配置")]
-    [SerializeField] private PersonalityEffectConfig personalityConfig; // 直接拖拽配置文件到 Inspector
 
     private void Start()
     {
-        //testSystem();
+        // 初始化性格系统
+        PersonalitySystem.Initialize();
+        // 初始化属性系统
+        AttributeSystem.Initialize();
+        testSystem();
         //testSystem2();
 
     }
@@ -25,8 +21,7 @@ public class PetSystemTester : MonoBehaviour
     //属性系统测试
     private void testSystem2()
     {
-        // 初始化系统
-        AttributeSystem.Initialize();
+        
 
         AttributeSystem.PrintAllAttributeInfo();
         AttributeSystem.PrintAllRelationInfo();
@@ -74,43 +69,27 @@ public class PetSystemTester : MonoBehaviour
     //性格系统测试
     private void testSystem()
     {
-        // 确保配置文件自动加载
-        LoadPersonalityConfig();
 
         // 运行测试用例
         TestAbilityCalculator();
         TestPersonalityEffects();
     }
 
+
     /// <summary>
-    /// 自动加载性格修正配置文件
+    /// 测试能力值计算公式
     /// </summary>
-    private void LoadPersonalityConfig()
-    {
-        // 配置文件路径（无需文件扩展名）
-        const string configPath = "Configs/PersonalityEffectConfig";
-        var config = Resources.Load<PersonalityEffectConfig>(configPath);
-
-        if (config == null)
-        {
-            Debug.LogError($"未找到性格修正配置文件！请检查：\n" +
-                           $"1. 文件是否命名为 PersonalityEffectConfig\n" +
-                           $"2. 是否放置在 Resources/Configs 目录下\n" +
-                           $"3. 文件类型是否为 ScriptableObject");
-        }
-        else
-        {
-            Debug.Log($"成功加载配置文件：{config.name}");
-        }
-    }
-
-
     /// <summary>
     /// 测试能力值计算公式
     /// </summary>
     private void TestAbilityCalculator()
     {
         Debug.Log("=== 开始测试能力值计算 ===");
+
+        // 定义测试变量
+        float testRacialPhysicalAttack = 100f; // 种族值（物攻）
+        float testEffortPhysicalAttack = 252f; // 努力值（物攻）
+        int testLevel = 50; // 等级
 
         // 测试常规能力值（物攻）
         int calculatedPhysicalAttack = AbilityCalculator.CalculateNormal(
@@ -130,8 +109,8 @@ public class PetSystemTester : MonoBehaviour
 
         // 测试体力值（HP）
         int calculatedHP = AbilityCalculator.CalculateHP(
-            racialValue: 100,  // 假设种族值HP=100
-            effortValue: 252,  // 努力值HP=252
+            racialValue: 100f,  // 假设种族值HP=100
+            effortValue: 252f,  // 努力值HP=252
             level: 50,
             personalityMultiplier: 1.0f,
             extraValue: 0
@@ -154,17 +133,22 @@ public class PetSystemTester : MonoBehaviour
     /// </summary>
     private void TestPersonalityEffects()
     {
-        Debug.Log("=== 开始测试性格修正获取 ===");
+        
 
-        // 测试已配置的性格（如 固执）
-        var effect = PersonalityEffects.GetEffect(testPersonality);
-        Debug.Log($"性格 {testPersonality} 的物攻修正: {effect.physicalAttackMultiplier}");
+        // 创建精灵并设置初始值
+        Pet myPet = new Pet
+        {
+            petName = "小火龙",
+            Lv = 5,
+            attribute = 1,
+            racial = new RacialSixDimensions(60, 50, 40, 50, 65, 45),
+            effort = new EffortSixDimensions(0, 0, 0, 0, 0, 0),
+            extra = new AbilitySixDimensions(0, 0, 0, 0, 0, 0),
+            personality = 1
+        };
 
-        // 测试未配置的性格（如 开朗）
-        var unknownEffect = PersonalityEffects.GetEffect(Personality.开朗);
-        Debug.Log($"未配置性格的默认物攻修正: {unknownEffect.physicalAttackMultiplier}（应为1.0）");
-        Debug.Assert(unknownEffect.physicalAttackMultiplier == 1.0f, "默认性格修正错误！");
-
-        Debug.Log("=== 性格修正获取测试完成 ===");
+        // 刷新能力值
+        myPet.RefreshCapability();
+        myPet.PrintStatus();
     }
 }
