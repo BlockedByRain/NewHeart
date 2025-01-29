@@ -108,8 +108,7 @@ public class FightManager : MonoSingleton<FightManager>
             challenger.DefaultAction();
             Debug.Log("challenger 执行了默认操作！");
         }
-                        
-        
+                               
         if (!challenged.HasChosenAction())
         {
             challenged.DefaultAction();
@@ -128,46 +127,28 @@ public class FightManager : MonoSingleton<FightManager>
         // 比较双方精灵的速度，速度高的先行动
         // todo 先判定选择的技能先制，后判定速度，后续考虑引入出手时节点的无视强弱化
 
+
         if (challengerPet.fightAbility.Speed > challengedPet.fightAbility.Speed)
         {
             // 挑战方先攻击
             challenger.ExecuteAction(challengerPet, challengedPet);
             
-            
-            //foreach (var buffInfo in challengerPetBag[challenger.activePetIndex].buffInfos)
-            //{
-            //    buffInfo.HandleUsingSkilleEffect();
-            //}
+           
 
             if (challengedPet.fightAbility.HP > 0)  // 如果防守方没有被击败
                 challenged.ExecuteAction(challengedPet, challengerPet);
             
-            
-            //foreach (var buffInfo in challengedPetBag[challenged.activePetIndex].buffInfos)
-            //{
-            //    buffInfo.HandleUsingSkilleEffect();
-            //}
         }
         else
         {
             // 防守方先攻击
             challenged.ExecuteAction(challengedPet, challengerPet);
 
-            //todo 和战斗开始时一样需要先判空，之后考虑做封装，这里先注释掉
-            //foreach (var buffInfo in challengedPetBag[challenged.activePetIndex].buffInfos)
-            //{
-            //    buffInfo.HandleUsingSkilleEffect();
-            //}
-
             
 
             if (challengerPet.fightAbility.HP > 0)  // 如果挑战方没有被击败
                 challenger.ExecuteAction(challengerPet, challengedPet);
 
-            //foreach (var buffInfo in challengerPetBag[challenger.activePetIndex].buffInfos)
-            //{
-            //    buffInfo.HandleUsingSkilleEffect();
-            //}
 
         }
 
@@ -246,7 +227,5 @@ public class FightManager : MonoSingleton<FightManager>
             }
         }
     }
-
-
 
 }

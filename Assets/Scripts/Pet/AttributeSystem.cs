@@ -51,10 +51,7 @@ public static class AttributeSystem
     /// </summary>
     public static string GetAttributeName(int attributeId)
     {
-        if (!_isInitialized) throw new Exception("属性系统未初始化");
-
         AttributeDefinition attribute = GetAttribute(attributeId);
-
         return attribute.Name;
     }
 
@@ -64,13 +61,39 @@ public static class AttributeSystem
     /// </summary>
     public static float GetMultiplier(int attackerId, int defenderId)
     {
-        if (!_isInitialized) throw new Exception("属性系统未初始化");
-
         AttributeDefinition attacker = GetAttribute(attackerId);
         AttributeDefinition defender = GetAttribute(defenderId);
-
         return CalculateMultiplier(attacker, defender);
     }
+
+    /// <summary>
+    /// 获取是否为单属性
+    /// </summary>
+    public static bool IsSingle(int attributeId)
+    {
+        AttributeDefinition attribute = GetAttribute(attributeId);
+        return attribute.IsSingle;
+    }
+
+    /// <summary>
+    /// 获取构成属性
+    /// </summary>
+    public static int[] GetAttributeElement(int attributeId)
+    {
+        AttributeDefinition attribute = GetAttribute(attributeId);
+        int[] attributeElement={};
+        if (attribute.IsSingle==true)
+        {
+            Array.Resize(ref attributeElement, attributeElement.Length + 1);
+            attributeElement[attributeElement.Length - 1] = attribute.Id;
+        }
+        else
+        {
+            attributeElement = attribute.Components;
+        }
+        return attributeElement;
+    }
+
 
     //=== 核心计算逻辑 ===//
     private static float CalculateMultiplier(AttributeDefinition attacker, AttributeDefinition defender)

@@ -13,12 +13,19 @@ public class GameTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 初始化性格系统
+        PersonalitySystem.Initialize();
+        // 初始化属性系统
+        AttributeSystem.Initialize();
+
+
+
         //精灵数据
 
         AbilitySixDimensions abilitySixDimensions0 = new AbilitySixDimensions(0, 0, 0, 0, 0, 0);
-        AbilitySixDimensions abilitySixDimensions50 =new AbilitySixDimensions(50, 50, 50, 50, 50, 50);
-        RacialSixDimensions racialSixDimensions100 =new RacialSixDimensions(100, 100, 100, 100, 100, 300);
-        EffortSixDimensions effortSixDimensions0 =new EffortSixDimensions(0, 0, 0, 0, 0, 0);
+        AbilitySixDimensions abilitySixDimensions50 = new AbilitySixDimensions(50, 50, 50, 50, 50, 50);
+        RacialSixDimensions racialSixDimensions100 = new RacialSixDimensions(100, 100, 100, 100, 100, 300);
+        EffortSixDimensions effortSixDimensions0 = new EffortSixDimensions(0, 0, 0, 0, 0, 0);
 
         //加载技能
         // 加载 SkillSO 资源
@@ -53,12 +60,13 @@ public class GameTest : MonoBehaviour
             petName = "日你",
             Lv = 100,
             personality = 1,
+            attribute=1,
             ability = abilitySixDimensions50,
             racial = racialSixDimensions100,
             effort = effortSixDimensions0,
             extra = abilitySixDimensions0,
             currentSkills = new List<SkillInfo>(),
-            buffInfos= new List<BuffInfo>(),
+            buffInfos = new List<BuffInfo>(),
         };
         testPet1.currentSkills.Add(Pet.CreateSkillInfoFromConfig(loadSkill));
         testPet1.buffInfos.Add(Pet.CreateBuffInfoFromConfig(loadBuff));
@@ -72,6 +80,7 @@ public class GameTest : MonoBehaviour
             petName = "大坝",
             Lv = 100,
             personality = 2,
+            attribute = 1,
             ability = abilitySixDimensions50,
             racial = racialSixDimensions100,
             effort = effortSixDimensions0,

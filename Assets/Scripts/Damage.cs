@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,8 @@ public class Damage
     public DamageType damageType;
     //伤害属性
     public int attribute;
-
+    //攻击类型（是物攻还是特攻）
+    public SkillType skillType;
 
     /// <summary>
     /// 计算攻击伤害
@@ -28,6 +30,8 @@ public class Damage
         //实际能力
         float curAttack;
         float curDefense;
+
+
         if (skillConfig.skillType == SkillType.Physical)
         {
             curAttack = creator.fightAbility.PhysicalAttack;
@@ -38,29 +42,22 @@ public class Damage
             curAttack = creator.fightAbility.SpecialAttack;
             curDefense = target.fightAbility.SpecialDefense;
         }
-        //属性加成 todo 双属性也吃单独本系
+        //属性加成，只要包括则1.5倍
+        float attributeMultiplier=1f;
         this.attribute = skillConfig.attribute;
-
-        float attributeMultiplier;
-        if (creator.attribute == skillConfig.attribute)
+        int[] creatorAttributeElement= AttributeSystem.GetAttributeElement(creator.attribute);
+        if (Array.IndexOf(creatorAttributeElement, attribute) != -1)
         {
             attributeMultiplier = 1.5f;
         }
-        else
-        {
-            attributeMultiplier = 1f;
-        }
 
         //浮动系数 [217÷255，1]
-
-        int a = Random.Range(217, 256);
-
-        float FloatingMultiplier = (float)a / 255;
+        float FloatingMultiplier = (float)UnityEngine.Random.Range(217, 256)/255;
 
 
-        //todo克制倍数
-        float restraintMultiplier = 1f;
-
+        //克制倍数
+        float restraintMultiplier = 1f;   
+        restraintMultiplier= AttributeSystem.GetMultiplier(attribute, target.attribute);
 
         //todo增减伤
 
@@ -76,13 +73,7 @@ public class Damage
 
         //伤害值=【【等级系数*技能威力*（进攻方对战实际进攻值÷防守方对战实际防守值）+2】*浮动范围*属性加成*克制倍数*己方增伤百分比*（1-对方减伤百分比）】
         damageValue = (int)((LvMultiplier * skillPower * (curAttack / curDefense) + 2) * FloatingMultiplier * attributeMultiplier * restraintMultiplier);
-
-
         LogDamageInfo();
-
-
-
-
         return this;
 
     }
